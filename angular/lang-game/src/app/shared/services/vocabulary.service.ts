@@ -46,7 +46,7 @@ export class VocabularyService {
       .subscribe(
         (data: CategoryModel[]) => {
           const newCategories = Object.keys(data).map(key => data[key]);
-          this.categoriesChanged.next([...newCategories]);
+          this.categoriesChanged.next(newCategories);
         },
         (err: HttpErrorResponse) => {
           if (err instanceof Error) {
