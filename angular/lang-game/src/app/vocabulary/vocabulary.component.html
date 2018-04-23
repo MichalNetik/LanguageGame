@@ -1,3 +1,20 @@
-<p>
-  vocabulary works!
-</p>
+<div class="form-container">
+    <h2>Manage vocabulary categories</h2>
+    <mat-form-field>
+        <input [(ngModel)]="category.name" matInput placeholder="Input category name">
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="category.description" matInput placeholder="Input category description">
+    </mat-form-field>
+
+    <button (click)="saveWords()" class="save-button" mat-button>Save this category</button>
+
+    <h4>List of categories:</h4>
+    <ul>
+        <li *ngFor="let category of categories">
+            <button (click)="deleteCategory(category)" class="remove-button" mat-button><i class="material-icons">remove_circle</i></button>
+            <button (click)="setActiveCategory(category)" class="edit-button" mat-button><i class="material-icons">mode_edit</i></button>
+            <span>{{ category.name }} - {{ category.description }}</span>
+        </li>
+    </ul>
+</div>
