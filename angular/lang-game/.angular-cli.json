@@ -5,7 +5,8 @@
   },
   "apps": [{
     "root": "src",
-    "outDir": "dist",
+    "outDir": "../../webapp/lang_game/core/static",
+    "deployUrl": "/static",
     "assets": [
       "assets",
       "favicon.ico"
