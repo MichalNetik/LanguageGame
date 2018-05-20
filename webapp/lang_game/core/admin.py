@@ -1,3 +1,6 @@
 from django.contrib import admin
+from core.models import Vocabulary, VocabularyCategory
 
-# Register your models here.
+
+admin.site.register(Vocabulary)
+admin.site.register(VocabularyCategory)

@@ -1,0 +1,118 @@
+[
+{
+    "model": "core.vocabulary",
+    "pk": 1,
+    "fields": {
+        "original": "cat",
+        "translation": "ko\u010dka",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 2,
+    "fields": {
+        "original": "dog",
+        "translation": "pes",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 3,
+    "fields": {
+        "original": "elephant",
+        "translation": "slon",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 4,
+    "fields": {
+        "original": "bird",
+        "translation": "pt\u00e1k",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 6,
+    "fields": {
+        "original": "cow",
+        "translation": "kr\u00e1va",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 7,
+    "fields": {
+        "original": "table",
+        "translation": "st\u016fl",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 8,
+    "fields": {
+        "original": "chair",
+        "translation": "\u017eidle",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 9,
+    "fields": {
+        "original": "living room",
+        "translation": "ob\u00fdvac\u00ed pokoj",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 10,
+    "fields": {
+        "original": "sofa",
+        "translation": "pohovka",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.vocabulary",
+    "pk": 13,
+    "fields": {
+        "original": "floor",
+        "translation": "podlaha",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 1,
+    "fields": {
+        "name": "Animals",
+        "description": "Different kinds of animals"
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 2,
+    "fields": {
+        "name": "House",
+        "description": "House stuff"
+    }
+}
+]
