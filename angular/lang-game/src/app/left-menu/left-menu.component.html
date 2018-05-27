@@ -1,11 +1,15 @@
-<mat-drawer-container class="left-menu-container" autosize>
-  <mat-drawer #drawer class="left-menu-sidenav" opened="true" mode="side">
-    <mat-list role="list">
-      <mat-list-item role="listitem" routerLink="/vocabulary" routerLinkActive="active">Vocabulary</mat-list-item>
-      <mat-list-item role="listitem" routerLink="/learning" routerLinkActive="active">Learning</mat-list-item>
-      <mat-list-item role="listitem" routerLink="/statistics" routerLinkActive="active">Uber baf</mat-list-item>
-    </mat-list>
-
-
-  </mat-drawer>
-</mat-drawer-container>
+<div
+  class="left-menu-container">
+  <div
+    class="left-menu-container__item"
+    routerLink="/learning"
+    routerLinkActive="active">Learning</div>
+  <div
+    class="left-menu-container__item"
+    routerLink="/vocabulary"
+    routerLinkActive="active">Vocabulary</div>
+  <div
+    class="left-menu-container__item"
+    routerLink="/statistics"
+    routerLinkActive="active">Statistics</div>
+</div>

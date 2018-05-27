@@ -1,8 +1,9 @@
 from django.db import models
 
-class Vocabulary(models.Model):
-    original = models.CharField(max_length=100)
-    translation = models.CharField(max_length=100)
+
+class WordPair(models.Model):
+    base = models.CharField(max_length=100)
+    translated = models.CharField(max_length=100)
     description = models.CharField(max_length=300, null=True)
     category = models.ForeignKey('VocabularyCategory', on_delete=models.CASCADE)
 

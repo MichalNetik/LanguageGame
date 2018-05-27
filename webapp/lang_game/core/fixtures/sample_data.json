@@ -1,100 +1,100 @@
 [
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 1,
     "fields": {
-        "original": "cat",
-        "translation": "ko\u010dka",
+        "base": "cat",
+        "translated": "ko\u010dka",
         "description": null,
         "category": 1
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 2,
     "fields": {
-        "original": "dog",
-        "translation": "pes",
+        "base": "dog",
+        "translated": "pes",
         "description": null,
         "category": 1
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 3,
     "fields": {
-        "original": "elephant",
-        "translation": "slon",
+        "base": "elephant",
+        "translated": "slon",
         "description": null,
         "category": 1
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 4,
     "fields": {
-        "original": "bird",
-        "translation": "pt\u00e1k",
+        "base": "bird",
+        "translated": "pt\u00e1k",
         "description": null,
         "category": 1
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 6,
     "fields": {
-        "original": "cow",
-        "translation": "kr\u00e1va",
+        "base": "cow",
+        "translated": "kr\u00e1va",
         "description": null,
         "category": 1
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 7,
     "fields": {
-        "original": "table",
-        "translation": "st\u016fl",
+        "base": "table",
+        "translated": "st\u016fl",
         "description": null,
         "category": 2
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 8,
     "fields": {
-        "original": "chair",
-        "translation": "\u017eidle",
+        "base": "chair",
+        "translated": "\u017eidle",
         "description": null,
         "category": 2
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 9,
     "fields": {
-        "original": "living room",
-        "translation": "ob\u00fdvac\u00ed pokoj",
+        "base": "living room",
+        "translated": "ob\u00fdvac\u00ed pokoj",
         "description": null,
         "category": 2
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 10,
     "fields": {
-        "original": "sofa",
-        "translation": "pohovka",
+        "base": "sofa",
+        "translated": "pohovka",
         "description": null,
         "category": 2
     }
 },
 {
-    "model": "core.vocabulary",
+    "model": "core.wordpair",
     "pk": 13,
     "fields": {
-        "original": "floor",
-        "translation": "podlaha",
+        "base": "floor",
+        "translated": "podlaha",
         "description": null,
         "category": 2
     }

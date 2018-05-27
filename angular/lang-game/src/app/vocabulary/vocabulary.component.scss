@@ -1,27 +1,9 @@
-.form-container {
-    display: flex;
-    flex-direction: column;
-    padding: 5em;
-}
+.vocabulary-container {
+  margin-top: 1.5em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 
-button {
-    cursor: pointer;
-    background: #efefef;
-    &.save-button {
-        width: 15em;
-    }
-    &.remove-button,
-    &.edit-button {}
-}
-
-h4 {
-    -webkit-margin-before: 1.33em;
-    -webkit-margin-after: 0.33em;
-}
-
-ul {
-    list-style: none;
-    li {
-        margin-top: 0.3em;
-    }
+  height: calc(100% - 1.5em);
+  box-shadow: 0.2em 0em 1em;
+  box-sizing: border-box;
 }

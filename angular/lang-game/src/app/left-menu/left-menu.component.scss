@@ -1,13 +1,29 @@
+@import '~app/shared/styles/variables';
+
 .left-menu-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0.2em 0em 1em;
   height: 100%;
-  mat-list-item {
-    cursor: pointer;
+
+  &__item {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    border-radius: 0.3em;
+
     &:hover {
-      background: #f1f1f1;
+      cursor: pointer;
+      background-color: $light-blue;
     }
-    &.active {
-      background: #efefef;
+
+    &:focus{
+      outline: none;
     }
   }
+
+  .active {
+    background-color: $blue;
+  }
 }
+

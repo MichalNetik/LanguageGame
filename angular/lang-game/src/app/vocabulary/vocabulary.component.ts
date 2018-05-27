@@ -1,45 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { VocabularyService } from '../shared/services/vocabulary.service';
-import { CategoryModel } from '../shared/models/category.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { VocabularyCategoryModel } from '../shared/models/vocabulary-category.model';
+import * as fromVocabulary from './store/vocabulary.reducers';
+import * as VocabularyActions from './store/vocabulary.actions';
 
 @Component({
   selector: 'app-vocabulary',
   templateUrl: './vocabulary.component.html',
   styleUrls: ['./vocabulary.component.scss']
 })
-export class VocabularyComponent implements OnInit, OnDestroy {
-  category: CategoryModel;
-  categories: CategoryModel[];
+export class VocabularyComponent implements OnInit {
+  categoriesState: Observable<fromVocabulary.State>;
 
-  constructor(private vocabularyService: VocabularyService) { }
+  constructor(private store: Store<fromVocabulary.FeatureState>) { }
 
   ngOnInit() {
-    this.category = new CategoryModel({ id: undefined, name: 'test name', description: 'test description' });
-    this.vocabularyService.onGetAllCategories();
-
-    this.vocabularyService.categoriesChanged
-      .subscribe(
-        (data: CategoryModel[]) => {
-          this.categories = data;
-        }
-      )
+    this.categoriesState = this.store.select('vocabulary');
+    this.store.dispatch(new VocabularyActions.FetchCategories());
   }
-
-  saveWords() {
-    this.vocabularyService.onCategorySave(this.category);
-  }
-
-  setActiveCategory(category: CategoryModel) {
-    // need to clone this so reference isn't kept
-    this.category = { ...category };
-  }
-
-  deleteCategory(category: CategoryModel) {
-    this.vocabularyService.onCategoryDelete(category);
-  }
-
-  ngOnDestroy() {
-    this.vocabularyService.onGetAllCategories().unsubscribe();
-  }
-
 }
