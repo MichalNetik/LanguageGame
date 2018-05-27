@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducers';
 import { VocabularyEffects } from './vocabulary/store/vocabulary.effects';
+import { VocabularyCategoriesComponent } from './vocabulary/vocabulary-categories/vocabulary-categories.component';
+import { VocabularyWordPairsComponent } from './vocabulary/vocabulary-word-pairs/vocabulary-word-pairs.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { VocabularyEffects } from './vocabulary/store/vocabulary.effects';
     LeftMenuComponent,
     VocabularyComponent,
     LearningComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    VocabularyCategoriesComponent,
+    VocabularyWordPairsComponent
   ],
   imports: [
     AppRoutingModule,

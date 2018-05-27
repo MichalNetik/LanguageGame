@@ -1,3 +1,5 @@
+@import '~app/shared/styles/variables';
+
 .vocabulary-container {
   margin-top: 1.5em;
   margin-left: 1.5em;
@@ -6,4 +8,30 @@
   height: calc(100% - 1.5em);
   box-shadow: 0.2em 0em 1em;
   box-sizing: border-box;
+
+  .active {
+    background-color: $light-blue;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0em 0em 1em -0.1em;
+
+    &__item {
+      flex-grow: 1;
+      text-align: center;
+      padding: 1em;
+
+      &:focus{
+        outline: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $light-blue;
+      }
+    }
+
+  }
 }

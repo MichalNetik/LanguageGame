@@ -1,10 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
-import { VocabularyCategoryModel } from '../shared/models/vocabulary-category.model';
-import * as fromVocabulary from './store/vocabulary.reducers';
-import * as VocabularyActions from './store/vocabulary.actions';
 
 @Component({
   selector: 'app-vocabulary',
@@ -12,12 +7,10 @@ import * as VocabularyActions from './store/vocabulary.actions';
   styleUrls: ['./vocabulary.component.scss']
 })
 export class VocabularyComponent implements OnInit {
-  categoriesState: Observable<fromVocabulary.State>;
 
-  constructor(private store: Store<fromVocabulary.FeatureState>) { }
+  constructor() { }
 
   ngOnInit() {
-    this.categoriesState = this.store.select('vocabulary');
-    this.store.dispatch(new VocabularyActions.FetchCategories());
+
   }
 }

@@ -1,9 +1,16 @@
 <div class="vocabulary-container">
-  <h3>Vocabulary Categories</h3>
+  <div class="vocabulary-container__header">
+    <div
+      class="vocabulary-container__header__item"
+      routerLink="word-pair"
+      routerLinkActive="active">Word Pairs</div>
+    <div
+      class="vocabulary-container__header__item"
+      routerLink="category"
+      routerLinkActive="active">Categories</div>
+  </div>
 
-  <ul>
-    <li *ngFor="let category of (categoriesState | async).categories">
-      {{ category.name }}
-    </li>
-  </ul>
+  <div class="vocabulary-container___body">
+    <router-outlet></router-outlet>
+  </div>
 </div>
