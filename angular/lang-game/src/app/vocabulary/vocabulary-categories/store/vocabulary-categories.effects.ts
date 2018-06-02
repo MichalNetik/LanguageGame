@@ -3,15 +3,16 @@ import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map } from 'rxjs/operators';
 
 
-import * as VocabularyActions from './vocabulary.actions';
-import { VocabularyHttpService } from './../../shared/services/vocabulary-http.service';
-import { VocabularyCategoryModel, VocabularyCategoryInterface } from '../../shared/models/vocabulary-category.model';
+import { WordPairModel, WordPairInterface } from '../../../shared/models/word-pair.model';
+import * as VocabularyActions from './vocabulary-categories.actions';
+import { VocabularyHttpService } from '../../../shared/services/vocabulary-http.service';
+import { VocabularyCategoryModel, VocabularyCategoryInterface } from '../../../shared/models/vocabulary-category.model';
 
 
 @Injectable()
-export class VocabularyEffects {
+export class VocabularyCategoriesEffects {
   @Effect()
-  vocabularyCategoryFetch = this.actions$
+  vocabularyCategoriesFetch = this.actions$
     .ofType(VocabularyActions.FETCH_CATEGORIES)
     .pipe(
       switchMap(

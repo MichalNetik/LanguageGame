@@ -1,3 +1,5 @@
-<p>
-  vocabulary-word-pairs works!
-</p>
+<ul>
+  <li *ngFor="let wordPair of (wordPairsState | async).wordPairs">
+    {{ wordPair.base }} -> {{ wordPair.translated }}
+  </li>
+</ul>

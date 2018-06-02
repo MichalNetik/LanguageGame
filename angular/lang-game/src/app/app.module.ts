@@ -14,7 +14,8 @@ import { VocabularyHttpService } from './shared/services/vocabulary-http.service
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducers';
-import { VocabularyEffects } from './vocabulary/store/vocabulary.effects';
+import { VocabularyCategoriesEffects } from './vocabulary/vocabulary-categories/store/vocabulary-categories.effects';
+import { WordPairsEffects } from './vocabulary/vocabulary-word-pairs/store/word-pairs.effects';
 import { VocabularyCategoriesComponent } from './vocabulary/vocabulary-categories/vocabulary-categories.component';
 import { VocabularyWordPairsComponent } from './vocabulary/vocabulary-word-pairs/vocabulary-word-pairs.component';
 
@@ -36,7 +37,7 @@ import { VocabularyWordPairsComponent } from './vocabulary/vocabulary-word-pairs
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([VocabularyEffects])
+    EffectsModule.forRoot([VocabularyCategoriesEffects, WordPairsEffects])
   ],
   providers: [VocabularyHttpService],
   bootstrap: [AppComponent]

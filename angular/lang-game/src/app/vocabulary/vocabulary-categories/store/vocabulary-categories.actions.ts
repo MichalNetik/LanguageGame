@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { VocabularyCategoryModel } from '../../shared/models/vocabulary-category.model';
-
+import { VocabularyCategoryModel } from '../../../shared/models/vocabulary-category.model';
+import { WordPairModel } from '../../../shared/models/word-pair.model';
 
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
@@ -15,5 +15,5 @@ export class SetCategories implements Action {
   constructor(public payload: VocabularyCategoryModel[]) {}
 }
 
-export type VocabularyActions = FetchCategories |
+export type VocabularyCategoriesActions = FetchCategories |
   SetCategories;

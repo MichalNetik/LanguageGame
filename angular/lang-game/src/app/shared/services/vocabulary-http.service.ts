@@ -10,4 +10,8 @@ export class VocabularyHttpService {
   getAllVocabularyCategories() {
     return this.http.get('/api/vocabulary-category');
   }
+
+  getWordPairs() {
+    return this.http.get('/api/word-pair')
+  }
 }

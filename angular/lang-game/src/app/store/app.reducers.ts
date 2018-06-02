@@ -1,11 +1,15 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import * as fromVocabulary from '../vocabulary/store/vocabulary.reducers';
+import * as fromVocabularyCategories from '../vocabulary/vocabulary-categories/store/vocabulary-categories.reducers';
+import * as fromWordPairs from '../vocabulary/vocabulary-word-pairs/store/word-pairs.reducers';
+
 
 export interface AppState {
-  vocabulary: fromVocabulary.State
+  categories: fromVocabularyCategories.State,
+  wordPairs: fromWordPairs.State
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  vocabulary: fromVocabulary.vocabularyReducer
+  categories: fromVocabularyCategories.vocabularyCategoriesReducer,
+  wordPairs: fromWordPairs.wordPairsReducer
 };
