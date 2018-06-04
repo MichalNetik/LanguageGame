@@ -1,0 +1,22 @@
+<div class="table-container">
+  <div class="table-container__header">
+    Word Pairs Table
+  </div>
+  <div class="table-container__body">
+    <div
+      class="table-container__body__column"
+      *ngFor="let column of columns"
+    >
+      <div class="table-container__body__header-cell">
+        {{ column.displayName }}
+      </div>
+      <div
+        class="table-container__body__body-cell"
+        *ngFor="let dataRow of (wordPairsState | async).wordPairs"
+      >{{ dataRow[column.name] }}</div>
+    </div>
+  </div>
+  <div class="table-container__footer">
+
+  </div>
+</div>

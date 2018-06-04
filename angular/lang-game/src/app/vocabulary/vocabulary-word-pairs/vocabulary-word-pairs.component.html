@@ -1,5 +1,4 @@
-<ul>
-  <li *ngFor="let wordPair of (wordPairsState | async).wordPairs">
-    {{ wordPair.base }} -> {{ wordPair.translated }}
-  </li>
-</ul>
+<div class="word-pairs-container">
+  <app-word-pairs-table></app-word-pairs-table>
+  <app-word-pairs-form></app-word-pairs-form>
+</div>

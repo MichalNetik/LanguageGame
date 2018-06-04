@@ -18,6 +18,8 @@ import { VocabularyCategoriesEffects } from './vocabulary/vocabulary-categories/
 import { WordPairsEffects } from './vocabulary/vocabulary-word-pairs/store/word-pairs.effects';
 import { VocabularyCategoriesComponent } from './vocabulary/vocabulary-categories/vocabulary-categories.component';
 import { VocabularyWordPairsComponent } from './vocabulary/vocabulary-word-pairs/vocabulary-word-pairs.component';
+import { WordPairsTableComponent } from './vocabulary/vocabulary-word-pairs/word-pairs-table/word-pairs-table.component';
+import { WordPairsFormComponent } from './vocabulary/vocabulary-word-pairs/word-pairs-form/word-pairs-form.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { VocabularyWordPairsComponent } from './vocabulary/vocabulary-word-pairs
     LearningComponent,
     StatisticsComponent,
     VocabularyCategoriesComponent,
-    VocabularyWordPairsComponent
+    VocabularyWordPairsComponent,
+    WordPairsTableComponent,
+    WordPairsFormComponent
   ],
   imports: [
     AppRoutingModule,

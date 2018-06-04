@@ -1,0 +1,44 @@
+@import '~app/shared/styles/variables';
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2em;
+
+  &__header {
+    font-weight: bold;
+    font-size: 120%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+
+    &__column {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      border: 1px solid black;
+
+      div:nth-child(even) {background-color: $light-grey;}
+    }
+
+    &__header-cell {
+      font-weight: bold;
+      padding: 0.2em;
+      text-align: center;
+    }
+
+    &__body-cell {
+      padding: 0.2em;
+      flex-grow: 1;
+    }
+  }
+
+  &__footer {
+
+  }
+}
