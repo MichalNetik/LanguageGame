@@ -8,7 +8,7 @@ class WordPair(models.Model):
     category = models.ForeignKey('VocabularyCategory', on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{0} -> {1} in {2}'.format(self.original, self.translation, self.category)
+        return '{0} -> {1} in {2}'.format(self.base, self.translated, self.category)
 
 class VocabularyCategory(models.Model):
     name = models.CharField(max_length=50)
