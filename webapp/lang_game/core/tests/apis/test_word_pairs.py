@@ -20,7 +20,6 @@ class TestWordPairs(APITestCase):
     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     expected_res = {
-        'totalRecords': 10,
         'data': [
             ('bird', 'pták'),
             ('cat', 'kočka'),
@@ -28,16 +27,22 @@ class TestWordPairs(APITestCase):
             ('cow', 'kráva'),
             ('dog', 'pes')
         ],
-        'startOffset': 0,
-        'endOffset': 5,
-        'sortColumn': 'base',
-        'sortDirection': 'asc'
+        'totalRecords': 10,
+        'urlParams': {
+            'startOffset': 0,
+            'endOffset': 5,
+            'sortColumn': 'base',
+            'sortDirection': 'asc',
+            'filterValue': None,
+            'filterColumn': None,
+        }
+        
     }
     self.assertEqual(response.data['totalRecords'], expected_res['totalRecords'])
-    self.assertEqual(response.data['startOffset'], expected_res['startOffset'])
-    self.assertEqual(response.data['endOffset'], expected_res['endOffset'])
-    self.assertEqual(response.data['sortColumn'], expected_res['sortColumn'])
-    self.assertEqual(response.data['sortDirection'], expected_res['sortDirection'])
+    self.assertEqual(response.data['urlParams']['startOffset'], expected_res['urlParams']['startOffset'])
+    self.assertEqual(response.data['urlParams']['endOffset'], expected_res['urlParams']['endOffset'])
+    self.assertEqual(response.data['urlParams']['sortColumn'], expected_res['urlParams']['sortColumn'])
+    self.assertEqual(response.data['urlParams']['sortDirection'], expected_res['urlParams']['sortDirection'])
     self.assertEqual(
         [(item['base'], item['translated']) for item in response.data['data']], 
         expected_res['data']
@@ -69,16 +74,20 @@ class TestWordPairs(APITestCase):
             ('dog', 'pes'),
             ('elephant', 'slon')
         ],
-        'startOffset': 0,
-        'endOffset': 5,
-        'sortColumn': 'base',
-        'sortDirection': 'asc'
+        'urlParams': {
+            'startOffset': 0,
+            'endOffset': 5,
+            'sortColumn': 'base',
+            'sortDirection': 'asc',
+            'filterValue': 1,
+            'filterColumn': 'category'
+        }
       }
       self.assertEqual(response.data['totalRecords'], expected_res['totalRecords'])
-      self.assertEqual(response.data['startOffset'], expected_res['startOffset'])
-      self.assertEqual(response.data['endOffset'], expected_res['endOffset'])
-      self.assertEqual(response.data['sortColumn'], expected_res['sortColumn'])
-      self.assertEqual(response.data['sortDirection'], expected_res['sortDirection'])
+      self.assertEqual(response.data['urlParams']['startOffset'], expected_res['urlParams']['startOffset'])
+      self.assertEqual(response.data['urlParams']['endOffset'], expected_res['urlParams']['endOffset'])
+      self.assertEqual(response.data['urlParams']['sortColumn'], expected_res['urlParams']['sortColumn'])
+      self.assertEqual(response.data['urlParams']['sortDirection'], expected_res['urlParams']['sortDirection'])
       self.assertEqual(
           [(item['base'], item['translated']) for item in response.data['data']], 
           expected_res['data']

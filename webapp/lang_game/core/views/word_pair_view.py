@@ -59,9 +59,13 @@ class WordPairViewSet(viewsets.ModelViewSet):
             {
                 'data': serializer.data,
                 'totalRecords': total_records,
-                'startOffset': int(self.request.query_params['startOffset']),
-                'endOffset': int(self.request.query_params['endOffset']),
-                'sortDirection': self.request.query_params['sortDirection'],
-                'sortColumn': self.request.query_params['sortColumn']
+                'urlParams': {
+                    'startOffset': int(self.request.query_params['startOffset']),
+                    'endOffset': int(self.request.query_params['endOffset']),
+                    'sortDirection': self.request.query_params['sortDirection'],
+                    'sortColumn': self.request.query_params['sortColumn'],
+                    'filterValue': self.request.query_params.get('filterValue'),
+                    'filterColumn': self.request.query_params.get('filterColumn'),
+                }
             }
         )
