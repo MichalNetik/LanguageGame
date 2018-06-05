@@ -3,7 +3,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map } from 'rxjs/operators';
 
 
-import { WordPairModel, WordPairInterface } from '../../../shared/models/word-pair.model';
+import { WordPairPaginationModel, WordPairPaginationInterface } from '../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';
 import { VocabularyHttpService } from '../../../shared/services/vocabulary-http.service';
 
@@ -16,15 +16,15 @@ export class WordPairsEffects {
     .pipe(
       switchMap(
         (action: WordPairsActions.FetchWordPairs) => {
-          return this.httpVocabularyService.getWordPairs();
+          return this.httpVocabularyService.getWordPairs(action.payload);
         }
       ),
       map(
-        (data: WordPairInterface[]) => {
-          const wordPairs = data.map(item => new WordPairModel(item));
+        (data: WordPairPaginationInterface) => {
+          const wordPairsPagination = new WordPairPaginationModel(data);
           return {
             type: WordPairsActions.SET_WORD_PAIRS,
-            payload: wordPairs
+            payload: wordPairsPagination
           }
         }
       )

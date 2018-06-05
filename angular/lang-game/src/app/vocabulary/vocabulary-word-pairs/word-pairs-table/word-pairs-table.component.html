@@ -12,7 +12,7 @@
       </div>
       <div
         class="table-container__body__body-cell"
-        *ngFor="let dataRow of (wordPairsState | async).wordPairs"
+        *ngFor="let dataRow of (wordPairsState | async).wordPairsPagination.data"
       >{{ dataRow[column.name] }}</div>
     </div>
   </div>

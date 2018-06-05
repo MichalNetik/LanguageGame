@@ -6,10 +6,10 @@ import * as fromWordPairs from '../vocabulary/vocabulary-word-pairs/store/word-p
 
 export interface AppState {
   categories: fromVocabularyCategories.State,
-  wordPairs: fromWordPairs.State
+  wordPairsPagination: fromWordPairs.State
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   categories: fromVocabularyCategories.vocabularyCategoriesReducer,
-  wordPairs: fromWordPairs.wordPairsReducer
+  wordPairsPagination: fromWordPairs.wordPairsReducer
 };
