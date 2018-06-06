@@ -6,10 +6,19 @@
   margin: 2em;
 
   &__header {
-    font-weight: bold;
-    font-size: 120%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+
+    .table-name {
+      font-weight: bold;
+      font-size: 120%;
+    }
+
+    .table-records-per-page {
+    }
   }
 
   &__body {
@@ -39,6 +48,28 @@
   }
 
   &__footer {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 
+    .table-pagination {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 120%;
+
+      &__records-displayed {
+
+      }
+
+      &__total-records {
+
+      }
+
+      &__arrow-icons {
+        fa {
+          margin-left: 0.5em;
+          margin-right: 0.5em;
+        }
+      }
+    }
   }
 }

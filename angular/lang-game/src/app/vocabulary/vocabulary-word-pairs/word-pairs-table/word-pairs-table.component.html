@@ -1,6 +1,13 @@
 <div class="table-container">
   <div class="table-container__header">
-    Word Pairs Table
+    <div class="table-name">Word Pairs Table</div>
+    <div class="table-records-per-page">
+      <select>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+    </div>
   </div>
   <div class="table-container__body">
     <div
@@ -17,6 +24,14 @@
     </div>
   </div>
   <div class="table-container__footer">
-
+    <div class="table-pagination">
+      <div class="table-pagination__records-displayed">xxx-xxx</div>
+      <div>&nbsp;of&nbsp;</div>
+      <div class="table-pagination__total-records">xxx</div>
+      <div class="table-pagination__arrow-icons">
+          <fa name="angle-left" size="2x"></fa>
+          <fa name="angle-right" size="2x"></fa>
+      </div>
+    </div>
   </div>
 </div>

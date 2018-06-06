@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +41,7 @@ import { WordPairsFormComponent } from './vocabulary/vocabulary-word-pairs/word-
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    AngularFontAwesomeModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([VocabularyCategoriesEffects, WordPairsEffects])
   ],
