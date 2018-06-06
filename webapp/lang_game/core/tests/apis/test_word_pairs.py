@@ -21,13 +21,13 @@ class TestWordPairs(APITestCase):
 
     expected_res = {
         'data': [
+            ('bedroom', 'ložnice'),
             ('bird', 'pták'),
-            ('cat', 'kočka'),
-            ('chair', 'židle'),
-            ('cow', 'kráva'),
-            ('dog', 'pes')
+            ('camel', 'velbloud'),
+            ('carrot', 'mrkev'),
+            ('cat', 'kočka')
         ],
-        'totalRecords': 10,
+        'totalRecords': 32,
         'urlParams': {
             'startOffset': 0,
             'endOffset': 5,
@@ -66,13 +66,13 @@ class TestWordPairs(APITestCase):
       self.assertEqual(response.status_code, status.HTTP_200_OK)
 
       expected_res = {
-        'totalRecords': 5,
+        'totalRecords': 13,
         'data': [
             ('bird', 'pták'),
+            ('camel', 'velbloud'),
             ('cat', 'kočka'),
-            ('cow', 'kráva'),
-            ('dog', 'pes'),
-            ('elephant', 'slon')
+            ('chicken', 'kuře'),
+            ('cow', 'kráva')
         ],
         'urlParams': {
             'startOffset': 0,
