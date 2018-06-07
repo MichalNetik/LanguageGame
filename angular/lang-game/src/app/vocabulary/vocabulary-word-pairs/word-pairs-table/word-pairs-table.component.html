@@ -25,9 +25,15 @@
   </div>
   <div class="table-container__footer">
     <div class="table-pagination">
-      <div class="table-pagination__records-displayed">xxx-xxx</div>
+      <div class="table-pagination__records-displayed">
+          {{ (wordPairsState | async).wordPairsPagination.urlParams.startOffset }}
+          -
+          {{ (wordPairsState | async).wordPairsPagination.urlParams.endOffset }}
+      </div>
       <div>&nbsp;of&nbsp;</div>
-      <div class="table-pagination__total-records">xxx</div>
+      <div class="table-pagination__total-records">
+          {{ (wordPairsState | async).wordPairsPagination.totalRecords }}
+      </div>
       <div class="table-pagination__arrow-icons">
         <fa name="angle-double-left"></fa>
         <fa name="angle-left"></fa>
