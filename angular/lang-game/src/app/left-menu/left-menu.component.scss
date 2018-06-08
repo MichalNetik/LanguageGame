@@ -10,11 +10,13 @@
     padding-top: 1em;
     padding-bottom: 1em;
     padding-left: 0.5em;
-    border-radius: 0.3em;
+    border-radius: 0.2em;
+    margin: 0.1em;
 
     &:hover {
       cursor: pointer;
       background-color: $light-blue;
+      color: $white;
     }
 
     &:focus{
@@ -24,6 +26,7 @@
 
   .active {
     background-color: $light-blue;
+    color: $white;
   }
 }
 

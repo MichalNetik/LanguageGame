@@ -19,15 +19,7 @@ export class WordPairsTableComponent implements OnInit {
 
   ngOnInit() {
     this.wordPairsState = this.store.select('wordPairsPagination');
-    this.wordPairsState
-      .pipe(take(1))
-      .subscribe(
-        (data: fromWordPairs.State) => {
-          this.store.dispatch(
-            new WordPairsActions.FetchWordPairs(data.wordPairsPagination.urlParams)
-          );
-        }
-    )
+
 
     this.columns = [
       {

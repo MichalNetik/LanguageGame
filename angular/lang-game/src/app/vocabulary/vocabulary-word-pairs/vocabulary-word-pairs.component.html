@@ -1,4 +1,10 @@
-<div class="word-pairs-container">
+<div class="word-pairs-header">
+  <button
+    type="button"
+    class="btn-primary"
+    (click)="loadData()">Load Data</button>
+</div>
+<div class="word-pairs-body">
   <app-word-pairs-table></app-word-pairs-table>
   <app-word-pairs-form></app-word-pairs-form>
 </div>

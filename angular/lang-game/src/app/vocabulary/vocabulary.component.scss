@@ -11,6 +11,7 @@
 
   .active {
     background-color: $light-blue;
+    color: $white;
   }
 
   &__header {
@@ -22,6 +23,8 @@
       flex-grow: 1;
       text-align: center;
       padding: 1em;
+      margin: 0.3em;
+      border-radius: 0.2em;
 
       &:focus{
         outline: none;
@@ -30,6 +33,7 @@
       &:hover {
         cursor: pointer;
         background-color: $light-blue;
+        color: $white;
       }
     }
 
