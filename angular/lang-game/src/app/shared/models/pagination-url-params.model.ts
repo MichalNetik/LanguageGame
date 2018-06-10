@@ -91,4 +91,14 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
     this.endOffset = this.totalRecords;
   }
 
+  setPageSize(value: number) {
+    this.pageSize = value;
+
+    if (this.startOffset + value > this.totalRecords) {
+      this.endOffset = this.totalRecords;
+    } else {
+      this.endOffset = this.startOffset + value;
+    }
+  }
+
 }

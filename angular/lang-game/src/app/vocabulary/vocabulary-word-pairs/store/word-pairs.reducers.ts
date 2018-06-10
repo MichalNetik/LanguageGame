@@ -66,6 +66,14 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
         ...state,
         urlParams: urlParamsLastPage
       }
+    case (WordPairsActions.SET_PAGE_SIZE_WORD_PAIRS):
+      const urlParamsSetRecordsPerPage = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsSetRecordsPerPage.setPageSize(action.payload);
+
+      return {
+        ...state,
+        urlParams: urlParamsSetRecordsPerPage
+      }
     default:
       return state;
   }

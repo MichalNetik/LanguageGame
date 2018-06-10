@@ -60,4 +60,10 @@ export class WordPairsTableComponent implements OnInit {
       new WordPairsActions.LastPageWordPairs()
     )
   }
+
+  onSelectionChange(value: number) {
+    this.store.dispatch(
+      new WordPairsActions.SetPageSizeWordPairs(+value)
+    );
+  }
 }
