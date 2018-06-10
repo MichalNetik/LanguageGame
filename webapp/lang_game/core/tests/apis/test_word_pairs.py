@@ -28,21 +28,8 @@ class TestWordPairs(APITestCase):
             ('cat', 'kočka')
         ],
         'totalRecords': 32,
-        'urlParams': {
-            'startOffset': 0,
-            'endOffset': 5,
-            'sortColumn': 'base',
-            'sortDirection': 'asc',
-            'filterValue': None,
-            'filterColumn': None,
-        }
-        
     }
     self.assertEqual(response.data['totalRecords'], expected_res['totalRecords'])
-    self.assertEqual(response.data['urlParams']['startOffset'], expected_res['urlParams']['startOffset'])
-    self.assertEqual(response.data['urlParams']['endOffset'], expected_res['urlParams']['endOffset'])
-    self.assertEqual(response.data['urlParams']['sortColumn'], expected_res['urlParams']['sortColumn'])
-    self.assertEqual(response.data['urlParams']['sortDirection'], expected_res['urlParams']['sortDirection'])
     self.assertEqual(
         [(item['base'], item['translated']) for item in response.data['data']], 
         expected_res['data']
@@ -74,20 +61,8 @@ class TestWordPairs(APITestCase):
             ('chicken', 'kuře'),
             ('cow', 'kráva')
         ],
-        'urlParams': {
-            'startOffset': 0,
-            'endOffset': 5,
-            'sortColumn': 'base',
-            'sortDirection': 'asc',
-            'filterValue': 1,
-            'filterColumn': 'category'
-        }
       }
       self.assertEqual(response.data['totalRecords'], expected_res['totalRecords'])
-      self.assertEqual(response.data['urlParams']['startOffset'], expected_res['urlParams']['startOffset'])
-      self.assertEqual(response.data['urlParams']['endOffset'], expected_res['urlParams']['endOffset'])
-      self.assertEqual(response.data['urlParams']['sortColumn'], expected_res['urlParams']['sortColumn'])
-      self.assertEqual(response.data['urlParams']['sortDirection'], expected_res['urlParams']['sortDirection'])
       self.assertEqual(
           [(item['base'], item['translated']) for item in response.data['data']], 
           expected_res['data']
