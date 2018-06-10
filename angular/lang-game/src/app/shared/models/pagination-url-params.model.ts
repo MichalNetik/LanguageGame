@@ -3,15 +3,19 @@ export interface PaginationUrlParamsInterface {
   endOffset: number;
   sortColumn: string;
   sortDirection: string;
+  pageSize: number;
+  totalRecords: number;
   filterColumn?: string;
   filterValue?: string;
 }
 
-export class PaginationUrlParamsModel {
+export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
   startOffset: number;
   endOffset: number;
   sortColumn: string;
   sortDirection: string;
+  pageSize: number;
+  totalRecords: number;
   filterColumn?: string;
   filterValue?: string;
 
@@ -21,6 +25,8 @@ export class PaginationUrlParamsModel {
       endOffset: 10,
       sortColumn: 'base',
       sortDirection: 'asc',
+      pageSize: 10,
+      totalRecords: 0
     }
 
     return new this(emptyData);
@@ -31,6 +37,8 @@ export class PaginationUrlParamsModel {
     this.endOffset = data.endOffset;
     this.sortColumn = data.sortColumn;
     this.sortDirection = data.sortDirection;
+    this.pageSize = data.pageSize;
+    this.totalRecords = data.totalRecords;
 
     if (data.filterColumn) {
       this.filterColumn = data.filterColumn
@@ -40,4 +48,47 @@ export class PaginationUrlParamsModel {
       this.filterValue = data.filterValue;
     };
   }
+
+  nextPage() {
+    if (this.endOffset !== this.totalRecords) {
+      if (this.endOffset + this.pageSize > this.totalRecords) {
+        const modRes = this.totalRecords % this.pageSize;
+        this.startOffset += this.pageSize;
+        this.endOffset += modRes;
+      } else {
+        this.startOffset += this.pageSize;
+        this.endOffset += this.pageSize;
+      }
+    }
+  }
+
+  previousPage() {
+    if (this.startOffset - this.pageSize < 0) {
+      this.startOffset = 0;
+      this.endOffset = this.pageSize;
+    } else {
+      const modRes = this.endOffset % this.pageSize;
+
+      this.startOffset -= this.pageSize;
+      if (modRes) {
+        this.endOffset -= modRes;
+      } else {
+        this.endOffset -= this.pageSize;
+      }
+    }
+  }
+
+  firstPage() {
+    this.startOffset = 0;
+    this.endOffset = this.pageSize < this.totalRecords
+      ? this.pageSize : this.totalRecords;
+  }
+
+  lastPage() {
+    const modRes = this.totalRecords % this.pageSize;
+    const newStartOffset = this.totalRecords - modRes;
+    this.startOffset = newStartOffset > 0 ? newStartOffset : 0;
+    this.endOffset = this.totalRecords;
+  }
+
 }

@@ -1,18 +1,22 @@
-import { WordPairPaginationModel } from './../../../shared/models/word-pair.model';
+import { PaginationUrlParamsModel } from './../../../shared/models/pagination-url-params.model';
+import { WordPairModel } from './../../../shared/models/word-pair.model';
 import { VocabularyCategoryModel } from '../../../shared/models/vocabulary-category.model';
 import * as WordPairsActions from './word-pairs.actions';
 import * as fromApp from '../../../store/app.reducers';
+import { StaticReflector } from '@angular/compiler';
 
 export interface FeatureState extends fromApp.AppState {
   wordPairsPagination: State;
 }
 
 export interface State {
-  wordPairsPagination: WordPairPaginationModel
+  wordPairs: WordPairModel[],
+  urlParams: PaginationUrlParamsModel
 }
 
 const initialState: State = {
-  wordPairsPagination: WordPairPaginationModel.getEmpty()
+  wordPairs: [],
+  urlParams: PaginationUrlParamsModel.getEmpty()
 };
 
 export function wordPairsReducer(state = initialState, action: WordPairsActions.WordPairsActions) {
@@ -20,7 +24,47 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
     case (WordPairsActions.SET_WORD_PAIRS):
       return {
         ...state,
-        wordPairsPagination: action.payload
+        wordPairs: action.payload
+      }
+    case (WordPairsActions.SET_TOTAL_RECORDS):
+      const urlParamsTotalRecords = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsTotalRecords.totalRecords = action.payload;
+
+      return {
+        ...state,
+        urlParams: urlParamsTotalRecords
+      };
+    case (WordPairsActions.NEXT_PAGE_WORD_PAIRS):
+      const urlParamsNextPage = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsNextPage.nextPage();
+
+      return {
+        ...state,
+        urlParams: urlParamsNextPage
+      }
+    case (WordPairsActions.PREVIOUS_PAGE_WORD_PAIRS):
+      const urlParamsPreviousPage = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsPreviousPage.previousPage();
+
+      return {
+        ...state,
+        urlParams: urlParamsPreviousPage
+      }
+    case (WordPairsActions.FIRST_PAGE_WORD_PAIRS):
+      const urlParamsFirstPage = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsFirstPage.firstPage();
+
+      return {
+        ...state,
+        urlParams: urlParamsFirstPage
+      }
+    case (WordPairsActions.LAST_PAGE_WORD_PAIRS):
+      const urlParamsLastPage = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsLastPage.lastPage();
+
+      return {
+        ...state,
+        urlParams: urlParamsLastPage
       }
     default:
       return state;

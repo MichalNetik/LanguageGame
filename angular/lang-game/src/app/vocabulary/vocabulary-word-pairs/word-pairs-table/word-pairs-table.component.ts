@@ -37,4 +37,27 @@ export class WordPairsTableComponent implements OnInit {
     ]
   }
 
+  onNextPage() {
+    this.store.dispatch(
+      new WordPairsActions.NextPageWordPairs()
+    )
+  }
+
+  onPreviousPage() {
+    this.store.dispatch(
+      new WordPairsActions.PreviousPageWordPairs()
+    )
+  }
+
+  onFirstPage() {
+    this.store.dispatch(
+      new WordPairsActions.FirstPageWordPairs()
+    )
+  }
+
+  onLastPage() {
+    this.store.dispatch(
+      new WordPairsActions.LastPageWordPairs()
+    )
+  }
 }
