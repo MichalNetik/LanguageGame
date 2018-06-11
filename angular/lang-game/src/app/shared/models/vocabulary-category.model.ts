@@ -12,11 +12,9 @@ export class VocabularyCategoryModel implements VocabularyCategoryInterface {
   name: string;
   description: string;
 
-
   constructor(data: VocabularyCategoryInterface) {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
-
   }
 };

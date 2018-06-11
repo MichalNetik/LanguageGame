@@ -13,7 +13,7 @@ import * as WordPairsActions from '../store/word-pairs.actions';
 })
 export class WordPairsTableComponent implements OnInit {
   wordPairsState: Observable<fromWordPairs.State>;
-  columns: {name: string, displayName: string}[];
+  columns: {name: string, displayName: string, property?: string}[];
 
   constructor(private store: Store<fromWordPairs.FeatureState>) { }
 
@@ -33,6 +33,11 @@ export class WordPairsTableComponent implements OnInit {
       {
         name: 'description',
         displayName: 'Description'
+      },
+      {
+        name: 'category',
+        property: 'name',
+        displayName: 'Category'
       }
     ]
   }

@@ -24,7 +24,7 @@
       <div
         class="table-container__body__body-cell"
         *ngFor="let dataRow of (wordPairsState | async).wordPairs"
-      >{{ dataRow[column.name] }}</div>
+      >{{ column.property ? dataRow[column.name][column.property] : dataRow[column.name] }}</div>
     </div>
   </div>
   <div class="table-container__footer">
