@@ -12,6 +12,7 @@ export const PREVIOUS_PAGE_WORD_PAIRS = 'PREVIOUS_PAGE_WORD_PAIRS';
 export const FIRST_PAGE_WORD_PAIRS = 'FIRST_PAGE_WORD_PAIRS';
 export const LAST_PAGE_WORD_PAIRS = 'LAST_PAGE_WORD_PAIRS';
 export const SET_PAGE_SIZE_WORD_PAIRS = 'SET_PAGE_SIZE_WORD_PAIRS';
+export const SET_SORT_WORD_PARIS = 'SET_SORT_WORD_PARIS';
 
 
 export class FetchWordPairs implements Action {
@@ -53,7 +54,15 @@ export class LastPageWordPairs implements Action {
 export class SetPageSizeWordPairs implements Action {
   readonly type = SET_PAGE_SIZE_WORD_PAIRS;
 
-  constructor(public payload: number) {};
+  constructor(public payload: number) {}
+}
+
+export class SetSortWordPairs implements Action {
+  readonly type = SET_SORT_WORD_PARIS;
+
+  constructor(
+    public payload: string
+  ) {}
 }
 
 export type WordPairsActions = FetchWordPairs |
@@ -63,4 +72,5 @@ export type WordPairsActions = FetchWordPairs |
   PreviousPageWordPairs |
   FirstPageWordPairs |
   LastPageWordPairs |
-  SetPageSizeWordPairs;
+  SetPageSizeWordPairs |
+  SetSortWordPairs;

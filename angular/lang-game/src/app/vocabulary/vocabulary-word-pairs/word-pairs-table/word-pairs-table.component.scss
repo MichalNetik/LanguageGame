@@ -28,6 +28,7 @@
       flex-direction: column;
       flex-grow: 1;
       border: 1px solid black;
+      width: 20%;
 
       div:nth-child(even) {background-color: $light-grey;}
     }

@@ -21,7 +21,8 @@
       <div class="table-container__body__header-cell">
         <fa
           [name]="(wordPairsState | async).urlParams.getSortIcon(column.name)"
-          *ngIf="column.sortable">
+          *ngIf="column.sortable"
+          (click)="onSetSort(column.name)">
         </fa>
         {{ column.displayName }}
       </div>

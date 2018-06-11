@@ -109,4 +109,14 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
     }
   }
 
+  setSort(sortColumn: string) {
+    if (this.sortColumn === sortColumn) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortDirection = 'asc';
+    }
+
+    this.sortColumn = sortColumn;
+  }
+
 }

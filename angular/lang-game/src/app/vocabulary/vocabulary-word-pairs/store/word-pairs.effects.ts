@@ -47,7 +47,8 @@ export class WordPairsEffects {
       WordPairsActions.PREVIOUS_PAGE_WORD_PAIRS,
       WordPairsActions.FIRST_PAGE_WORD_PAIRS,
       WordPairsActions.LAST_PAGE_WORD_PAIRS,
-      WordPairsActions.SET_PAGE_SIZE_WORD_PAIRS
+      WordPairsActions.SET_PAGE_SIZE_WORD_PAIRS,
+      WordPairsActions.SET_SORT_WORD_PARIS
     )
     .pipe(
       withLatestFrom(this.store.select('wordPairsPagination')),

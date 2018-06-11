@@ -77,4 +77,10 @@ export class WordPairsTableComponent implements OnInit {
       new WordPairsActions.SetPageSizeWordPairs(+value)
     );
   }
+
+  onSetSort(sortColumn: string) {
+    this.store.dispatch(
+      new WordPairsActions.SetSortWordPairs(sortColumn)
+    );
+  }
 }
