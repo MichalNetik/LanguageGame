@@ -49,6 +49,14 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
     };
   }
 
+  getSortIcon(columnName: string) {
+    if (columnName === this.sortColumn) {
+      return this.sortDirection === 'asc' ? 'sort-up' : 'sort-down';
+    } else {
+      return 'sort';
+    }
+  }
+
   nextPage() {
     if (this.endOffset !== this.totalRecords) {
       if (this.endOffset + this.pageSize > this.totalRecords) {

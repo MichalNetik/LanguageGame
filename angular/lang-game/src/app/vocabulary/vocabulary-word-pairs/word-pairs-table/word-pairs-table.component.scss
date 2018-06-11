@@ -34,12 +34,23 @@
 
     &__header-cell {
       font-weight: bold;
-      padding: 0.2em;
+      padding: 0.6em;
       text-align: center;
+
+      fa {
+        font-size: 120%;
+        margin-left: 0.2em;
+        margin-right: 0.2em;
+
+        &:hover {
+          cursor: pointer;
+          color: $dark-grey;
+        }
+      }
     }
 
     &__body-cell {
-      padding: 0.2em;
+      padding: 0.4em;
       flex-grow: 1;
     }
   }

@@ -19,6 +19,10 @@
       *ngFor="let column of columns"
     >
       <div class="table-container__body__header-cell">
+        <fa
+          [name]="(wordPairsState | async).urlParams.getSortIcon(column.name)"
+          *ngIf="column.sortable">
+        </fa>
         {{ column.displayName }}
       </div>
       <div
@@ -30,7 +34,7 @@
   <div class="table-container__footer">
     <div class="table-pagination">
       <div class="table-pagination__records-displayed">
-          {{ (wordPairsState | async).urlParams.startOffset}}
+          {{ (wordPairsState | async).urlParams.startOffset }}
           -
           {{ (wordPairsState | async).urlParams.endOffset }}
       </div>

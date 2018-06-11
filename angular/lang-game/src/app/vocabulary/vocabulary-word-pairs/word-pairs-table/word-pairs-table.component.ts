@@ -13,31 +13,37 @@ import * as WordPairsActions from '../store/word-pairs.actions';
 })
 export class WordPairsTableComponent implements OnInit {
   wordPairsState: Observable<fromWordPairs.State>;
-  columns: {name: string, displayName: string, property?: string}[];
+  columns: {
+    name: string, displayName: string, property?: string,
+    sortable: boolean
+  }[];
 
   constructor(private store: Store<fromWordPairs.FeatureState>) { }
 
   ngOnInit() {
     this.wordPairsState = this.store.select('wordPairsPagination');
 
-
     this.columns = [
       {
         name: 'base',
-        displayName: 'Base'
+        displayName: 'Base',
+        sortable: true
       },
       {
         name: 'translated',
-        displayName: 'Translated'
+        displayName: 'Translated',
+        sortable: true
       },
       {
         name: 'description',
-        displayName: 'Description'
+        displayName: 'Description',
+        sortable: false
       },
       {
         name: 'category',
         property: 'name',
-        displayName: 'Category'
+        displayName: 'Category',
+        sortable: true
       }
     ]
   }
