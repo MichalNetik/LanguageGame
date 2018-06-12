@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 import * as fromWordPairs from '../store/word-pairs.reducers';
 import * as WordPairsActions from '../store/word-pairs.actions';

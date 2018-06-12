@@ -13,6 +13,7 @@ export const FIRST_PAGE_WORD_PAIRS = 'FIRST_PAGE_WORD_PAIRS';
 export const LAST_PAGE_WORD_PAIRS = 'LAST_PAGE_WORD_PAIRS';
 export const SET_PAGE_SIZE_WORD_PAIRS = 'SET_PAGE_SIZE_WORD_PAIRS';
 export const SET_SORT_WORD_PARIS = 'SET_SORT_WORD_PARIS';
+export const SET_FILTER = 'SET_FILTER';
 
 
 export class FetchWordPairs implements Action {
@@ -65,6 +66,14 @@ export class SetSortWordPairs implements Action {
   ) {}
 }
 
+export class SetFilter implements Action {
+    readonly type = SET_FILTER;
+
+    constructor(
+      public payload: { filterColumn: string, filterValue: string}
+    ) {}
+}
+
 export type WordPairsActions = FetchWordPairs |
   SetTotalRecords |
   SetWordPairs |
@@ -73,4 +82,5 @@ export type WordPairsActions = FetchWordPairs |
   FirstPageWordPairs |
   LastPageWordPairs |
   SetPageSizeWordPairs |
-  SetSortWordPairs;
+  SetSortWordPairs |
+  SetFilter;

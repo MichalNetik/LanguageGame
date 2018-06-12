@@ -82,6 +82,18 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
         ...state,
         urlParams: urlParamsSetSort
       }
+
+    case (WordPairsActions.SET_FILTER):
+      const urlParamsSetFilter = new PaginationUrlParamsModel({...state.urlParams});
+
+      urlParamsSetFilter.setFilter(action.payload);
+
+      return {
+        ...state,
+        urlParams: urlParamsSetFilter
+      }
+
+
     default:
       return state;
   }

@@ -119,4 +119,13 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
     this.sortColumn = sortColumn;
   }
 
+  setFilter({filterColumn, filterValue}: {filterColumn: string, filterValue: string}) {
+    if (filterValue === 'all') {
+      delete this.filterColumn;
+      delete this.filterValue;
+    } else {
+      this.filterValue = filterValue;
+      this.filterColumn = filterColumn;
+    }
+  }
 }
