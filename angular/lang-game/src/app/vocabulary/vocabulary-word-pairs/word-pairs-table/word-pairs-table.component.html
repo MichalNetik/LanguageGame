@@ -17,6 +17,7 @@
     <div
       class="table-container__body__column"
       *ngFor="let column of columns"
+      [style.width]="column.width"
     >
       <div class="table-container__body__header-cell">
         <fa

@@ -15,7 +15,7 @@ export class WordPairsTableComponent implements OnInit {
   wordPairsState: Observable<fromWordPairs.State>;
   columns: {
     name: string, displayName: string, property?: string,
-    sortable: boolean
+    sortable: boolean, width: string
   }[];
 
   constructor(private store: Store<fromWordPairs.FeatureState>) { }
@@ -27,23 +27,27 @@ export class WordPairsTableComponent implements OnInit {
       {
         name: 'base',
         displayName: 'Base',
-        sortable: true
+        sortable: true,
+        width: '25%'
       },
       {
         name: 'translated',
         displayName: 'Translated',
-        sortable: true
+        sortable: true,
+        width: '25%'
       },
       {
         name: 'description',
         displayName: 'Description',
-        sortable: false
+        sortable: false,
+        width: '30%'
       },
       {
         name: 'category',
         property: 'name',
         displayName: 'Category',
-        sortable: true
+        sortable: true,
+        width: '20%'
       }
     ]
   }

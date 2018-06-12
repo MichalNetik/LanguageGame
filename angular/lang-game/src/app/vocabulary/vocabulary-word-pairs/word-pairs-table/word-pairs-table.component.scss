@@ -28,7 +28,6 @@
       flex-direction: column;
       flex-grow: 1;
       border: 1px solid black;
-      width: 20%;
 
       div:nth-child(even) {background-color: $light-grey;}
     }
@@ -37,6 +36,8 @@
       font-weight: bold;
       padding: 0.6em;
       text-align: center;
+      vertical-align: middle;
+      min-height: 1.3em;
 
       fa {
         font-size: 120%;
@@ -53,6 +54,7 @@
     &__body-cell {
       padding: 0.4em;
       flex-grow: 1;
+      min-height: 1.2em;
     }
   }
 
