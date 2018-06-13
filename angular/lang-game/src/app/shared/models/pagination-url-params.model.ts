@@ -99,6 +99,10 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
     this.endOffset = this.totalRecords;
   }
 
+  setTotalRecords(value: number) {
+    this.totalRecords = value;
+  }
+
   setPageSize(value: number) {
     this.pageSize = value;
 

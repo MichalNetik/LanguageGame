@@ -28,7 +28,7 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
       }
     case (WordPairsActions.SET_TOTAL_RECORDS):
       const urlParamsTotalRecords = new PaginationUrlParamsModel({...state.urlParams});
-      urlParamsTotalRecords.totalRecords = action.payload;
+      urlParamsTotalRecords.setTotalRecords(action.payload);
 
       return {
         ...state,
