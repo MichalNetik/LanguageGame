@@ -20,12 +20,12 @@
       [style.width]="column.width"
     >
       <div class="table-container__body__header-cell">
+        {{ column.displayName }}
         <fa
           [name]="(wordPairsState | async).urlParams.getSortIcon(column.name)"
           *ngIf="column.sortable"
           (click)="onSetSort(column.name)">
         </fa>
-        {{ column.displayName }}
       </div>
       <div
         class="table-container__body__body-cell"
