@@ -75,7 +75,7 @@ export class WordPairsTableComponent implements OnInit {
     )
   }
 
-  onSelectionChange(value: number) {
+  onPageSizeSelectionChange(value: number) {
     this.store.dispatch(
       new WordPairsActions.SetPageSizeWordPairs(+value)
     );

@@ -18,6 +18,7 @@ export class VocabularyWordPairsComponent implements OnInit, OnDestroy {
   urlParams: PaginationUrlParamsModel;
   categoriesState: Observable<fromCategories.State>;
   subscription: Subscription;
+  categorySelected = 'all';
 
   constructor(
     private wordPairsStore: Store<fromWordPairs.FeatureState>,
@@ -45,16 +46,14 @@ export class VocabularyWordPairsComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.wordPairsStore.dispatch(
-      new WordPairsActions.FetchWordPairs(this.urlParams)
-    );
-  }
-
-  onCategorySelectionChange(categoryId: string) {
-    this.wordPairsStore.dispatch(
       new WordPairsActions.SetFilter(
-        { filterColumn: 'category', filterValue: categoryId }
+        { filterColumn: 'category', filterValue: this.categorySelected }
       )
     )
+
+    this.wordPairsStore.dispatch(
+      new WordPairsActions.FetchWordPairs(this.urlParams)
+    );
   }
 
 }

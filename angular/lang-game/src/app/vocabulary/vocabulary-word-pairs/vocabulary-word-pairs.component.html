@@ -1,6 +1,6 @@
 <div class="word-pairs-header">
   <select
-    (change)="onCategorySelectionChange($event.target.value)"
+    [(ngModel)]="categorySelected"
     class="btn-select-primary">
     <option value="all">All</option>
     <option

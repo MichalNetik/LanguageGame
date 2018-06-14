@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import { WordPairPaginationInterface, WordPairModel } from '../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';

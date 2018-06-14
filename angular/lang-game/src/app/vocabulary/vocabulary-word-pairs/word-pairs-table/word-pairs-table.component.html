@@ -4,7 +4,7 @@
     <div class="table-records-per-page">
       <select
         class="btn-pagination-select"
-        (change)="onSelectionChange($event.target.value)"
+        (change)="onPageSizeSelectionChange($event.target.value)"
         [ngModel]="(wordPairsState | async).urlParams.pageSize">
         <option value="5">5</option>
         <option value="10">10</option>

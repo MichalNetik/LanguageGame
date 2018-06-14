@@ -101,6 +101,10 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
 
   setTotalRecords(value: number) {
     this.totalRecords = value;
+
+    if (this.totalRecords < this.endOffset) {
+      this.endOffset = this.totalRecords;
+    }
   }
 
   setPageSize(value: number) {
@@ -131,5 +135,8 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
       this.filterValue = filterValue;
       this.filterColumn = filterColumn;
     }
+
+    this.startOffset = 0;
+    this.endOffset = this.pageSize;
   }
 }
