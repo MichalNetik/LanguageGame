@@ -1,3 +1,21 @@
+<div class="word-pairs-header">
+  <select
+    [(ngModel)]="categorySelected"
+    class="btn-select-primary">
+    <option value="all">All</option>
+    <option
+      [value]="category.id"
+      *ngFor="let category of (categoriesState | async).categories"
+    >
+      {{ category.name }}
+    </option>
+  </select>
+  <button
+    type="button"
+    class="btn-primary"
+    (click)="loadData()">Load Data</button>
+</div>
+
 <div class="table-container">
   <div class="table-container__header">
     <div class="table-name">Word Pairs Table</div>
