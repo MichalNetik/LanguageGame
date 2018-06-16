@@ -1,0 +1,5 @@
+ <ul>
+  <li *ngFor="let category of (categoriesState | async).categories">
+    {{ category.name }}
+  </li>
+</ul>

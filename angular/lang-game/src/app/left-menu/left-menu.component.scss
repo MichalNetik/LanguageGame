@@ -1,0 +1,32 @@
+@import '~app/shared/styles/variables';
+
+.left-menu-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0.2em 0em 1em;
+  height: 100%;
+
+  &__item {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    border-radius: 0.2em;
+    margin: 0.1em;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $light-blue;
+      color: $white;
+    }
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  .active {
+    background-color: $light-blue;
+    color: $white;
+  }
+}
+

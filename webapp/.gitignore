@@ -1,1 +1,5 @@
 /venv
+/lang_game/core/static
+__pycache__/
+*.sqlite3
+*.pyc

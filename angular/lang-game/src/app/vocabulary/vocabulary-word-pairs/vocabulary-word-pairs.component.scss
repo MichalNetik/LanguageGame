@@ -1,0 +1,15 @@
+@import '~app/shared/styles/variables';
+
+.word-pairs-body {
+  display: flex;
+  flex-direction: row;
+
+  app-word-pairs-form {
+    flex-grow: 0;
+  }
+
+  app-word-pairs-table {
+    flex-grow: 2;
+  }
+
+}

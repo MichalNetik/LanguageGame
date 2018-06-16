@@ -1,0 +1,354 @@
+[
+{
+    "model": "core.wordpair",
+    "pk": 1,
+    "fields": {
+        "base": "cat",
+        "translated": "ko\u010dka",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 2,
+    "fields": {
+        "base": "dog",
+        "translated": "pes",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 3,
+    "fields": {
+        "base": "elephant",
+        "translated": "slon",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 4,
+    "fields": {
+        "base": "bird",
+        "translated": "pt\u00e1k",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 6,
+    "fields": {
+        "base": "cow",
+        "translated": "kr\u00e1va",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 7,
+    "fields": {
+        "base": "table",
+        "translated": "st\u016fl",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 8,
+    "fields": {
+        "base": "chair",
+        "translated": "\u017eidle",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 9,
+    "fields": {
+        "base": "living room",
+        "translated": "ob\u00fdvac\u00ed pokoj",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 10,
+    "fields": {
+        "base": "sofa",
+        "translated": "pohovka",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 13,
+    "fields": {
+        "base": "floor",
+        "translated": "podlaha",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 14,
+    "fields": {
+        "base": "squirrel",
+        "translated": "veverka",
+        "description": "little forest animal",
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 15,
+    "fields": {
+        "base": "fox",
+        "translated": "li\u0161ka",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 16,
+    "fields": {
+        "base": "bedroom",
+        "translated": "lo\u017enice",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 17,
+    "fields": {
+        "base": "pig",
+        "translated": "prase",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 18,
+    "fields": {
+        "base": "camel",
+        "translated": "velbloud",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 19,
+    "fields": {
+        "base": "tree",
+        "translated": "strom",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 20,
+    "fields": {
+        "base": "grass",
+        "translated": "tr\u00e1va",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 21,
+    "fields": {
+        "base": "carrot",
+        "translated": "mrkev",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 22,
+    "fields": {
+        "base": "flowers",
+        "translated": "kv\u011btiny",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 23,
+    "fields": {
+        "base": "fence",
+        "translated": "plot",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 24,
+    "fields": {
+        "base": "water",
+        "translated": "voda",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 25,
+    "fields": {
+        "base": "stone",
+        "translated": "k\u00e1men",
+        "description": null,
+        "category": 4
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 26,
+    "fields": {
+        "base": "chicken",
+        "translated": "ku\u0159e",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 27,
+    "fields": {
+        "base": "stairs",
+        "translated": "schody",
+        "description": null,
+        "category": 2
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 28,
+    "fields": {
+        "base": "hospital",
+        "translated": "nemocnice",
+        "description": null,
+        "category": 3
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 29,
+    "fields": {
+        "base": "doctor",
+        "translated": "l\u00e9ka\u0159",
+        "description": null,
+        "category": 3
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 30,
+    "fields": {
+        "base": "illness",
+        "translated": "nemoc",
+        "description": null,
+        "category": 3
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 31,
+    "fields": {
+        "base": "injury",
+        "translated": "zran\u011bn\u00ed",
+        "description": null,
+        "category": 3
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 32,
+    "fields": {
+        "base": "sore throat",
+        "translated": "bolest v krku",
+        "description": null,
+        "category": 3
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 33,
+    "fields": {
+        "base": "rat",
+        "translated": "krysa",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 34,
+    "fields": {
+        "base": "fish",
+        "translated": "ryba",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.wordpair",
+    "pk": 35,
+    "fields": {
+        "base": "monkey",
+        "translated": "opice",
+        "description": null,
+        "category": 1
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 1,
+    "fields": {
+        "name": "Animals",
+        "description": "Different kinds of animals"
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 2,
+    "fields": {
+        "name": "House",
+        "description": "House stuff"
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 3,
+    "fields": {
+        "name": "Hospital",
+        "description": null
+    }
+},
+{
+    "model": "core.vocabularycategory",
+    "pk": 4,
+    "fields": {
+        "name": "Garden",
+        "description": null
+    }
+}
+]
