@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromWordPairs from '../store/word-pairs.reducers';
-import * as WordPairsActions from '../store/word-pairs.actions';
+import * as fromLangTable from '../../../../shared/components/lang-table/store/lang-table.reducers';
+import * as LangTableActions from '../../../../shared/components/lang-table/store/lang-table.actions';
 
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./word-pairs-table.component.scss']
 })
 export class WordPairsTableComponent implements OnInit, OnDestroy {
-  wordPairsState: Observable<fromWordPairs.State>;
+  wordPairsState: Observable<fromLangTable.State>;
   columns: {
     name: string, displayName: string, property?: string,
     sortable: boolean, width: string
@@ -28,14 +28,12 @@ export class WordPairsTableComponent implements OnInit, OnDestroy {
   categorySelected = 'all';
 
   constructor(
-    private wordPairsStore: Store<fromWordPairs.FeatureState>,
+    private wordPairsStore: Store<fromLangTable.FeatureState>,
     private categoriesStore: Store<fromCategories.FeatureState>
   ) { }
 
   ngOnInit() {
-    console.log('Global store: ', Store);
-    console.log('Word pair store: ', this.wordPairsStore);
-    this.wordPairsState = this.wordPairsStore.select('wordPairsPagination');
+    this.wordPairsState = this.wordPairsStore.select('word-pairs');
 
     this.columns = [
       {
@@ -65,14 +63,14 @@ export class WordPairsTableComponent implements OnInit, OnDestroy {
       }
     ]
 
-    this.subscription = this.wordPairsStore.select('wordPairsPagination')
+    this.subscription = this.wordPairsStore.select('word-pairs')
       .subscribe(
-        (data: fromWordPairs.State) => {
+        (data: fromLangTable.State) => {
           this.urlParams = data.urlParams;
         }
       );
 
-    this.categoriesState = this.categoriesStore.select('categories')
+    this.categoriesState = this.categoriesStore.select('word-pair-categories')
 
     this.categoriesStore.dispatch(
       new WordPairCategoriesActions.FetchCategories()
@@ -83,51 +81,15 @@ export class WordPairsTableComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onNextPage() {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.NextPageWordPairs()
-    )
-  }
-
-  onPreviousPage() {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.PreviousPageWordPairs()
-    )
-  }
-
-  onFirstPage() {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.FirstPageWordPairs()
-    )
-  }
-
-  onLastPage() {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.LastPageWordPairs()
-    )
-  }
-
-  onPageSizeSelectionChange(value: number) {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.SetPageSizeWordPairs(+value)
-    );
-  }
-
-  onSetSort(sortColumn: string) {
-    this.wordPairsStore.dispatch(
-      new WordPairsActions.SetSortWordPairs(sortColumn)
-    );
-  }
-
   loadData() {
     this.wordPairsStore.dispatch(
-      new WordPairsActions.SetFilter(
+      new LangTableActions.SetFilter(
         { filterColumn: 'category', filterValue: this.categorySelected }
       )
     )
 
     this.wordPairsStore.dispatch(
-      new WordPairsActions.FetchWordPairs(this.urlParams)
+      new LangTableActions.FetchData(this.urlParams)
     );
   }
 }

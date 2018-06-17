@@ -16,7 +16,7 @@ export class WordPairCategoriesComponent implements OnInit {
   constructor(private store: Store<fromWordPairCategories.FeatureState>) { }
 
   ngOnInit() {
-    this.categoriesState = this.store.select('categories');
+    this.categoriesState = this.store.select('word-pair-categories');
     this.store.dispatch(new WordPairCategoriesActions.FetchCategories());
   }
 

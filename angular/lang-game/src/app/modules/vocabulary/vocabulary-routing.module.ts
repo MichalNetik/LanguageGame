@@ -7,9 +7,9 @@ import { WordPairsComponent } from './word-pairs/word-pairs.component';
 
 const vocabularyRoutes: Routes = [
   { path: '', component: VocabularyComponent, children: [
-      { path: '', redirectTo: 'word-pair', pathMatch: 'full' },
-      { path: 'word-pair', component:  WordPairsComponent },
-      { path: 'category', component:  WordPairCategoriesComponent }
+      { path: '', redirectTo: 'word-pairs', pathMatch: 'full' },
+      { path: 'word-pairs', component:  WordPairsComponent },
+      { path: 'word-pair-categories', component:  WordPairCategoriesComponent }
     ]
   }
 ];

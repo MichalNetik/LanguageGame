@@ -16,66 +16,6 @@
     (click)="loadData()">Load Data</button>
 </div>
 
-<div class="table-container">
-  <div class="table-container__header">
-    <div class="table-name">Word Pairs Table</div>
-    <div class="table-records-per-page">
-      <select
-        class="btn-pagination-select"
-        (change)="onPageSizeSelectionChange($event.target.value)"
-        [ngModel]="(wordPairsState | async).urlParams.pageSize">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-      </select>
-    </div>
-  </div>
-  <div class="table-container__body">
-    <div
-      class="table-container__body__column"
-      *ngFor="let column of columns"
-      [style.width]="column.width"
-    >
-      <div class="table-container__body__header-cell">
-        {{ column.displayName }}
-        <fa
-          [name]="(wordPairsState | async).urlParams.getSortIcon(column.name)"
-          *ngIf="column.sortable"
-          (click)="onSetSort(column.name)">
-        </fa>
-      </div>
-      <div
-        class="table-container__body__body-cell"
-        *ngFor="let dataRow of (wordPairsState | async).wordPairs"
-      >{{ column.property ? dataRow[column.name][column.property] : dataRow[column.name] }}</div>
-    </div>
-  </div>
-  <div class="table-container__footer">
-    <div class="table-pagination">
-      <div class="table-pagination__records-displayed">
-          {{ (wordPairsState | async).urlParams.startOffset }}
-          -
-          {{ (wordPairsState | async).urlParams.endOffset }}
-      </div>
-      <div>&nbsp;of&nbsp;</div>
-      <div class="table-pagination__total-records">
-          {{ (wordPairsState | async).urlParams.totalRecords }}
-      </div>
-      <div class="table-pagination__arrow-icons">
-        <fa
-          name="angle-double-left"
-          (click)="onFirstPage()"></fa>
-        <fa
-          name="angle-left"
-          (click)="onPreviousPage()"></fa>
-        <fa
-          name="angle-right"
-          (click)="onNextPage()"></fa>
-        <fa
-          name="angle-double-right"
-          (click)="onLastPage()"></fa>
-      </div>
-    </div>
-  </div>
-</div>
+<app-lang-table
+  tableType="word-pairs"
+  [columns]="columns"></app-lang-table>
