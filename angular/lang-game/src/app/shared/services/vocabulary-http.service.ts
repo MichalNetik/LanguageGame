@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { WordPairCategoryInterface } from './../models/word-pair-category.model';
 import { WordPairPaginationInterface } from './../models/word-pair.model';
 import { PaginationUrlParamsModel } from './../models/pagination-url-params.model'
 
@@ -15,7 +15,7 @@ export class VocabularyHttpService {
   }
 
   getAllVocabularyCategories() {
-    return this.http.get('/api/vocabulary-category');
+    return this.http.get<WordPairCategoryInterface[]>('/api/vocabulary-category');
   }
 
   getWordPairs(params: PaginationUrlParamsModel) {

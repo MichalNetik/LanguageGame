@@ -1,7 +1,6 @@
-import { WordPairModel } from './../../../shared/models/word-pair.model';
+import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Action } from '@ngrx/store';
-import { VocabularyCategoryModel } from '../../../shared/models/vocabulary-category.model';
-import { PaginationUrlParamsModel } from './../../../shared/models/pagination-url-params.model';
+import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 
 export const FETCH_WORD_PAIRS = 'FETCH_WORD_PAIRS';
 export const SET_WORD_PAIRS = 'SET_WORD_PAIRS';

@@ -1,9 +1,7 @@
-import { PaginationUrlParamsModel } from './../../../shared/models/pagination-url-params.model';
-import { WordPairModel } from './../../../shared/models/word-pair.model';
-import { VocabularyCategoryModel } from '../../../shared/models/vocabulary-category.model';
+import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
+import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';
-import * as fromApp from '../../../store/app.reducers';
-import { StaticReflector } from '@angular/compiler';
+import * as fromApp from '../../../../store/app.reducers';
 
 export interface FeatureState extends fromApp.AppState {
   wordPairsPagination: State;

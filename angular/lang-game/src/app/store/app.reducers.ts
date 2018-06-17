@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import * as fromVocabularyCategories from '../vocabulary/vocabulary-categories/store/vocabulary-categories.reducers';
-import * as fromWordPairs from '../vocabulary/vocabulary-word-pairs/store/word-pairs.reducers';
+import * as fromVocabularyCategories from '../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
+import * as fromWordPairs from '../modules/vocabulary/word-pairs/store/word-pairs.reducers';
 
 
 export interface AppState {
@@ -10,6 +10,6 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  categories: fromVocabularyCategories.vocabularyCategoriesReducer,
+  categories: fromVocabularyCategories.wordPairsCategoriesReducer,
   wordPairsPagination: fromWordPairs.wordPairsReducer
 };

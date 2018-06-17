@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import * as fromWordPairs from '../store/word-pairs.reducers';
 import * as WordPairsActions from '../store/word-pairs.actions';
 
-import { PaginationUrlParamsModel } from '../../../shared/models/pagination-url-params.model';
-import * as CategoriesActions from '../../vocabulary-categories/store/vocabulary-categories.actions';
-import * as fromCategories from '../../vocabulary-categories/store/vocabulary-categories.reducers';
+import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
+import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
+import * as fromCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -73,7 +73,7 @@ export class WordPairsTableComponent implements OnInit, OnDestroy {
     this.categoriesState = this.categoriesStore.select('categories')
 
     this.categoriesStore.dispatch(
-      new CategoriesActions.FetchCategories()
+      new WordPairCategoriesActions.FetchCategories()
     );
   }
 

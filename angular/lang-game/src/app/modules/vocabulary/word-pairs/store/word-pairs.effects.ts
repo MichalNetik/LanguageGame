@@ -3,10 +3,10 @@ import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { WordPairPaginationInterface, WordPairModel } from '../../../shared/models/word-pair.model';
+import { WordPairPaginationInterface, WordPairModel } from '../../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';
 import * as fromWordPairs from './word-pairs.reducers';
-import { VocabularyHttpService } from '../../../shared/services/vocabulary-http.service';
+import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
 
 @Injectable()
 export class WordPairsEffects {
