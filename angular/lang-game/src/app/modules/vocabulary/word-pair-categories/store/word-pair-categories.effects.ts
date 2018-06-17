@@ -8,7 +8,7 @@ import { WordPairCategoryModel, WordPairCategoryInterface } from '../../../../sh
 
 
 @Injectable()
-export class WordPairsCategoriesEffects {
+export class WordPairCategoriesEffects {
   @Effect()
   vocabularyCategoriesFetch = this.actions$
     .ofType(WordPairCategoryActions.FETCH_CATEGORIES)

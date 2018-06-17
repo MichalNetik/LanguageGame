@@ -1,9 +1,8 @@
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';
-import * as fromApp from '../../../../store/app.reducers';
 
-export interface FeatureState extends fromApp.AppState {
+export interface FeatureState {
   wordPairsPagination: State;
 }
 

@@ -33,6 +33,8 @@ export class WordPairsTableComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('Global store: ', Store);
+    console.log('Word pair store: ', this.wordPairsStore);
     this.wordPairsState = this.wordPairsStore.select('wordPairsPagination');
 
     this.columns = [
