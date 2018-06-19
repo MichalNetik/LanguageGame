@@ -4,7 +4,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 import * as WordPairCategoryActions from './word-pair-categories.actions';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
-import { WordPairCategoryModel, WordPairCategoryInterface } from '../../../../shared/models/word-pair-category.model';
+import { WordPairCategoryModel, WordPairCategoryPaginationInterface } from '../../../../shared/models/word-pair-category.model';
 
 
 @Injectable()
@@ -15,12 +15,12 @@ export class WordPairCategoriesEffects {
     .pipe(
       switchMap(
         (action: WordPairCategoryActions.FetchCategories) => {
-          return this.httpVocabularyService.getAllVocabularyCategories();
+          return this.httpVocabularyService.getVocabularyCategories();
         }
       ),
       map(
-        (data: WordPairCategoryInterface[]) => {
-          const categories = data.map(item => new WordPairCategoryModel(item));
+        (data: WordPairCategoryPaginationInterface) => {
+          const categories = data.data.map(item => new WordPairCategoryModel(item));
           return {
             type: WordPairCategoryActions.SET_CATEGORIES,
             payload: categories

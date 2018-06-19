@@ -1,5 +1,3 @@
-import { WordPairInterface, WordPairModel } from './word-pair.model';
-
 export interface WordPairCategoryInterface {
   id: number;
   name: string;
@@ -18,3 +16,8 @@ export class WordPairCategoryModel implements WordPairCategoryInterface {
     this.description = data.description;
   }
 };
+
+export interface WordPairCategoryPaginationInterface {
+  data: WordPairCategoryInterface[];
+  totalRecords: number;
+}
