@@ -1,33 +1,32 @@
-import { WordPairCategoryModel } from './../../../models/word-pair-category.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Action } from '@ngrx/store';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 
-export const FETCH_DATA = 'FETCH_DATA';
-export const SET_DATA = 'SET_DATA';
-export const SET_TOTAL_RECORDS = 'SET_TOTAL_RECORDS';
+export const FETCH_DATA = '[word-pairs]FETCH_DATA';
+export const SET_DATA = '[word-pairs]SET_DATA';
+export const SET_TOTAL_RECORDS = '[word-pairs]SET_TOTAL_RECORDS';
 
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
-export const FIRST_PAGE = 'FIRST_PAGE';
-export const LAST_PAGE = 'LAST_PAGE';
-export const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
-export const SET_SORT = 'SET_SORT';
-export const SET_FILTER = 'SET_FILTER';
+export const NEXT_PAGE = '[word-pairs]NEXT_PAGE';
+export const PREVIOUS_PAGE = '[word-pairs]PREVIOUS_PAGE';
+export const FIRST_PAGE = '[word-pairs]FIRST_PAGE';
+export const LAST_PAGE = '[word-pairs]LAST_PAGE';
+export const SET_PAGE_SIZE = '[word-pairs]SET_PAGE_SIZE';
+export const SET_SORT = '[word-pairs]SET_SORT';
+export const SET_FILTER = '[word-pairs]SET_FILTER';
 
 
 export class FetchData implements Action {
   readonly type = FETCH_DATA;
 
   constructor(
-    public payload: PaginationUrlParamsModel
+    public payload: PaginationUrlParamsModel | {}
   ) {}
 }
 
 export class SetData implements Action {
   readonly type = SET_DATA;
 
-  constructor(public payload: WordPairModel[] | WordPairCategoryModel[]) {}
+  constructor(public payload: WordPairModel[]) {}
 }
 
 export class SetTotalRecords implements Action {
@@ -74,7 +73,7 @@ export class SetFilter implements Action {
     ) {}
 }
 
-export type LangTableActions = FetchData |
+export type WordPairsActions = FetchData |
   SetTotalRecords |
   SetData |
   NextPage |

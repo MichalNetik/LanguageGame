@@ -1,37 +1,72 @@
+import { WordPairCategoryPaginationInterface, WordPairCategoryModel } from './../../../../shared/models/word-pair-category.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import * as WordPairCategoryActions from './word-pair-categories.actions';
+import * as WordPairCategoriesActions from './word-pair-categories.actions';
+import * as fromWordPairCategories from './word-pair-categories.reducers';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
-import { WordPairCategoryModel, WordPairCategoryPaginationInterface } from '../../../../shared/models/word-pair-category.model';
-
 
 @Injectable()
 export class WordPairCategoriesEffects {
+
   @Effect()
-  vocabularyCategoriesFetch = this.actions$
-    .ofType(WordPairCategoryActions.FETCH_CATEGORIES)
+  wordPairsFetch = this.actions$
+    .ofType(WordPairCategoriesActions.FETCH_DATA)
     .pipe(
       switchMap(
-        (action: WordPairCategoryActions.FetchCategories) => {
-          return this.httpVocabularyService.getVocabularyCategories();
+        (action: WordPairCategoriesActions.FetchData) => {
+          return this.httpVocabularyService.getWordPairCategories(action.payload);
         }
       ),
-      map(
+      mergeMap(
         (data: WordPairCategoryPaginationInterface) => {
-          const categories = data.data.map(item => new WordPairCategoryModel(item));
+          const tableData = data.data.map(item => new WordPairCategoryModel(item));
+          const totalRecords = data.totalRecords;
+
+          return [
+            {
+              type: WordPairCategoriesActions.SET_DATA,
+              payload: tableData
+            },
+            {
+              type: WordPairCategoriesActions.SET_TOTAL_RECORDS,
+              payload: totalRecords
+            }
+          ]
+        }
+      )
+    )
+
+  @Effect()
+  pagination = this.actions$
+    .ofType(
+      WordPairCategoriesActions.NEXT_PAGE,
+      WordPairCategoriesActions.PREVIOUS_PAGE,
+      WordPairCategoriesActions.FIRST_PAGE,
+      WordPairCategoriesActions.LAST_PAGE,
+      WordPairCategoriesActions.SET_PAGE_SIZE,
+      WordPairCategoriesActions.SET_SORT
+    )
+    .pipe(
+      withLatestFrom(
+        this.store.select('word-pair-categories')
+      ),
+      map(
+        ([action, state]) => {
           return {
-            type: WordPairCategoryActions.SET_CATEGORIES,
-            payload: categories
+            type: WordPairCategoriesActions.FETCH_DATA,
+            payload: state.urlParams
           }
         }
+
       )
     )
 
   constructor(
     private actions$: Actions,
-    private httpVocabularyService: VocabularyHttpService
+    private httpVocabularyService: VocabularyHttpService,
+    private store: Store<fromWordPairCategories.FeatureState>
   ) {}
-
 }

@@ -5,7 +5,7 @@
     <option value="all">All</option>
     <option
       [value]="category.id"
-      *ngFor="let category of (categoriesState | async).categories"
+      *ngFor="let category of (categoriesState | async).tableData"
     >
       {{ category.name }}
     </option>

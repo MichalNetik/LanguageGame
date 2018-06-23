@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as LangActions from './store/lang-table.actions';
-import * as fromLangTable from './store/lang-table.reducers';
+import { LangTableColumns } from './lang-table.type';
+import * as WordPairsActions from '../../../modules/vocabulary/word-pairs/store/word-pairs.actions';
+import * as WordPairCategoriesActions from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.actions';
+import * as fromWordPairs from '../../../modules/vocabulary/word-pairs/store/word-pairs.reducers';
+import * as fromWordPairCategories from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
 
 @Component({
   selector: 'app-lang-table',
@@ -10,19 +13,23 @@ import * as fromLangTable from './store/lang-table.reducers';
   styleUrls: ['./lang-table.component.scss']
 })
 export class LangTableComponent implements OnInit {
-  @Input() tableStore: Store<any>;
-  @Input() columns: {
-    name: string, displayName: string, property?: string,
-    sortable: boolean, width: string
-  }[]
+  @Input() columns: LangTableColumns;
   @Input() tableType: string;
 
-  tableState: Observable<fromLangTable.State>;
+  tableState: Observable<fromWordPairs.State | fromWordPairCategories.State>;
 
   constructor(
-    private langTableStore: Store<fromLangTable.FeatureState>,
+    private langTableStore: Store<fromWordPairs.FeatureState | fromWordPairCategories.FeatureState>,
   ) { }
 
+  private getAction(actionName: string) {
+    switch (this.tableType) {
+      case 'word-pairs':
+        return WordPairsActions[actionName];
+      case 'word-pair-categories':
+        return WordPairCategoriesActions[actionName];
+    }
+  }
 
   ngOnInit() {
     this.tableState = this.langTableStore.select(this.tableType);
@@ -30,38 +37,44 @@ export class LangTableComponent implements OnInit {
 
 
   onNextPage() {
+    const action = this.getAction('NextPage');
     this.langTableStore.dispatch(
-      new LangActions.NextPage()
+      new action()
     )
   }
 
   onPreviousPage() {
+    const action = this.getAction('PreviousPage');
     this.langTableStore.dispatch(
-      new LangActions.PreviousPage()
+      new action()
     )
   }
 
   onFirstPage() {
+    const action = this.getAction('FirstPage');
     this.langTableStore.dispatch(
-      new LangActions.FirstPage()
+      new action()
     )
   }
 
   onLastPage() {
+    const action = this.getAction('LastPage');
     this.langTableStore.dispatch(
-      new LangActions.LastPage()
+      new action()
     )
   }
 
   onPageSizeSelectionChange(value: number) {
+    const action = this.getAction('SetPageSize');
     this.langTableStore.dispatch(
-      new LangActions.SetPageSize(+value)
+      new action(+value)
     );
   }
 
   onSetSort(sortColumn: string) {
+    const action = this.getAction('SetSort');
     this.langTableStore.dispatch(
-      new LangActions.SetSort(sortColumn)
+      new action(sortColumn)
     );
   }
 }

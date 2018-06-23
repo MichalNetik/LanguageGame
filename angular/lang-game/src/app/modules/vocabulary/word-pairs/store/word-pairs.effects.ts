@@ -1,16 +1,16 @@
+import { WordPairPaginationInterface } from './../../../../shared/models/word-pair.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { WordPairPaginationInterface, WordPairModel } from '../../../../shared/models/word-pair.model';
-import * as LangTableActions from './lang-table.actions';
-import * as fromLangTable from './lang-table.reducers';
+import { WordPairModel } from '../../../../shared/models/word-pair.model';
+import * as LangTableActions from './word-pairs.actions';
+import * as fromLangTable from './word-pairs.reducers';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
-import { Router } from '@angular/router';
 
 @Injectable()
-export class LangTableEffects {
+export class WordPairsEffects {
 
   @Effect()
   wordPairsFetch = this.actions$
@@ -18,24 +18,18 @@ export class LangTableEffects {
     .pipe(
       switchMap(
         (action: LangTableActions.FetchData) => {
-          const currentUrl = this.router.url;
-          if (/vocabulary\/word-pairs/.test(currentUrl)) {
-            return this.httpVocabularyService.getWordPairs(action.payload);
-          }
-          // else if (/vocabulary\/word-pair-categories/.test(currentUrl)) {
-          //  return this.httpVocabularyService.getAllVocabularyCategories(action.payload);
-          // }
+          return this.httpVocabularyService.getWordPairs(action.payload);
         }
       ),
       mergeMap(
         (data: WordPairPaginationInterface) => {
-          const wordPairs = data.data.map(item => new WordPairModel(item));
+          const tableData = data.data.map(item => new WordPairModel(item));
           const totalRecords = data.totalRecords;
 
           return [
             {
               type: LangTableActions.SET_DATA,
-              payload: wordPairs
+              payload: tableData
             },
             {
               type: LangTableActions.SET_TOTAL_RECORDS,
@@ -57,7 +51,6 @@ export class LangTableEffects {
       LangTableActions.SET_SORT
     )
     .pipe(
-      // TODO: source relevant store from router
       withLatestFrom(
         this.store.select('word-pairs')
       ),
@@ -75,8 +68,6 @@ export class LangTableEffects {
   constructor(
     private actions$: Actions,
     private httpVocabularyService: VocabularyHttpService,
-    private store: Store<fromLangTable.FeatureState>,
-    private router: Router
+    private store: Store<fromLangTable.FeatureState>
   ) {}
-
 }

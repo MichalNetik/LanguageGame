@@ -5,7 +5,8 @@ import { LeftMenuComponent } from './left-menu.component';
 @NgModule({
   declarations: [LeftMenuComponent],
   imports: [
-    AppRoutingModule],
+    AppRoutingModule
+  ],
   exports: [
     AppRoutingModule,
     LeftMenuComponent

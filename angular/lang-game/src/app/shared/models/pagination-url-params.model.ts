@@ -19,11 +19,11 @@ export class PaginationUrlParamsModel implements PaginationUrlParamsInterface {
   filterColumn?: string;
   filterValue?: string;
 
-  static getEmpty() {
+  static getEmpty(sortColumn: string) {
     const emptyData = {
       startOffset: 0,
       endOffset: 10,
-      sortColumn: 'base',
+      sortColumn: sortColumn,
       sortDirection: 'asc',
       pageSize: 10,
       totalRecords: 0

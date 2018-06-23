@@ -1,23 +1,22 @@
-import { WordPairCategoryModel } from './../../../models/word-pair-category.model';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
-import * as LangTableActions from './lang-table.actions';
+import * as LangTableActions from './word-pairs.actions';
 
 export interface FeatureState {
   tableState: State;
 }
 
 export interface State {
-  tableData: WordPairModel[] | WordPairCategoryModel[],
+  tableData: WordPairModel[],
   urlParams: PaginationUrlParamsModel
 }
 
 const initialState: State = {
   tableData: [],
-  urlParams: PaginationUrlParamsModel.getEmpty()
+  urlParams: PaginationUrlParamsModel.getEmpty('base')
 };
 
-export function langTableReducer(state = initialState, action: LangTableActions.LangTableActions) {
+export function wordPairsReducer(state = initialState, action: LangTableActions.WordPairsActions) {
   switch (action.type) {
     case (LangTableActions.SET_DATA):
       return {

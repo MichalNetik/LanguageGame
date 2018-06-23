@@ -14,7 +14,7 @@ export class VocabularyHttpService {
         .reduce((p, key) => p.set(key, params[key]), new HttpParams());
   }
 
-  getVocabularyCategories(params: PaginationUrlParamsModel | {} = {}) {
+  getWordPairCategories(params: PaginationUrlParamsModel | {} = {}) {
     const httpParams = this.toHttpParams(params);
     return this.http.get<WordPairCategoryPaginationInterface>('/api/vocabulary-category',
       {
@@ -23,7 +23,7 @@ export class VocabularyHttpService {
     );
   }
 
-  getWordPairs(params: PaginationUrlParamsModel) {
+  getWordPairs(params: PaginationUrlParamsModel | {} = {}) {
     const httpParams = this.toHttpParams(params);
     return this.http.get<WordPairPaginationInterface>('/api/word-pair',
       {
