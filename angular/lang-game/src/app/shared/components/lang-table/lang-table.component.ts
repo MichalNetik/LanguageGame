@@ -15,6 +15,7 @@ import * as fromWordPairCategories from '../../../modules/vocabulary/word-pair-c
 export class LangTableComponent implements OnInit {
   @Input() columns: LangTableColumns;
   @Input() tableType: string;
+  @Input() tableName: string;
 
   tableState: Observable<fromWordPairs.State | fromWordPairCategories.State>;
 
