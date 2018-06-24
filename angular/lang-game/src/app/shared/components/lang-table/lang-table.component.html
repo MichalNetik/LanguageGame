@@ -1,20 +1,3 @@
-<div class="word-pairs-header">
-  <select
-    [(ngModel)]="categorySelected"
-    class="btn-select-primary">
-    <option value="all">All</option>
-    <option
-      [value]="category.id"
-      *ngFor="let category of (categoriesState | async).categories"
-    >
-      {{ category.name }}
-    </option>
-  </select>
-  <button
-    type="button"
-    class="btn-primary"
-    (click)="loadData()">Load Data</button>
-</div>
 
 <div class="table-container">
   <div class="table-container__header">
@@ -23,7 +6,7 @@
       <select
         class="btn-pagination-select"
         (change)="onPageSizeSelectionChange($event.target.value)"
-        [ngModel]="(wordPairsState | async).urlParams.pageSize">
+        [ngModel]="(tableState | async).urlParams.pageSize">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
@@ -40,27 +23,27 @@
       <div class="table-container__body__header-cell">
         {{ column.displayName }}
         <fa
-          [name]="(wordPairsState | async).urlParams.getSortIcon(column.name)"
+          [name]="(tableState | async).urlParams.getSortIcon(column.name)"
           *ngIf="column.sortable"
           (click)="onSetSort(column.name)">
         </fa>
       </div>
       <div
         class="table-container__body__body-cell"
-        *ngFor="let dataRow of (wordPairsState | async).wordPairs"
+        *ngFor="let dataRow of (tableState | async).tableData"
       >{{ column.property ? dataRow[column.name][column.property] : dataRow[column.name] }}</div>
     </div>
   </div>
   <div class="table-container__footer">
     <div class="table-pagination">
       <div class="table-pagination__records-displayed">
-          {{ (wordPairsState | async).urlParams.startOffset }}
+          {{ (tableState | async).urlParams.startOffset }}
           -
-          {{ (wordPairsState | async).urlParams.endOffset }}
+          {{ (tableState | async).urlParams.endOffset }}
       </div>
       <div>&nbsp;of&nbsp;</div>
       <div class="table-pagination__total-records">
-          {{ (wordPairsState | async).urlParams.totalRecords }}
+          {{ (tableState | async).urlParams.totalRecords }}
       </div>
       <div class="table-pagination__arrow-icons">
         <fa

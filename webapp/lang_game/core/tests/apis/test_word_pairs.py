@@ -68,15 +68,12 @@ class TestWordPairs(APITestCase):
           expected_res['data']
       )
 
-  def test_load_word_pairs_missing_mandatory_params(self):
-      # word-pair/?sortColumn=base&sortDirection=asc&startOffset=0
+  def test_load_word_pairs_missing_pagination_params(self):
+      # word-pair/
 
       url = reverse('wordpair-list')
-      input_params = {
-          'startOffset': 0,
-          'sortColumn': 'base',
-          'sortDirection': 'asc',
-      }
 
-      response = self.client.get(url, input_params, format='json')
-      self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+      response = self.client.get(url, format='json')
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+      self.assertEqual(response.data['totalRecords'], 32)
+      self.assertEqual(len(response.data['data']), 32)
