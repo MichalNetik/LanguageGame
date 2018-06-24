@@ -1,0 +1,24 @@
+<div class="form-container">
+  <div class="form-container__header">
+    {{ formName }}
+  </div>
+
+  <form
+    class="form-container__body"
+    [formGroup]="formModel.form"
+  >
+    <div
+      class="form-container__field"
+      *ngFor="let field of formModel.data">
+        <app-standard-input-field
+          *ngIf="field.fieldType === 'standard-input-field'"
+          [fieldData]="field"
+          [fieldFormControl]="formModel.form.controls[field.name]"
+        ></app-standard-input-field>
+
+        <app-select-field
+          *ngIf="field.fieldType === 'select-field'"
+        ></app-select-field>
+    </div>
+  </form>
+</div>
