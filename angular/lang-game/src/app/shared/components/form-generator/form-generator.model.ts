@@ -1,4 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 export enum FieldType {
   STANDARD_INPUT_FIELD = 'standard-input-field',
@@ -10,7 +11,8 @@ export class FormGeneratorFieldInterface {
   name: string;
   value: string | number;
   validators: string[];
-  fieldType: FieldType
+  fieldType: FieldType;
+  $optionsData?: any;
 }
 
 

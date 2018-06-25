@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { FormGeneratorFieldInterface } from './../form-generator.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-select-field',
@@ -6,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-field.component.scss']
 })
 export class SelectFieldComponent implements OnInit {
+  @Input() options: { id: string | number, name: string, [key: string]: any}
+  @Input() fieldData: FormGeneratorFieldInterface;
+  @Input() fieldFormControl: FormControl;
+
+  optionSelected: string | number = 'all';
 
   constructor() { }
 
