@@ -1,6 +1,6 @@
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
-import * as LangTableActions from './word-pairs.actions';
+import * as WordPairsActions from './word-pairs.actions';
 
 export interface FeatureState {
   tableState: State;
@@ -8,22 +8,24 @@ export interface FeatureState {
 
 export interface State {
   tableData: WordPairModel[],
-  urlParams: PaginationUrlParamsModel
+  urlParams: PaginationUrlParamsModel,
+  selectedRow: number
 }
 
 const initialState: State = {
   tableData: [],
-  urlParams: PaginationUrlParamsModel.getEmpty('base')
+  urlParams: PaginationUrlParamsModel.getEmpty('base'),
+  selectedRow: null
 };
 
-export function wordPairsReducer(state = initialState, action: LangTableActions.WordPairsActions) {
+export function wordPairsReducer(state = initialState, action: WordPairsActions.WordPairsActions) {
   switch (action.type) {
-    case (LangTableActions.SET_DATA):
+    case (WordPairsActions.SET_DATA):
       return {
         ...state,
         tableData: action.payload
       }
-    case (LangTableActions.SET_TOTAL_RECORDS):
+    case (WordPairsActions.SET_TOTAL_RECORDS):
       const urlParamsTotalRecords = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsTotalRecords.setTotalRecords(action.payload);
 
@@ -31,7 +33,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsTotalRecords
       };
-    case (LangTableActions.NEXT_PAGE):
+    case (WordPairsActions.NEXT_PAGE):
       const urlParamsNextPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsNextPage.nextPage();
 
@@ -39,7 +41,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsNextPage
       }
-    case (LangTableActions.PREVIOUS_PAGE):
+    case (WordPairsActions.PREVIOUS_PAGE):
       const urlParamsPreviousPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsPreviousPage.previousPage();
 
@@ -47,7 +49,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsPreviousPage
       }
-    case (LangTableActions.FIRST_PAGE):
+    case (WordPairsActions.FIRST_PAGE):
       const urlParamsFirstPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsFirstPage.firstPage();
 
@@ -55,7 +57,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsFirstPage
       }
-    case (LangTableActions.LAST_PAGE):
+    case (WordPairsActions.LAST_PAGE):
       const urlParamsLastPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsLastPage.lastPage();
 
@@ -63,7 +65,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsLastPage
       }
-    case (LangTableActions.SET_PAGE_SIZE):
+    case (WordPairsActions.SET_PAGE_SIZE):
       const urlParamsSetRecordsPerPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsSetRecordsPerPage.setPageSize(action.payload);
 
@@ -71,7 +73,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         ...state,
         urlParams: urlParamsSetRecordsPerPage
       }
-    case (LangTableActions.SET_SORT):
+    case (WordPairsActions.SET_SORT):
       const urlParamsSetSort = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsSetSort.setSort(action.payload);
 
@@ -80,7 +82,7 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         urlParams: urlParamsSetSort
       }
 
-    case (LangTableActions.SET_FILTER):
+    case (WordPairsActions.SET_FILTER):
       const urlParamsSetFilter = new PaginationUrlParamsModel({...state.urlParams});
 
       urlParamsSetFilter.setFilter(action.payload);
@@ -90,6 +92,11 @@ export function wordPairsReducer(state = initialState, action: LangTableActions.
         urlParams: urlParamsSetFilter
       }
 
+    case (WordPairsActions.SET_SELECTED_ROW):
+      return {
+        ...state,
+        selectedRow: action.payload
+      }
 
     default:
       return state;

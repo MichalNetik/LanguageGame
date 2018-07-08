@@ -1,5 +1,11 @@
 @import '~app/shared/styles/variables';
 
+@mixin highlighted-row {
+  background-color: $light-blue;
+  cursor: pointer;
+  color: $white;
+}
+
 .table-container {
   display: flex;
   flex-direction: column;
@@ -21,18 +27,31 @@
   }
 
   &__body {
-    display: flex;
-    flex-direction: row;
+    border-radius: 0.2em;
+    border: 1px solid $grey;
 
+    .active {
+      @include highlighted-row;
+    }
 
-    &__column {
+    &__header-row {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       flex-grow: 1;
-      border: 1px solid $grey;
-      border-radius: 0.2em;
+    }
 
-      div:nth-child(even) {background-color: $light-grey;}
+    &__row {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+
+      &:nth-child(even) {
+        background-color: $light-grey;
+      }
+
+      &:hover {
+        @include highlighted-row;
+      }
     }
 
     &__header-cell {
@@ -41,6 +60,8 @@
       text-align: center;
       vertical-align: middle;
       min-height: 1.3em;
+      border: 1px solid $grey;
+
 
       fa {
         font-size: 120%;
@@ -55,10 +76,11 @@
       }
     }
 
-    &__body-cell {
+    &__cell {
       padding: 0.4em;
       flex-grow: 1;
       min-height: 1.2em;
+      border: 1px solid $grey;
     }
   }
 

@@ -78,4 +78,11 @@ export class LangTableComponent implements OnInit {
       new action(sortColumn)
     );
   }
+
+  onSelectRow(index: number) {
+    const action = this.getAction('SetSelectedRow')
+    this.langTableStore.dispatch(
+      new action(index)
+    );
+  }
 }

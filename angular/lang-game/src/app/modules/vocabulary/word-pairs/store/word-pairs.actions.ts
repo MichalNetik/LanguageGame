@@ -13,6 +13,7 @@ export const LAST_PAGE = '[word-pairs]LAST_PAGE';
 export const SET_PAGE_SIZE = '[word-pairs]SET_PAGE_SIZE';
 export const SET_SORT = '[word-pairs]SET_SORT';
 export const SET_FILTER = '[word-pairs]SET_FILTER';
+export const SET_SELECTED_ROW = '[word-pairs]SET_SELECTED_ROW';
 
 
 export class FetchData implements Action {
@@ -73,6 +74,14 @@ export class SetFilter implements Action {
     ) {}
 }
 
+export class SetSelectedRow implements Action {
+  readonly type = SET_SELECTED_ROW;
+
+  constructor(
+    public payload: number
+  ) {}
+}
+
 export type WordPairsActions = FetchData |
   SetTotalRecords |
   SetData |
@@ -82,4 +91,5 @@ export type WordPairsActions = FetchData |
   LastPage |
   SetPageSize |
   SetSort |
-  SetFilter;
+  SetFilter |
+  SetSelectedRow;
