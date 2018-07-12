@@ -1,23 +1,24 @@
 import { WordPairPaginationInterface } from './../../../../shared/models/word-pair.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map, mergeMap, withLatestFrom, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
-import * as LangTableActions from './word-pairs.actions';
+import * as WordPairsActions from './word-pairs.actions';
 import * as fromLangTable from './word-pairs.reducers';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class WordPairsEffects {
 
   @Effect()
   wordPairsFetch = this.actions$
-    .ofType(LangTableActions.FETCH_DATA)
+    .ofType(WordPairsActions.FETCH_DATA)
     .pipe(
       switchMap(
-        (action: LangTableActions.FetchData) => {
+        (action: WordPairsActions.FetchData) => {
           return this.httpVocabularyService.getWordPairs(action.payload);
         }
       ),
@@ -28,11 +29,11 @@ export class WordPairsEffects {
 
           return [
             {
-              type: LangTableActions.SET_DATA,
+              type: WordPairsActions.SET_DATA,
               payload: tableData
             },
             {
-              type: LangTableActions.SET_TOTAL_RECORDS,
+              type: WordPairsActions.SET_TOTAL_RECORDS,
               payload: totalRecords
             }
           ]
@@ -43,12 +44,12 @@ export class WordPairsEffects {
   @Effect()
   pagination = this.actions$
     .ofType(
-      LangTableActions.NEXT_PAGE,
-      LangTableActions.PREVIOUS_PAGE,
-      LangTableActions.FIRST_PAGE,
-      LangTableActions.LAST_PAGE,
-      LangTableActions.SET_PAGE_SIZE,
-      LangTableActions.SET_SORT
+      WordPairsActions.NEXT_PAGE,
+      WordPairsActions.PREVIOUS_PAGE,
+      WordPairsActions.FIRST_PAGE,
+      WordPairsActions.LAST_PAGE,
+      WordPairsActions.SET_PAGE_SIZE,
+      WordPairsActions.SET_SORT
     )
     .pipe(
       withLatestFrom(
@@ -57,7 +58,7 @@ export class WordPairsEffects {
       map(
         ([action, state]) => {
           return {
-            type: LangTableActions.FETCH_DATA,
+            type: WordPairsActions.FETCH_DATA,
             payload: state.urlParams
           }
         }
@@ -65,9 +66,32 @@ export class WordPairsEffects {
       )
     )
 
+  @Effect()
+  edit = this.actions$
+    .ofType(
+      WordPairsActions.SET_SELECTED_ROW
+    )
+    .pipe(
+      withLatestFrom(
+        this.store.select('word-pairs')
+      ),
+      map(
+        ([action, state]) => {
+          const item = state.tableData[state.selectedRow];
+
+          return {
+            type: WordPairsActions.SET_FORM_ITEM,
+            payload: item
+          }
+        }
+      )
+    )
+
   constructor(
     private actions$: Actions,
     private httpVocabularyService: VocabularyHttpService,
-    private store: Store<fromLangTable.FeatureState>
+    private store: Store<fromLangTable.FeatureState>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 }

@@ -2,9 +2,8 @@
   {{ fieldData.label }}
 </div>
 <select
-  [(ngModel)]="optionSelected"
+  [formControl]="fieldFormControl"
   class="btn-select-primary select-field">
-  <option value="all">All</option>
   <option
     [value]="option.id"
     *ngFor="let option of (options | async).tableData"

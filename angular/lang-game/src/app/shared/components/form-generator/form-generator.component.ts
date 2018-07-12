@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGeneratorModel, FormGeneratorFieldInterface, FieldType } from './form-generator.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGeneratorModel, FormGeneratorFieldInterface, FieldType } from './fo
   templateUrl: './form-generator.component.html',
   styleUrls: ['./form-generator.component.scss']
 })
-export class FormGeneratorComponent implements OnInit {
+export class FormGeneratorComponent implements OnChanges {
   @Input() formName: string;
 
   @Input() formData: FormGeneratorFieldInterface[];
@@ -14,7 +14,7 @@ export class FormGeneratorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
 
     this.formModel = new FormGeneratorModel(this.formData);
   }

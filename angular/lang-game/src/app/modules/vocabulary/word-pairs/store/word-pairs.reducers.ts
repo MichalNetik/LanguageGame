@@ -9,13 +9,15 @@ export interface FeatureState {
 export interface State {
   tableData: WordPairModel[],
   urlParams: PaginationUrlParamsModel,
-  selectedRow: number
+  selectedRow: number,
+  activeFormItem: WordPairModel
 }
 
 const initialState: State = {
   tableData: [],
   urlParams: PaginationUrlParamsModel.getEmpty('base'),
-  selectedRow: null
+  selectedRow: null,
+  activeFormItem: null
 };
 
 export function wordPairsReducer(state = initialState, action: WordPairsActions.WordPairsActions) {
@@ -96,6 +98,12 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
       return {
         ...state,
         selectedRow: action.payload
+      }
+
+    case (WordPairsActions.SET_FORM_ITEM):
+      return {
+        ...state,
+        activeFormItem: action.payload
       }
 
     default:

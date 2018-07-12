@@ -14,7 +14,7 @@ export const SET_PAGE_SIZE = '[word-pairs]SET_PAGE_SIZE';
 export const SET_SORT = '[word-pairs]SET_SORT';
 export const SET_FILTER = '[word-pairs]SET_FILTER';
 export const SET_SELECTED_ROW = '[word-pairs]SET_SELECTED_ROW';
-
+export const SET_FORM_ITEM = '[word-pairs]SET_FORM_ITEM'
 
 export class FetchData implements Action {
   readonly type = FETCH_DATA;
@@ -82,6 +82,14 @@ export class SetSelectedRow implements Action {
   ) {}
 }
 
+export class SetFormItem implements Action {
+  readonly type = SET_FORM_ITEM
+
+  constructor(
+    public payload: WordPairModel
+  ) {}
+}
+
 export type WordPairsActions = FetchData |
   SetTotalRecords |
   SetData |
@@ -92,4 +100,5 @@ export type WordPairsActions = FetchData |
   SetPageSize |
   SetSort |
   SetFilter |
-  SetSelectedRow;
+  SetSelectedRow |
+  SetFormItem;

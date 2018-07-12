@@ -12,7 +12,7 @@ export class SelectFieldComponent implements OnInit {
   @Input() fieldData: FormGeneratorFieldInterface;
   @Input() fieldFormControl: FormControl;
 
-  optionSelected: string | number = 'all';
+  optionSelected: number;
 
   constructor() { }
 

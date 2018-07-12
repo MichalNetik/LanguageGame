@@ -1,3 +1,4 @@
+import { WordPairModel } from './../../../../shared/models/word-pair.model';
 import { FieldType, FormGeneratorFieldInterface } from './../../../../shared/components/form-generator/form-generator.model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -23,23 +24,32 @@ export class WordPairsFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.wordPairsStore.select('word-pairs').subscribe(
+      (data) => {
+        if (data.activeFormItem) {
+          this.createFormData(data.activeFormItem);
+        }
+      }
+    )
+  }
 
+  createFormData(wordPair: WordPairModel) {
     this.formData = [
       {
         label: 'Base', name: 'base', 'validators': ['required'],
-        fieldType: FieldType.STANDARD_INPUT_FIELD, value: ''
+        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.base
       },
       {
         label: 'Translated', name: 'translated', 'validators': ['required'],
-        fieldType: FieldType.STANDARD_INPUT_FIELD, value: ''
+        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.translated
       },
       {
         label: 'Description', name: 'description', 'validators': [],
-        fieldType: FieldType.STANDARD_INPUT_FIELD, value: ''
+        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.description
       },
       {
         label: 'Category', name: 'category', 'validators': ['required'],
-        fieldType: FieldType.SELECT_FIELD, value: '',
+        fieldType: FieldType.SELECT_FIELD, value: wordPair.category.id,
         $optionsData: this.categoriesStore.select('word-pair-categories')
       }
     ];
