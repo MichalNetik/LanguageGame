@@ -6,3 +6,6 @@ class VocabularyCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = VocabularyCategory
         fields = '__all__'
+        extra_kwargs = {
+            'id': {'read_only': False, 'required': False}
+        }

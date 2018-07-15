@@ -6,6 +6,7 @@ import * as WordPairsActions from '../../../modules/vocabulary/word-pairs/store/
 import * as WordPairCategoriesActions from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.actions';
 import * as fromWordPairs from '../../../modules/vocabulary/word-pairs/store/word-pairs.reducers';
 import * as fromWordPairCategories from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lang-table',
@@ -20,6 +21,8 @@ export class LangTableComponent implements OnInit {
   tableState: Observable<fromWordPairs.State | fromWordPairCategories.State>;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private langTableStore: Store<fromWordPairs.FeatureState | fromWordPairCategories.FeatureState>,
   ) { }
 
@@ -79,10 +82,12 @@ export class LangTableComponent implements OnInit {
     );
   }
 
-  onSelectRow(index: number) {
+  onSelectRow(index: number, itemId: number) {
     const action = this.getAction('SetSelectedRow')
     this.langTableStore.dispatch(
       new action(index)
     );
+
+    this.router.navigate([`${itemId}`], { relativeTo: this.route});
   }
 }

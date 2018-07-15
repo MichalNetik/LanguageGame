@@ -5,7 +5,7 @@
   [formControl]="fieldFormControl"
   class="btn-select-primary select-field">
   <option
-    [value]="option.id"
+    [value]="option"
     *ngFor="let option of (options | async).tableData"
   >
     {{ option.name }}

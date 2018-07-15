@@ -9,7 +9,7 @@ export enum FieldType {
 export class FormGeneratorFieldInterface {
   label: string;
   name: string;
-  value: string | number;
+  value: any;
   validators: string[];
   fieldType: FieldType;
   $optionsData?: any;

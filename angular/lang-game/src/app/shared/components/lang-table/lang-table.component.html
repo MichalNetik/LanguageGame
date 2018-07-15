@@ -35,8 +35,9 @@
     <div
       class="table-container__body__row"
       *ngFor="let dataRow of (tableState | async).tableData; let i = index"
-      (click)="onSelectRow(i)"
-      [ngClass]="{'active': (tableState | async).selectedRow === i}"
+      (click)="onSelectRow(i, dataRow.id)"
+      [ngClass]="{
+        'active': (tableState | async).activeFormItem && (tableState | async).activeFormItem.id === dataRow.id}"
     >
       <div
         class="table-container__body__cell"

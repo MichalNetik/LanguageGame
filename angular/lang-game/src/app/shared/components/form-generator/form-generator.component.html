@@ -6,6 +6,7 @@
   <form
     class="form-container__body"
     [formGroup]="formModel.form"
+    (ngSubmit)="onSubmit()"
   >
     <div
       class="form-container__field"

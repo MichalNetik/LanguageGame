@@ -78,10 +78,37 @@ export class WordPairsEffects {
       map(
         ([action, state]) => {
           const item = state.tableData[state.selectedRow];
-
           return {
             type: WordPairsActions.SET_FORM_ITEM,
             payload: item
+          }
+        }
+      )
+    )
+
+  @Effect()
+  saveForm = this.actions$
+    .ofType(
+      WordPairsActions.SAVE_FORM
+    )
+    .pipe(
+      switchMap(
+        (action: WordPairsActions.SaveForm) => {
+          if (action.payload.id) {
+            return this.httpVocabularyService.updateWordPair(action.payload);
+          } else {
+            return this.httpVocabularyService.saveWordPair(action.payload);
+          }
+        }
+      ),
+      withLatestFrom(
+        this.store.select('word-pairs')
+      ),
+      map(
+        ([action, state]) => {
+          return {
+            type: WordPairsActions.FETCH_DATA,
+            payload: state.urlParams
           }
         }
       )
@@ -91,7 +118,7 @@ export class WordPairsEffects {
     private actions$: Actions,
     private httpVocabularyService: VocabularyHttpService,
     private store: Store<fromLangTable.FeatureState>,
-    private router: Router,
     private route: ActivatedRoute,
+    private router: Router
   ) {}
 }

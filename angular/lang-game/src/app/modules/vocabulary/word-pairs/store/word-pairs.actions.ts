@@ -1,3 +1,4 @@
+import { WordPairInterface } from './../../../../shared/models/word-pair.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Action } from '@ngrx/store';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
@@ -15,6 +16,7 @@ export const SET_SORT = '[word-pairs]SET_SORT';
 export const SET_FILTER = '[word-pairs]SET_FILTER';
 export const SET_SELECTED_ROW = '[word-pairs]SET_SELECTED_ROW';
 export const SET_FORM_ITEM = '[word-pairs]SET_FORM_ITEM'
+export const SAVE_FORM = '[word-pairs]SAVE_FORM';
 
 export class FetchData implements Action {
   readonly type = FETCH_DATA;
@@ -87,6 +89,14 @@ export class SetFormItem implements Action {
 
   constructor(
     public payload: WordPairModel
+  ) {}
+}
+
+export class SaveForm implements Action {
+  readonly type = SAVE_FORM;
+
+  constructor(
+    public payload: WordPairInterface
   ) {}
 }
 

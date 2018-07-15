@@ -29,6 +29,7 @@
   &__body {
     border-radius: 0.2em;
     border: 1px solid $grey;
+    box-shadow: 0.2em 0.3em 0.5em $border-grey;
 
     .active {
       @include highlighted-row;

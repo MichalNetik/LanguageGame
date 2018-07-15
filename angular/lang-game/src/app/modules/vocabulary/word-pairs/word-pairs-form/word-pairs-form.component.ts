@@ -8,6 +8,7 @@ import * as WordPairsActions from '../store/word-pairs.actions';
 
 import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
 import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-word-pairs-form',
@@ -19,6 +20,7 @@ export class WordPairsFormComponent implements OnInit {
   formData: FormGeneratorFieldInterface[];
 
   constructor(
+    private route: ActivatedRoute,
     private wordPairsStore: Store<fromWordPairs.FeatureState>,
     private categoriesStore: Store<fromWordPairCategories.FeatureState>
   ) { }
@@ -36,6 +38,10 @@ export class WordPairsFormComponent implements OnInit {
   createFormData(wordPair: WordPairModel) {
     this.formData = [
       {
+        label: 'Id', name: 'id', 'validators': [],
+        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.id
+      },
+      {
         label: 'Base', name: 'base', 'validators': ['required'],
         fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.base
       },
@@ -49,7 +55,7 @@ export class WordPairsFormComponent implements OnInit {
       },
       {
         label: 'Category', name: 'category', 'validators': ['required'],
-        fieldType: FieldType.SELECT_FIELD, value: wordPair.category.id,
+        fieldType: FieldType.SELECT_FIELD, value: wordPair.category,
         $optionsData: this.categoriesStore.select('word-pair-categories')
       }
     ];
