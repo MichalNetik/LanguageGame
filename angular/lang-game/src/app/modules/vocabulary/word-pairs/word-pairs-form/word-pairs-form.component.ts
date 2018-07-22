@@ -8,6 +8,7 @@ import * as WordPairsActions from '../store/word-pairs.actions';
 
 import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
 import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-word-pairs-form',
@@ -20,7 +21,9 @@ export class WordPairsFormComponent implements OnInit {
 
   constructor(
     private wordPairsStore: Store<fromWordPairs.FeatureState>,
-    private categoriesStore: Store<fromWordPairCategories.FeatureState>
+    private categoriesStore: Store<fromWordPairCategories.FeatureState>,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -31,6 +34,10 @@ export class WordPairsFormComponent implements OnInit {
         }
       }
     )
+
+    if (!this.formData) {
+      this.router.navigate(['../'], { relativeTo: this.route});
+    }
   }
 
   createFormData(wordPair: WordPairModel) {
