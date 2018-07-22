@@ -1,10 +1,9 @@
-import { WordPairPaginationInterface } from './../../../../shared/models/word-pair.model';
+import { WordPairPaginationInterface, WordPairModel } from './../../../../shared/models/word-pair.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, mergeMap, withLatestFrom, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import * as WordPairsActions from './word-pairs.actions';
 import * as fromLangTable from './word-pairs.reducers';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
@@ -77,7 +76,17 @@ export class WordPairsEffects {
       ),
       map(
         ([action, state]) => {
-          const item = state.tableData[state.selectedRow];
+          let item: WordPairModel;
+          switch (state.selectedRow) {
+            case (null):
+              item = null;
+              break;
+            case ('new'):
+              item = WordPairModel.getEmpty();
+              break;
+            default:
+              item = state.tableData[state.selectedRow];
+          }
           return {
             type: WordPairsActions.SET_FORM_ITEM,
             payload: item
@@ -110,6 +119,36 @@ export class WordPairsEffects {
             type: WordPairsActions.FETCH_DATA,
             payload: state.urlParams
           }
+        }
+      )
+    )
+
+  @Effect()
+  deleteForm = this.actions$
+    .ofType(
+      WordPairsActions.DELETE_FORM
+    )
+    .pipe(
+      switchMap(
+        (action: WordPairsActions.DeleteForm) => {
+          return this.httpVocabularyService.deleteWordPair(action.payload);
+        }
+      ),
+      withLatestFrom(
+        this.store.select('word-pairs')
+      ),
+      mergeMap(
+        ([action, state]) => {
+          return [
+            {
+              type: WordPairsActions.SET_SELECTED_ROW,
+              payload: null
+            },
+            {
+              type: WordPairsActions.FETCH_DATA,
+              payload: state.urlParams
+            }
+          ]
         }
       )
     )

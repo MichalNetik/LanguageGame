@@ -41,4 +41,8 @@ export class VocabularyHttpService {
   updateWordPair(wordPair: WordPairModel) {
     return this.http.put<WordPairInterface>(`${this.WORD_PAIR_URL}/${wordPair.id}/`, wordPair);
   }
+
+  deleteWordPair(wordPairId: number) {
+    return this.http.delete(`${this.WORD_PAIR_URL}/${wordPairId}/`);
+  }
 }

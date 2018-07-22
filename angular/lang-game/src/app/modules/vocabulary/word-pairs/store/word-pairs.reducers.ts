@@ -106,6 +106,12 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
         activeFormItem: action.payload
       }
 
+    case (WordPairsActions.DELETE_FORM):
+      return {
+        ...state,
+        selectedRow: null
+      }
+
     default:
       return state;
   }

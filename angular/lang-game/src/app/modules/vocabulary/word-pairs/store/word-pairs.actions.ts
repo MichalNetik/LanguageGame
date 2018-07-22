@@ -17,6 +17,7 @@ export const SET_FILTER = '[word-pairs]SET_FILTER';
 export const SET_SELECTED_ROW = '[word-pairs]SET_SELECTED_ROW';
 export const SET_FORM_ITEM = '[word-pairs]SET_FORM_ITEM'
 export const SAVE_FORM = '[word-pairs]SAVE_FORM';
+export const DELETE_FORM = '[word-pairs]DELETE_FORM';
 
 export class FetchData implements Action {
   readonly type = FETCH_DATA;
@@ -100,6 +101,14 @@ export class SaveForm implements Action {
   ) {}
 }
 
+export class DeleteForm implements Action {
+  readonly type = DELETE_FORM;
+
+  constructor(
+    public payload: number
+  ) {}
+}
+
 export type WordPairsActions = FetchData |
   SetTotalRecords |
   SetData |
@@ -111,4 +120,5 @@ export type WordPairsActions = FetchData |
   SetSort |
   SetFilter |
   SetSelectedRow |
-  SetFormItem;
+  SetFormItem |
+  DeleteForm;

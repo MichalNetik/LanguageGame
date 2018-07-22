@@ -13,6 +13,7 @@ export class FormGeneratorFieldInterface {
   validators: string[];
   fieldType: FieldType;
   $optionsData?: any;
+  readOnly?: boolean
 }
 
 

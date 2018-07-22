@@ -9,7 +9,7 @@ class WordPairSerializer(serializers.ModelSerializer):
         model = WordPair
         fields = '__all__'
         extra_kwargs = {
-            'id': {'read_only': False, 'required': False}
+            'id': {'read_only': False, 'required': False, 'allow_null': True}
         }
 
     def create(self, validated_data):

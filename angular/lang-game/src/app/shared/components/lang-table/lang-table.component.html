@@ -1,7 +1,21 @@
 
 <div class="table-container">
   <div class="table-container__header">
-    <div class="table-name">{{ tableName }} Table</div>
+    <button
+      class="table-container__header__table-add-button btn-add-new"
+      (click)="onAddNew()"
+    >
+      <fa
+        name="plus"
+      ></fa>
+      &nbsp;
+      <div>
+        Add New
+      </div>
+    </button>
+    <div class="table-container__header__table-name">
+      {{ tableName }} Table
+    </div>
     <div class="table-records-per-page">
       <select
         class="btn-pagination-select"

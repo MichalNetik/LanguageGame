@@ -3,6 +3,7 @@ import { FormGeneratorModel, FormGeneratorFieldInterface, FieldType } from './fo
 import * as fromWordPairs from '../../../modules/vocabulary/word-pairs/store/word-pairs.reducers';
 import * as WordPairsActions from '../../../modules/vocabulary/word-pairs/store/word-pairs.actions';
 import { Store } from '@ngrx/store';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-generator',
@@ -15,7 +16,11 @@ export class FormGeneratorComponent implements OnChanges {
   @Input() formData: FormGeneratorFieldInterface[];
   formModel: FormGeneratorModel;
 
-  constructor(private formGeneratorStore: Store<fromWordPairs.FeatureState>) { }
+  constructor(
+    private formGeneratorStore: Store<fromWordPairs.FeatureState>,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnChanges() {
     this.formModel = new FormGeneratorModel(this.formData);
@@ -25,5 +30,12 @@ export class FormGeneratorComponent implements OnChanges {
     this.formGeneratorStore.dispatch(
       new WordPairsActions.SaveForm(this.formModel.form.value)
     );
+  }
+
+  onDelete() {
+    this.formGeneratorStore.dispatch(
+      new WordPairsActions.DeleteForm(this.formModel.form.value.id)
+    );
+    this.router.navigate(['../'], { relativeTo: this.route});
   }
 }

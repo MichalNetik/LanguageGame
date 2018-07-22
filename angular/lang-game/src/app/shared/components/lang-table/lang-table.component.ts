@@ -90,4 +90,13 @@ export class LangTableComponent implements OnInit {
 
     this.router.navigate([`${itemId}`], { relativeTo: this.route});
   }
+
+  onAddNew() {
+    const action = this.getAction('SetSelectedRow')
+    this.langTableStore.dispatch(
+      new action('new')
+    );
+
+    this.router.navigate(['new'], { relativeTo: this.route});
+  }
 }

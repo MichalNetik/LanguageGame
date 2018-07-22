@@ -16,12 +16,27 @@ export class WordPairModel implements WordPairInterface {
     description: string;
     category: WordPairCategoryModel;
 
+
+
+    static getEmpty() {
+      const emptyData: WordPairInterface = {
+        id: null,
+        base: '',
+        translated: '',
+        description: '',
+        category: null
+      }
+      return new this(emptyData);
+    }
+
     constructor(data: WordPairInterface) {
-        this.id = data.id;
-        this.base = data.base;
-        this.translated = data.translated;
-        this.description = data.description;
-        this.category = new WordPairCategoryModel(data.category);
+      this.id = data.id;
+      this.base = data.base;
+      this.translated = data.translated;
+      this.description = data.description;
+      this.category = data.category ?
+        new WordPairCategoryModel(data.category) :
+        null;
     }
 }
 

@@ -3,9 +3,10 @@
 </div>
 <select
   [formControl]="fieldFormControl"
-  class="btn-select-primary select-field">
+  class="btn-select-primary select-field"
+  >
   <option
-    [value]="option"
+    [ngValue]="option"
     *ngFor="let option of (options | async).tableData"
   >
     {{ option.name }}

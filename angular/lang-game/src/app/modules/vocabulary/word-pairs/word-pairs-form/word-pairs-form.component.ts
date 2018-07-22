@@ -39,7 +39,8 @@ export class WordPairsFormComponent implements OnInit {
     this.formData = [
       {
         label: 'Id', name: 'id', 'validators': [],
-        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.id
+        fieldType: FieldType.STANDARD_INPUT_FIELD, value: wordPair.id,
+        readOnly: true
       },
       {
         label: 'Base', name: 'base', 'validators': ['required'],
