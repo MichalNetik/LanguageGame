@@ -21,6 +21,8 @@ export class SelectFieldComponent implements OnInit {
   }
 
   compare(val1: ISelectField, val2: ISelectField) {
-    return val1.id === val2.id;
+    if (val1 && val2) {
+      return val1.id === val2.id;
+    }
   }
 }

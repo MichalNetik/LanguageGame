@@ -121,4 +121,5 @@ export type WordPairsActions = FetchData |
   SetFilter |
   SetSelectedRow |
   SetFormItem |
+  SaveForm |
   DeleteForm;

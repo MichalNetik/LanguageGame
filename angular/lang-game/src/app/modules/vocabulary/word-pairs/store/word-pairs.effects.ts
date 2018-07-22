@@ -113,12 +113,18 @@ export class WordPairsEffects {
       withLatestFrom(
         this.store.select('word-pairs')
       ),
-      map(
+      mergeMap(
         ([action, state]) => {
-          return {
-            type: WordPairsActions.FETCH_DATA,
-            payload: state.urlParams
-          }
+          return [
+            {
+              type: WordPairsActions.FETCH_DATA,
+              payload: state.urlParams
+            },
+            {
+              type: WordPairsActions.SET_FORM_ITEM,
+              payload: action
+            }
+          ]
         }
       )
     )
@@ -157,7 +163,5 @@ export class WordPairsEffects {
     private actions$: Actions,
     private httpVocabularyService: VocabularyHttpService,
     private store: Store<fromLangTable.FeatureState>,
-    private route: ActivatedRoute,
-    private router: Router
   ) {}
 }

@@ -8,7 +8,6 @@ import * as WordPairsActions from '../store/word-pairs.actions';
 
 import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
 import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
-import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-word-pairs-form',
@@ -20,7 +19,6 @@ export class WordPairsFormComponent implements OnInit {
   formData: FormGeneratorFieldInterface[];
 
   constructor(
-    private route: ActivatedRoute,
     private wordPairsStore: Store<fromWordPairs.FeatureState>,
     private categoriesStore: Store<fromWordPairCategories.FeatureState>
   ) { }
