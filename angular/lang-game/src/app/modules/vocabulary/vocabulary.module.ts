@@ -16,6 +16,8 @@ import { wordPairsReducer } from './word-pairs/store/word-pairs.reducers';
 import { WordPairCategoriesEffects } from './word-pair-categories/store/word-pair-categories.effects';
 import { wordPairCategoriesReducer } from './word-pair-categories/store/word-pair-categories.reducers';
 import { WordPairsEffects } from './word-pairs/store/word-pairs.effects';
+import { WordPairCategoriesTableComponent } from './word-pair-categories/word-pair-categories-table/word-pair-categories-table.component';
+import { WordPairCategoriesFormComponent } from './word-pair-categories/word-pair-categories-form/word-pair-categories-form.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { WordPairsEffects } from './word-pairs/store/word-pairs.effects';
     WordPairCategoriesComponent,
     WordPairsComponent,
     WordPairsTableComponent,
-    WordPairsFormComponent
+    WordPairsFormComponent,
+    WordPairCategoriesTableComponent,
+    WordPairCategoriesFormComponent
   ],
   imports: [
     CommonModule,

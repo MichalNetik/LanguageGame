@@ -1,14 +1,11 @@
-import { WordPairModel } from './../../../../shared/models/word-pair.model';
-import { FieldType, FormGeneratorFieldInterface } from './../../../../shared/components/form-generator/form-generator.model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import * as fromWordPairs from '../store/word-pairs.reducers';
-import * as WordPairsActions from '../store/word-pairs.actions';
-
-import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
-import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { FieldType, FormGeneratorFieldInterface } from '../../../../shared/components/table-form-combo/form-generator/form-generator.model';
+import { WordPairModel } from '../../../../shared/models/word-pair.model';
+import * as fromWordPairs from '../store/word-pairs.reducers';
+import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
 
 @Component({
   selector: 'app-word-pairs-form',
@@ -16,7 +13,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./word-pairs-form.component.scss']
 })
 export class WordPairsFormComponent implements OnInit {
-
   formData: FormGeneratorFieldInterface[];
 
   constructor(
@@ -35,6 +31,8 @@ export class WordPairsFormComponent implements OnInit {
       }
     )
 
+    // decrease route indent if a user tries to refresh site with
+    // form populated
     if (!this.formData) {
       this.router.navigate(['../'], { relativeTo: this.route});
     }

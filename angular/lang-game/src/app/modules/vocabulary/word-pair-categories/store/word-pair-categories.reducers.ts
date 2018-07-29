@@ -1,6 +1,7 @@
 import { WordPairCategoryModel } from './../../../../shared/models/word-pair-category.model';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
-import * as WordParirCategoriesActions from './word-pair-categories.actions';
+import { WordPairModel } from '../../../../shared/models/word-pair.model';
+import * as WordPairCategoriesActions from './word-pair-categories.actions';
 
 export interface FeatureState {
   tableState: State;
@@ -8,22 +9,26 @@ export interface FeatureState {
 
 export interface State {
   tableData: WordPairCategoryModel[],
-  urlParams: PaginationUrlParamsModel
+  urlParams: PaginationUrlParamsModel,
+  selectedRow: number,
+  activeFormItem: WordPairCategoryModel
 }
 
 const initialState: State = {
   tableData: [],
-  urlParams: PaginationUrlParamsModel.getEmpty('name')
+  urlParams: PaginationUrlParamsModel.getEmpty('name'),
+  selectedRow: null,
+  activeFormItem: null
 };
 
-export function wordPairCategoriesReducer(state = initialState, action: WordParirCategoriesActions.WordPairCategoriesActions) {
+export function wordPairCategoriesReducer(state = initialState, action: WordPairCategoriesActions.WordPairCategoriesActions) {
   switch (action.type) {
-    case (WordParirCategoriesActions.SET_DATA):
+    case (WordPairCategoriesActions.SET_DATA):
       return {
         ...state,
         tableData: action.payload
       }
-    case (WordParirCategoriesActions.SET_TOTAL_RECORDS):
+    case (WordPairCategoriesActions.SET_TOTAL_RECORDS):
       const urlParamsTotalRecords = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsTotalRecords.setTotalRecords(action.payload);
 
@@ -31,7 +36,7 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsTotalRecords
       };
-    case (WordParirCategoriesActions.NEXT_PAGE):
+    case (WordPairCategoriesActions.NEXT_PAGE):
       const urlParamsNextPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsNextPage.nextPage();
 
@@ -39,7 +44,7 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsNextPage
       }
-    case (WordParirCategoriesActions.PREVIOUS_PAGE):
+    case (WordPairCategoriesActions.PREVIOUS_PAGE):
       const urlParamsPreviousPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsPreviousPage.previousPage();
 
@@ -47,7 +52,7 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsPreviousPage
       }
-    case (WordParirCategoriesActions.FIRST_PAGE):
+    case (WordPairCategoriesActions.FIRST_PAGE):
       const urlParamsFirstPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsFirstPage.firstPage();
 
@@ -55,7 +60,7 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsFirstPage
       }
-    case (WordParirCategoriesActions.LAST_PAGE):
+    case (WordPairCategoriesActions.LAST_PAGE):
       const urlParamsLastPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsLastPage.lastPage();
 
@@ -63,7 +68,14 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsLastPage
       }
-    case (WordParirCategoriesActions.SET_PAGE_SIZE):
+    case (WordPairCategoriesActions.RESET_PAGINATION):
+      const urlParamsResetPagination = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsResetPagination.resetPagination();
+      return {
+        ...state,
+        urlParams: urlParamsResetPagination
+      }
+    case (WordPairCategoriesActions.SET_PAGE_SIZE):
       const urlParamsSetRecordsPerPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsSetRecordsPerPage.setPageSize(action.payload);
 
@@ -71,7 +83,7 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         ...state,
         urlParams: urlParamsSetRecordsPerPage
       }
-    case (WordParirCategoriesActions.SET_SORT):
+    case (WordPairCategoriesActions.SET_SORT):
       const urlParamsSetSort = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsSetSort.setSort(action.payload);
 
@@ -80,9 +92,8 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         urlParams: urlParamsSetSort
       }
 
-    case (WordParirCategoriesActions.SET_FILTER):
+    case (WordPairCategoriesActions.SET_FILTER):
       const urlParamsSetFilter = new PaginationUrlParamsModel({...state.urlParams});
-
       urlParamsSetFilter.setFilter(action.payload);
 
       return {
@@ -90,6 +101,23 @@ export function wordPairCategoriesReducer(state = initialState, action: WordPari
         urlParams: urlParamsSetFilter
       }
 
+    case (WordPairCategoriesActions.SET_SELECTED_ROW):
+      return {
+        ...state,
+        selectedRow: action.payload
+      }
+
+    case (WordPairCategoriesActions.SET_FORM_ITEM):
+      return {
+        ...state,
+        activeFormItem: action.payload
+      }
+
+    case (WordPairCategoriesActions.DELETE_FORM):
+      return {
+        ...state,
+        selectedRow: null
+      }
 
     default:
       return state;

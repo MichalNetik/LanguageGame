@@ -1,4 +1,4 @@
-import { FormGeneratorFieldInterface } from './../form-generator.model';
+import { FormGeneratorFieldInterface } from '../form-generator.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 

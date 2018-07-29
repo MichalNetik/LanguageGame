@@ -1,5 +1,5 @@
-import { ISelectField } from './../form-generator.type';
-import { FormGeneratorFieldInterface } from './../form-generator.model';
+import { ISelectField } from '../form-generator.type';
+import { FormGeneratorFieldInterface } from '../form-generator.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 

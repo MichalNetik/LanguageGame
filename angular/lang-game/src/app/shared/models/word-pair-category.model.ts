@@ -10,6 +10,15 @@ export class WordPairCategoryModel implements WordPairCategoryInterface {
   name: string;
   description: string;
 
+  static getEmpty() {
+    const emptyData = {
+      id: null,
+      name: '',
+      description: ''
+    }
+    return new this(emptyData);
+  }
+
   constructor(data: WordPairCategoryInterface) {
     this.id = data.id;
     this.name = data.name;

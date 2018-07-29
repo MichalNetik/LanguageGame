@@ -5,6 +5,7 @@ import { VocabularyComponent } from './vocabulary.component';
 import { WordPairCategoriesComponent } from './word-pair-categories/word-pair-categories.component';
 import { WordPairsComponent } from './word-pairs/word-pairs.component';
 import { WordPairsFormComponent } from './word-pairs/word-pairs-form/word-pairs-form.component';
+import { WordPairCategoriesFormComponent } from './word-pair-categories/word-pair-categories-form/word-pair-categories-form.component';
 
 const vocabularyRoutes: Routes = [
   { path: '', component: VocabularyComponent, children: [
@@ -15,7 +16,11 @@ const vocabularyRoutes: Routes = [
           { path: ':id', component: WordPairsFormComponent }
         ]
       },
-      { path: 'word-pair-categories', component:  WordPairCategoriesComponent }
+      { path: 'word-pair-categories', component:  WordPairCategoriesComponent, children: [
+          { path: 'new', component: WordPairCategoriesFormComponent },
+          { path: ':id', component: WordPairCategoriesFormComponent }
+        ]
+      },
     ]
   }
 ];

@@ -1,4 +1,4 @@
-import { AppRoutingModule } from './../../app-routing.module';
+import { AppRoutingModule } from '../../app-routing.module';
 import { NgModule } from '@angular/core';
 import { LeftMenuComponent } from './left-menu.component';
 

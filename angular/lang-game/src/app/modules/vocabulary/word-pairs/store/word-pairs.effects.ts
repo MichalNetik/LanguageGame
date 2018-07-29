@@ -1,4 +1,4 @@
-import { WordPairPaginationInterface, WordPairModel } from './../../../../shared/models/word-pair.model';
+import { WordPairPaginationInterface, WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, mergeMap, withLatestFrom, tap } from 'rxjs/operators';
@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import * as WordPairsActions from './word-pairs.actions';
 import * as fromLangTable from './word-pairs.reducers';
 import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class WordPairsEffects {
@@ -47,6 +46,7 @@ export class WordPairsEffects {
       WordPairsActions.PREVIOUS_PAGE,
       WordPairsActions.FIRST_PAGE,
       WordPairsActions.LAST_PAGE,
+      WordPairsActions.RESET_PAGINATION,
       WordPairsActions.SET_PAGE_SIZE,
       WordPairsActions.SET_SORT
     )
@@ -117,12 +117,11 @@ export class WordPairsEffects {
         ([action, state]) => {
           return [
             {
-              type: WordPairsActions.FETCH_DATA,
-              payload: state.urlParams
+              type: WordPairsActions.RESET_PAGINATION
             },
             {
               type: WordPairsActions.SET_FORM_ITEM,
-              payload: action
+              payload: null
             }
           ]
         }

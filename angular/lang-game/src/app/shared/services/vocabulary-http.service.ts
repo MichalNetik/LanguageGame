@@ -1,8 +1,9 @@
+import { WordPairCategoryModel } from './../models/word-pair-category.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { WordPairCategoryPaginationInterface } from './../models/word-pair-category.model';
-import { WordPairPaginationInterface, WordPairModel, WordPairInterface } from './../models/word-pair.model';
-import { PaginationUrlParamsModel } from './../models/pagination-url-params.model'
+import { WordPairCategoryPaginationInterface } from '../models/word-pair-category.model';
+import { WordPairPaginationInterface, WordPairModel, WordPairInterface } from '../models/word-pair.model';
+import { PaginationUrlParamsModel } from '../models/pagination-url-params.model'
 
 @Injectable()
 export class VocabularyHttpService {
@@ -23,6 +24,18 @@ export class VocabularyHttpService {
         params: httpParams
       }
     );
+  }
+
+  saveWordPairCategory(wordPairCategory: WordPairCategoryModel) {
+    return this.http.post<WordPairInterface>(`${this.WORD_PAIR_CATEGORY_URL}/`, wordPairCategory);
+  }
+
+  updateWordPairCategory(wordPairCategory: WordPairCategoryModel) {
+    return this.http.put<WordPairInterface>(`${this.WORD_PAIR_CATEGORY_URL}/${wordPairCategory.id}/`, wordPairCategory);
+  }
+
+  deleteWordPairCategory(wordPairCategoryId: number) {
+    return this.http.delete(`${this.WORD_PAIR_CATEGORY_URL}/${wordPairCategoryId}/`);
   }
 
   getWordPairs(params: PaginationUrlParamsModel | {} = {}) {

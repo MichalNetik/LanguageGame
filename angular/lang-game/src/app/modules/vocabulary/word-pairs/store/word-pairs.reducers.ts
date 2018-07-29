@@ -67,6 +67,12 @@ export function wordPairsReducer(state = initialState, action: WordPairsActions.
         ...state,
         urlParams: urlParamsLastPage
       }
+    case (WordPairsActions.RESET_PAGINATION):
+      const urlParamsResetPagination = new PaginationUrlParamsModel({...state.urlParams});
+      urlParamsResetPagination.resetPagination();
+      return {
+        ...state,
+      }
     case (WordPairsActions.SET_PAGE_SIZE):
       const urlParamsSetRecordsPerPage = new PaginationUrlParamsModel({...state.urlParams});
       urlParamsSetRecordsPerPage.setPageSize(action.payload);

@@ -11,6 +11,7 @@ export const NEXT_PAGE = '[word-pairs]NEXT_PAGE';
 export const PREVIOUS_PAGE = '[word-pairs]PREVIOUS_PAGE';
 export const FIRST_PAGE = '[word-pairs]FIRST_PAGE';
 export const LAST_PAGE = '[word-pairs]LAST_PAGE';
+export const RESET_PAGINATION = '[word-pairs]RESET_PAGINATION';
 export const SET_PAGE_SIZE = '[word-pairs]SET_PAGE_SIZE';
 export const SET_SORT = '[word-pairs]SET_SORT';
 export const SET_FILTER = '[word-pairs]SET_FILTER';
@@ -53,6 +54,10 @@ export class FirstPage implements Action {
 
 export class LastPage implements Action {
   readonly type = LAST_PAGE;
+}
+
+export class ResetPagination implements Action {
+  readonly type = RESET_PAGINATION;
 }
 
 export class SetPageSize implements Action {
@@ -116,6 +121,7 @@ export type WordPairsActions = FetchData |
   PreviousPage |
   FirstPage |
   LastPage |
+  ResetPagination |
   SetPageSize |
   SetSort |
   SetFilter |

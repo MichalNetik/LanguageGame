@@ -20,6 +20,7 @@ class WordPairSerializer(serializers.ModelSerializer):
         instance.id = validated_data.get('id', instance.id)
         instance.base = validated_data.get('base', instance.base)
         instance.translated = validated_data.get('translated', instance.translated)
+        instance.description = validated_data.get('description', instance.description)
         instance.category = VocabularyCategory.objects.get(id=validated_data['category']['id'])
         instance.save()
         return instance

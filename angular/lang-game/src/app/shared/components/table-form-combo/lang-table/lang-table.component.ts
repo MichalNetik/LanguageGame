@@ -2,11 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { LangTableColumns } from './lang-table.type';
-import * as WordPairsActions from '../../../modules/vocabulary/word-pairs/store/word-pairs.actions';
-import * as WordPairCategoriesActions from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.actions';
-import * as fromWordPairs from '../../../modules/vocabulary/word-pairs/store/word-pairs.reducers';
-import * as fromWordPairCategories from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
+import * as fromWordPairs from '../../../../modules/vocabulary/word-pairs/store/word-pairs.reducers';
+import * as fromWordPairCategories from '../../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
 import { Router, ActivatedRoute } from '@angular/router';
+import { getAction } from '../table-form-combo.utils';
 
 @Component({
   selector: 'app-lang-table',
@@ -26,64 +25,55 @@ export class LangTableComponent implements OnInit {
     private langTableStore: Store<fromWordPairs.FeatureState | fromWordPairCategories.FeatureState>,
   ) { }
 
-  private getAction(actionName: string) {
-    switch (this.tableType) {
-      case 'word-pairs':
-        return WordPairsActions[actionName];
-      case 'word-pair-categories':
-        return WordPairCategoriesActions[actionName];
-    }
-  }
-
   ngOnInit() {
     this.tableState = this.langTableStore.select(this.tableType);
   }
 
 
   onNextPage() {
-    const action = this.getAction('NextPage');
+    const action = getAction(this.tableType, 'NextPage');
     this.langTableStore.dispatch(
       new action()
     )
   }
 
   onPreviousPage() {
-    const action = this.getAction('PreviousPage');
+    const action = getAction(this.tableType, 'PreviousPage');
     this.langTableStore.dispatch(
       new action()
     )
   }
 
   onFirstPage() {
-    const action = this.getAction('FirstPage');
+    const action = getAction(this.tableType, 'FirstPage');
     this.langTableStore.dispatch(
       new action()
     )
   }
 
   onLastPage() {
-    const action = this.getAction('LastPage');
+    const action = getAction(this.tableType, 'LastPage');
     this.langTableStore.dispatch(
       new action()
     )
   }
 
   onPageSizeSelectionChange(value: number) {
-    const action = this.getAction('SetPageSize');
+    const action = getAction(this.tableType, 'SetPageSize');
     this.langTableStore.dispatch(
       new action(+value)
     );
   }
 
   onSetSort(sortColumn: string) {
-    const action = this.getAction('SetSort');
+    const action = getAction(this.tableType, 'SetSort');
     this.langTableStore.dispatch(
       new action(sortColumn)
     );
   }
 
   onSelectRow(index: number, itemId: number) {
-    const action = this.getAction('SetSelectedRow')
+    const action = getAction(this.tableType, 'SetSelectedRow')
     this.langTableStore.dispatch(
       new action(index)
     );
@@ -92,7 +82,7 @@ export class LangTableComponent implements OnInit {
   }
 
   onAddNew() {
-    const action = this.getAction('SetSelectedRow')
+    const action = getAction(this.tableType, 'SetSelectedRow')
     this.langTableStore.dispatch(
       new action('new')
     );
