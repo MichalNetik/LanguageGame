@@ -1,6 +1,5 @@
-import { WordPairCategoryModel } from './../../../../shared/models/word-pair-category.model';
+import { WordPairCategoryModel } from '../../../../shared/models/word-pair-category.model';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
-import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import * as WordPairCategoriesActions from './word-pair-categories.actions';
 
 export interface FeatureState {

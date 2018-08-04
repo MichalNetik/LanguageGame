@@ -1,4 +1,4 @@
-import { WordPairCategoryInterface, WordPairCategoryModel } from './../../../../shared/models/word-pair-category.model';
+import { WordPairCategoryInterface, WordPairCategoryModel } from '../../../../shared/models/word-pair-category.model';
 import { WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Action } from '@ngrx/store';
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';

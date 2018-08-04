@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { FieldType, FormGeneratorFieldInterface } from '../../../../shared/components/table-form-combo/form-generator/form-generator.model';
 import { WordPairCategoryModel } from '../../../../shared/models/word-pair-category.model';
-import * as fromWordPairCategories from '../../word-pair-categories/store/word-pair-categories.reducers';
+import * as fromWordPairCategories from '../store/word-pair-categories.reducers';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
