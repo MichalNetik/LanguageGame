@@ -1,7 +1,21 @@
 
 <div class="table-container">
   <div class="table-container__header">
-    <div class="table-name">Word Pairs Table</div>
+    <button
+      class="table-container__header__table-add-button btn-add-new"
+      (click)="onAddNew()"
+    >
+      <fa
+        name="plus"
+      ></fa>
+      &nbsp;
+      <div>
+        Add New
+      </div>
+    </button>
+    <div class="table-container__header__table-name">
+      {{ tableName }} Table
+    </div>
     <div class="table-records-per-page">
       <select
         class="btn-pagination-select"
@@ -14,13 +28,16 @@
       </select>
     </div>
   </div>
+
   <div class="table-container__body">
     <div
-      class="table-container__body__column"
-      *ngFor="let column of columns"
-      [style.width]="column.width"
+      class="table-container__body__header-row"
     >
-      <div class="table-container__body__header-cell">
+      <div
+        class="table-container__body__header-cell"
+        *ngFor="let column of columns"
+        [style.width]="column.width"
+      >
         {{ column.displayName }}
         <fa
           [name]="(tableState | async).urlParams.getSortIcon(column.name)"
@@ -28,12 +45,24 @@
           (click)="onSetSort(column.name)">
         </fa>
       </div>
+    </div>
+    <div
+      class="table-container__body__row"
+      *ngFor="let dataRow of (tableState | async).tableData; let i = index"
+      (click)="onSelectRow(i, dataRow.id)"
+      [ngClass]="{
+        'active': (tableState | async).activeFormItem && (tableState | async).activeFormItem.id === dataRow.id}"
+    >
       <div
-        class="table-container__body__body-cell"
-        *ngFor="let dataRow of (tableState | async).tableData"
-      >{{ column.property ? dataRow[column.name][column.property] : dataRow[column.name] }}</div>
+        class="table-container__body__cell"
+        *ngFor="let column of columns"
+        [style.width]="column.width"
+      >
+        {{ column.property ? dataRow[column.name][column.property] : dataRow[column.name] }}
+      </div>
     </div>
   </div>
+
   <div class="table-container__footer">
     <div class="table-pagination">
       <div class="table-pagination__records-displayed">

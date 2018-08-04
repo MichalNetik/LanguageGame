@@ -1,72 +1,69 @@
-import { WordPairCategoryPaginationInterface, WordPairCategoryModel } from './../../../../shared/models/word-pair-category.model';
+import { WordPairCategoriesHttpService } from '../../../../shared/services/word-pair-categories-http.service';
+import {
+  WordPairCategoryPaginationInterface,
+  WordPairCategoryModel,
+  WordPairCategoryInterface
+} from '../../../../shared/models/word-pair-category.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import * as WordPairCategoriesActions from './word-pair-categories.actions';
-import * as fromWordPairCategories from './word-pair-categories.reducers';
-import { VocabularyHttpService } from '../../../../shared/services/vocabulary-http.service';
+import * as TableFormComboActions from './word-pair-categories.actions';
+import * as fromLangTable from './word-pair-categories.reducers';
+import {
+  getTableDataFetchEffect,
+  getPaginationEffect,
+  getEditEffect,
+  getSaveFormEffect,
+  getDeleteFormEffect
+} from '../../../../shared/components/table-form-combo/utils/effects.utils';
 
 @Injectable()
 export class WordPairCategoriesEffects {
+  typeName = 'word-pair-categories';
 
   @Effect()
-  wordPairsFetch = this.actions$
-    .ofType(WordPairCategoriesActions.FETCH_DATA)
-    .pipe(
-      switchMap(
-        (action: WordPairCategoriesActions.FetchData) => {
-          return this.httpVocabularyService.getWordPairCategories(action.payload);
-        }
-      ),
-      mergeMap(
-        (data: WordPairCategoryPaginationInterface) => {
-          const tableData = data.data.map(item => new WordPairCategoryModel(item));
-          const totalRecords = data.totalRecords;
-
-          return [
-            {
-              type: WordPairCategoriesActions.SET_DATA,
-              payload: tableData
-            },
-            {
-              type: WordPairCategoriesActions.SET_TOTAL_RECORDS,
-              payload: totalRecords
-            }
-          ]
-        }
-      )
-    )
+  wordPairCategoriesFetch = getTableDataFetchEffect<WordPairCategoryPaginationInterface, WordPairCategoryModel, WordPairCategoryInterface>(
+    this.actions$,
+    WordPairCategoryModel,
+    TableFormComboActions,
+    this.httpService
+  )
 
   @Effect()
-  pagination = this.actions$
-    .ofType(
-      WordPairCategoriesActions.NEXT_PAGE,
-      WordPairCategoriesActions.PREVIOUS_PAGE,
-      WordPairCategoriesActions.FIRST_PAGE,
-      WordPairCategoriesActions.LAST_PAGE,
-      WordPairCategoriesActions.SET_PAGE_SIZE,
-      WordPairCategoriesActions.SET_SORT
-    )
-    .pipe(
-      withLatestFrom(
-        this.store.select('word-pair-categories')
-      ),
-      map(
-        ([action, state]) => {
-          return {
-            type: WordPairCategoriesActions.FETCH_DATA,
-            payload: state.urlParams
-          }
-        }
+  pagination = getPaginationEffect(
+    this.actions$,
+    TableFormComboActions,
+    this.store.select(this.typeName)
+  )
 
-      )
-    )
+  @Effect()
+  edit = getEditEffect<WordPairCategoryModel>(
+    this.actions$,
+    TableFormComboActions,
+    WordPairCategoryModel,
+    this.store.select(this.typeName)
+  )
+
+  @Effect()
+  saveForm = getSaveFormEffect(
+    this.actions$,
+    TableFormComboActions,
+    this.httpService,
+    this.store.select(this.typeName)
+  )
+
+  @Effect()
+  deleteForm = getDeleteFormEffect(
+    this.actions$,
+    TableFormComboActions,
+    this.httpService,
+    this.store.select(this.typeName)
+  )
 
   constructor(
     private actions$: Actions,
-    private httpVocabularyService: VocabularyHttpService,
-    private store: Store<fromWordPairCategories.FeatureState>
+    private httpService: WordPairCategoriesHttpService,
+    private store: Store<fromLangTable.FeatureState>,
   ) {}
 }

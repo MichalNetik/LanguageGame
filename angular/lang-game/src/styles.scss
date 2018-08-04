@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
-  font-family: Roboto, Arial, sans-serif;
+  font-family: 'Indie Flower';
   margin: 0;
   padding: 0;
+}
+
+input, textarea, button, select {
+  font-family: 'Indie Flower';
 }

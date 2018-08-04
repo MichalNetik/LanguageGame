@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { LangTableColumns } from './../../../../shared/components/lang-table/lang-table.type';
+import { LangTableColumns } from '../../../../shared/components/table-form-combo/lang-table/lang-table.type';
 import * as fromWordPairs from '../store/word-pairs.reducers';
 import * as WordPairsActions from '../store/word-pairs.actions';
 

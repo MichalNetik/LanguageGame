@@ -1,0 +1,39 @@
+<div class="form-container">
+  <div class="form-container__header">
+    {{ formName }}
+  </div>
+
+  <form
+    class="form-container__body"
+    [formGroup]="formModel.form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div
+      class="form-container__field"
+      *ngFor="let field of formModel.data">
+        <app-standard-input-field
+          *ngIf="field.fieldType === 'standard-input-field'"
+          [fieldData]="field"
+          [fieldFormControl]="formModel.form.controls[field.name]"
+        ></app-standard-input-field>
+
+        <app-select-field
+          *ngIf="field.fieldType === 'select-field'"
+          [fieldData]="field"
+          [fieldFormControl]="formModel.form.controls[field.name]"
+          [options]="field.$optionsData"
+        ></app-select-field>
+    </div>
+    <div class="form-container__footer">
+      <button class="btn-primary">Save</button>
+      <button
+        class="btn-delete"
+        type="button"
+        (click)="onDelete()"
+      >
+        Delete
+      </button>
+    </div>
+
+  </form>
+</div>
