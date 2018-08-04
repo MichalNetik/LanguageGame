@@ -1,4 +1,4 @@
-import { WordPairCategoriesHttpService } from './../../../../shared/services/word-pair-categories-http.service';
+import { WordPairCategoriesHttpService } from '../../../../shared/services/word-pair-categories-http.service';
 import {
   WordPairCategoryPaginationInterface,
   WordPairCategoryModel,
@@ -16,7 +16,7 @@ import {
   getEditEffect,
   getSaveFormEffect,
   getDeleteFormEffect
-} from '../../../../shared/components/table-form-combo/table-form-combo.utils';
+} from '../../../../shared/components/table-form-combo/utils/effects.utils';
 
 @Injectable()
 export class WordPairCategoriesEffects {

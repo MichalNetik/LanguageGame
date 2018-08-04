@@ -1,4 +1,4 @@
-import { PaginationUrlParamsModel } from './../models/pagination-url-params.model';
+import { PaginationUrlParamsModel } from '../models/pagination-url-params.model';
 import { HttpParams } from '@angular/common/http';
 
 

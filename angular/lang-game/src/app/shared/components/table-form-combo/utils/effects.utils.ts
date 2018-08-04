@@ -2,24 +2,7 @@ import { Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
-import * as WordPairsActions from '../../../modules/vocabulary/word-pairs/store/word-pairs.actions';
-import * as WordPairCategoriesActions from '../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.actions';
 
-interface Baf {
-  data: any,
-  totalRecords: any
-}
-
-export const getAction = (tableType: string, actionName: string) => {
-  switch (tableType) {
-    case 'word-pairs':
-      return WordPairsActions[actionName];
-    case 'word-pair-categories':
-      return WordPairCategoriesActions[actionName];
-  }
-}
-
-// Table Form Combo effect methods
 export function getTableDataFetchEffect<PaginationInterface extends any, ItemModel, ItemInterface> (
   $actions: Actions<Action>,
   constructorItemModel: new(data: ItemInterface) => ItemModel,

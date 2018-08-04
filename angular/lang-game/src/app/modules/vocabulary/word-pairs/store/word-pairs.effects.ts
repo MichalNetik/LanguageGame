@@ -1,4 +1,4 @@
-import { WordPairsHttpService } from './../../../../shared/services/word-pairs-http.service';
+import { WordPairsHttpService } from '../../../../shared/services/word-pairs-http.service';
 import { WordPairInterface, WordPairPaginationInterface, WordPairModel } from '../../../../shared/models/word-pair.model';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
@@ -12,7 +12,7 @@ import {
   getEditEffect,
   getSaveFormEffect,
   getDeleteFormEffect
-} from '../../../../shared/components/table-form-combo/table-form-combo.utils'
+} from '../../../../shared/components/table-form-combo/utils/effects.utils'
 
 @Injectable()
 export class WordPairsEffects {

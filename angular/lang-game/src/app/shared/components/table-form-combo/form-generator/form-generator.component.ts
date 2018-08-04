@@ -4,7 +4,7 @@ import * as fromWordPairs from '../../../../modules/vocabulary/word-pairs/store/
 import * as fromWordPairCategories from '../../../../modules/vocabulary/word-pair-categories/store/word-pair-categories.reducers';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getAction } from '../table-form-combo.utils';
+import { getAction } from '../utils/table-form-combo.utils';
 
 @Component({
   selector: 'app-form-generator',
