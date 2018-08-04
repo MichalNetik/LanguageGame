@@ -1,0 +1,15 @@
+<div>
+  {{ fieldData.label }}
+</div>
+<select
+  [formControl]="fieldFormControl"
+  class="btn-select-primary select-field"
+  [compareWith]="compare"
+>
+  <option
+    [ngValue]="option"
+    *ngFor="let option of (options | async).tableData"
+  >
+    {{ option.name }}
+  </option>
+</select>

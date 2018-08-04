@@ -1,7 +1,26 @@
-from rest_framework import viewsets
+from rest_framework.response import Response
+
 from core.models import VocabularyCategory
+from core.views.base_view import BaseViewSet
 from core.serializers.vocabulary_category_serializer import VocabularyCategorySerializer
 
-class VocabularyCategoryViewSet(viewsets.ModelViewSet):
+class VocabularyCategoryViewSet(BaseViewSet):
     queryset = VocabularyCategory.objects.all()
     serializer_class = VocabularyCategorySerializer
+
+    def get_queryset(self):
+        query = VocabularyCategory.objects.all()
+        return self.get_queryset_for_pagination(query)
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        total_records = len(queryset) 
+        queryset = self.paginate(queryset)
+
+        serializer = VocabularyCategorySerializer(queryset, many=True)
+        return Response(
+            {
+                'data': serializer.data,
+                'totalRecords': total_records
+            }
+        )

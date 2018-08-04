@@ -1,0 +1,8 @@
+<div class="field-label">
+  {{ fieldData.label }}
+</div>
+<input
+  class="input-primary"
+  [formControl]="fieldFormControl"
+  [attr.disabled]="fieldData.readOnly ? 'true' : null"
+>

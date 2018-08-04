@@ -1,0 +1,18 @@
+.form-container {
+  margin: 1.5em;
+
+  &__header {
+    font-weight: bold;
+    font-size: 120%;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+
+  &__field {
+    margin: 1.5em;
+  }
+
+  &__footer {
+    margin: 1em;
+  }
+}
