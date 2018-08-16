@@ -1,12 +1,12 @@
 @import '~app/shared/styles/variables';
 
 .vocabulary-container {
-  margin-top: 1.5em;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 
-  height: calc(100% - 1.5em);
-  box-shadow: 0.2em 0em 1em;
+  height: calc(100% - 1.5rem);
+  box-shadow: 4px 0 8px;
   box-sizing: border-box;
 
   .active {
@@ -17,14 +17,14 @@
   &__header {
     display: flex;
     flex-direction: row;
-    box-shadow: 0em 0em 1em -0.1em;
+    box-shadow: 0 0 2px -2px;
 
     &__item {
       flex-grow: 1;
       text-align: center;
-      padding: 1em;
-      margin: 0.3em;
-      border-radius: 0.2em;
+      padding: 1rem;
+      margin: 0.3rem;
+      border-radius: 4px;
 
       &:focus{
         outline: none;
