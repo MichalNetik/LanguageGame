@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LearningModule } from './modules/learning/learning.module';
 import { LeftMenuModule } from './modules/left-menu/left-menu.module';
 import { StatisticsModule } from './modules/statistics/statistics.module';
+import { TopMenuModule } from './modules/top-menu/top-menu.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
     LeftMenuModule,
     LearningModule,
     StatisticsModule,
+    TopMenuModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
   ],
