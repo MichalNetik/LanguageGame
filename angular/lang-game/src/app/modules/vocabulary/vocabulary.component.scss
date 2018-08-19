@@ -1,11 +1,10 @@
 @import '~app/shared/styles/variables';
 
 .vocabulary-container {
-  margin-top: 1.5rem;
+  height: 100%;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 
-  height: calc(100% - 1.5rem);
   box-shadow: 2px 0 8px;
   box-sizing: border-box;
 
