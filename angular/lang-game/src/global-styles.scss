@@ -23,6 +23,12 @@
   border-radius: 8px;
   margin: 0.5rem;
   outline: none;
+
+  &:disabled {
+    background-color: $light-grey;
+    color: black;
+    cursor: not-allowed;
+  }
 }
 
 .btn-delete {

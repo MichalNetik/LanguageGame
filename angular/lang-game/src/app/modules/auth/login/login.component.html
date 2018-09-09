@@ -1,15 +1,33 @@
-<form class="login-container">
+<form
+  class="login-container"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="loginForm"
+  >
   <div class="login-container__item">
-    <label for="">Username:</label>
-    <input type="text" id="username">
+    <label for="">Username</label>
+    <input 
+      type="text" 
+      id="username" 
+      class="input-primary"
+      formControlName="username"
+    >
   </div>
 
   <div class="login-container__item">
-    <label for="password">Password:</label>
-    <input type="password" id="password">
+    <label for="password">Password</label>
+    <input 
+      type="password" 
+      id="password" 
+      class="input-primary"
+      formControlName="password"
+    >
   </div>
 
   <div class="login-container__item">
-    <button class="btn-primary" type="submit">Login</button>
+    <button 
+      class="btn-primary" 
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >Login</button>
   </div>
 </form>
