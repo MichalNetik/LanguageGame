@@ -1,3 +1,5 @@
+@import '~app/shared/styles/variables';
+
 .header-container {
   height: 100%;
   display: flex;
@@ -18,4 +20,17 @@
     align-items: center;
     margin-right: 25px;
   }
+
+  .auth-link {
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    &:hover {
+      color: $grey;
+    }
+  }
 }
+
+

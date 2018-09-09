@@ -5,6 +5,22 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
+class SignUp(views.APIView):
+    def post(self, request, *args, **kwargs):
+        username = request.data['username']
+        password = request.data['password']
+
+        new_user = User()
+        new_user.username = username
+        new_user.password = password
+        new_user.save()
+
+        return JsonResponse(
+            json.dumps(new_user),
+            status=200,
+            content_type="application/json"
+        )
+
 class Login(views.APIView):
     def post(self, request, *args, **kwargs):
         if not request.data:
@@ -19,12 +35,16 @@ class Login(views.APIView):
         if user:  
             payload = {
                 'id': user.id,
-                'email': user.email,
+                'username': user.username,
             }
-            jwt_token = {'token': jwt.encode(payload, "SECRET_KEY")}
+            jwt_token = jwt.encode(payload, "SECRET_KEY")
 
+            response_data = {
+                username: user.username,
+                token: jwt_token
+            }
             return JsonResponse(
-                json.dumps(jwt_token),
+                json.dumps(response_data),
                 status=200,
                 content_type="application/json"
             )

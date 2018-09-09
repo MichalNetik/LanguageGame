@@ -1,8 +1,10 @@
+import { AuthInterceptor } from './auth.interceptor';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LangTableComponent } from './components/table-form-combo/lang-table/lang-table.component';
 import { FormGeneratorComponent } from './components/table-form-combo/form-generator/form-generator.component';
 import {
@@ -11,6 +13,7 @@ import {
 import { SelectFieldComponent } from './components/table-form-combo/form-generator/select-field/select-field.component';
 import { WordPairsHttpService } from './services/word-pairs-http.service';
 import { WordPairCategoriesHttpService } from './services/word-pair-categories-http.service';
+import { AuthHttpService } from './services/auth-http.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,11 @@ import { WordPairCategoriesHttpService } from './services/word-pair-categories-h
     LangTableComponent,
     FormGeneratorComponent
   ],
-  providers: [WordPairsHttpService, WordPairCategoriesHttpService]
+  providers: [
+    WordPairsHttpService,
+    WordPairCategoriesHttpService,
+    AuthHttpService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ]
 })
 export class SharedModule {}
