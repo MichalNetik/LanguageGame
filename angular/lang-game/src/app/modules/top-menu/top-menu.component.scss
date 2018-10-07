@@ -21,7 +21,7 @@
     margin-right: 25px;
   }
 
-  .auth-link {
+  &__auth-link {
     font-weight: bold;
     cursor: pointer;
     user-select: none;
@@ -30,6 +30,12 @@
     &:hover {
       color: $grey;
     }
+  }
+
+  &__username {
+    font-weight: bold;
+    margin-right: 32px;
+    font-size: 115%
   }
 }
 

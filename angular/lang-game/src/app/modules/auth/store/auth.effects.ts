@@ -39,6 +39,12 @@ export class AuthEffects {
       ),
       mergeMap((authData: {username: string, token: string}) => {
         this.router.navigate(['/']);
+
+        // TODO: this will be possible to do better,
+        // investigate how to properly sync store with localStorage
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('userName', authData.username);
+
         return [
           {
             type: AuthActions.LOGIN
@@ -60,6 +66,11 @@ export class AuthEffects {
     .pipe(
       tap(() => {
         this.router.navigate(['/']);
+
+        // TODO: this will be possible to do better,
+        // investigate how to properly sync store with localStorage
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
       })
     );
 
