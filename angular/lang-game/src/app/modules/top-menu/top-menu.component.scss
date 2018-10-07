@@ -1,0 +1,46 @@
+@import '~app/shared/styles/variables';
+
+.header-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  &__title {
+    height: 100%;
+    font-weight: bold;
+    font-size: 150%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &__auth-navbar{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+  }
+
+  &__auth-link {
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    &:hover {
+      color: $grey;
+    }
+  }
+
+  &__username {
+    font-weight: bold;
+    margin-right: 32px;
+    font-size: 115%
+  }
+
+  .active {
+    color: $grey;
+  }
+}
+
+

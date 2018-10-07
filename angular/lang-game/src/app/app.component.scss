@@ -1,22 +1,30 @@
 .application-container {
-  height: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 150px 1fr;
-  grid-template-rows: 100wh;
+  grid-template-rows: 60px 1fr;
 }
 
 app-left-menu {
   height: 100%;
   grid-column-start: 1;
   grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+app-top-menu {
+  height: 100%;
+  grid-column-start: 1;
+  grid-column-end: span 2;
   grid-row-start: 1;
   grid-row-end: 1;
 }
 
 .application-route-container {
-  height: 100%;
+  height:100%;
   grid-column-start: 2;
   grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
 }

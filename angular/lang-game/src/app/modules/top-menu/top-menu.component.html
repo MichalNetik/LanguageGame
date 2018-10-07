@@ -1,0 +1,42 @@
+<div class="header-container">
+  <div class="header-container__title">
+      Language Game
+  </div>
+  <div class="header-container__auth-navbar">
+    <div class="auth-container">
+      <div
+        *ngIf="(authState | async).authenticated"
+      >
+        <span class="header-container__username">
+          @{{ (authState | async).userName }}
+        </span>
+        <span 
+          class="header-container__auth-link"
+          (click)="onLogout()"
+        >
+          Logout
+        </span>
+      </div>
+
+      <div
+        *ngIf="!(authState | async).authenticated"
+      >
+        <span
+          class="header-container__auth-link"
+          routerLink="/auth/login"
+          routerLinkActive="active">
+          Login
+        </span>
+        <span>
+          /
+        </span>
+        <span
+          class="header-container__auth-link"
+          routerLink="/auth/signup"
+          routerLinkActive="active">
+          Sign Up
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

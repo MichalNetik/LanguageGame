@@ -1,9 +1,23 @@
 from rest_framework.test import APITestCase
+import jwt
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import force_authenticate
+
 
 class TestWordPairs(APITestCase):
   fixtures=['sample_data']
+
+  def setUp(self):
+      user = User.objects.create_user(
+          username='test_user',
+          password='TestTest99'
+      )
+      self.token = jwt.encode(
+          { 'id': user.id, 'username': user.username }, "SECRET_KEY"
+      ).decode('utf-8')
+      self.client.credentials(HTTP_X_TOKEN=self.token)
 
   def test_load_word_pairs(self):
     # word-pair/?sortColumn=base&sortDirection=asc&startOffset=0&endOffset=5
@@ -15,8 +29,9 @@ class TestWordPairs(APITestCase):
         'sortColumn': 'base',
         'sortDirection': 'asc'
     }
-
-    response = self.client.get(url, input_params, format='json')
+    response = self.client.get(
+        url, input_params, format='json'
+    )
     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     expected_res = {
