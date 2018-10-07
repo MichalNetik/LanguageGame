@@ -2,6 +2,8 @@ import jwt
 import json
 from rest_framework import views
 from rest_framework.response import Response
+from rest_framework.decorators import authentication_classes, permission_classes
+from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
@@ -21,6 +23,8 @@ class SignUp(views.APIView):
             content_type="application/json"
         )
 
+@authentication_classes([])
+@permission_classes([])
 class Login(views.APIView):
     def post(self, request, *args, **kwargs):
         if not request.data:
@@ -28,23 +32,21 @@ class Login(views.APIView):
         
         username = request.data['username']
         password = request.data['password']
-        try:
-            user = User.objects.get(username=username, password=password)
-        except User.DoesNotExist:
-            return Response({'Error': "Invalid username/password"}, status="400")
-        if user:  
+
+        user = authenticate(username=username, password=password)
+        if user:
             payload = {
                 'id': user.id,
                 'username': user.username,
             }
-            jwt_token = jwt.encode(payload, "SECRET_KEY")
+            jwt_token = jwt.encode(payload, "SECRET_KEY").decode('utf-8')
 
             response_data = {
-                username: user.username,
-                token: jwt_token
+                'username': user.username,
+                'token': jwt_token
             }
             return JsonResponse(
-                json.dumps(response_data),
+                response_data,
                 status=200,
                 content_type="application/json"
             )

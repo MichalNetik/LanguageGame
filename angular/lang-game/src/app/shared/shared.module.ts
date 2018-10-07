@@ -3,7 +3,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LangTableComponent } from './components/table-form-combo/lang-table/lang-table.component';
 import { FormGeneratorComponent } from './components/table-form-combo/form-generator/form-generator.component';
@@ -26,10 +26,14 @@ import { AuthHttpService } from './services/auth-http.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken'
+    }),
   ],
   exports: [
-    HttpClientModule,
     LangTableComponent,
     FormGeneratorComponent
   ],
