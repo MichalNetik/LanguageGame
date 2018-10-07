@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Router} from '@angular/router';
-import {map, tap, switchMap, mergeMap, mapTo} from 'rxjs/operators';
+import {map, tap, switchMap, mergeMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
@@ -19,7 +19,8 @@ export class AuthEffects {
       switchMap((authData: { username: string, password: string }) => {
         return this.authHttpService.signUp(authData.username, authData.password);
       }),
-      mapTo((authData: {username: string, password: string}) => {
+      map((authData: {username: string, password: string}) => {
+        console.log('aaa', authData);
         return {
             type: AuthActions.TRY_LOGIN,
             payload: authData

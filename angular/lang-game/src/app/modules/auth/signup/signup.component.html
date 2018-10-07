@@ -1,3 +1,33 @@
-<p>
-  signup works!
-</p>
+<form
+  class="signup-container"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="signUpForm"
+  >
+  <div class="signup-container__item">
+    <label for="">Username</label>
+    <input 
+      type="text" 
+      id="username" 
+      class="input-primary"
+      formControlName="username"
+    >
+  </div>
+
+  <div class="signup-container__item">
+    <label for="password">Password</label>
+    <input 
+      type="password" 
+      id="password" 
+      class="input-primary"
+      formControlName="password"
+    >
+  </div>
+
+  <div class="signup-container__item">
+    <button 
+      class="btn-primary" 
+      type="submit"
+      [disabled]="signUpForm.invalid"
+    >Sign Up</button>
+  </div>
+</form>

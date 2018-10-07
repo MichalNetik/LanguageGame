@@ -7,18 +7,20 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
+@authentication_classes([])
+@permission_classes([])
 class SignUp(views.APIView):
     def post(self, request, *args, **kwargs):
         username = request.data['username']
         password = request.data['password']
 
-        new_user = User()
-        new_user.username = username
-        new_user.password = password
-        new_user.save()
+        new_user = User.objects.create_user(
+            username=username,
+            password=password
+        )
 
         return JsonResponse(
-            json.dumps(new_user),
+            { 'username': username, 'password': password },
             status=200,
             content_type="application/json"
         )
