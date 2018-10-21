@@ -5,7 +5,7 @@ python:
 
 install:
   - cd webapp
-  - pip install -r requirements.txt
+  - pip install -r requirements_dev.txt
 
 script:
   - cd lang_game
