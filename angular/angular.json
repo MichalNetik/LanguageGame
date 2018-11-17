@@ -11,8 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../../webapp/lang_game/core/static",
-            "deployUrl": "/static/",
+            "outputPath": "./dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -51,7 +50,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lang-game:build"
+            "browserTarget": "lang-game:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

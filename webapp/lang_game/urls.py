@@ -13,8 +13,8 @@ router.register('vocabulary-category', vocabulary_category_view.VocabularyCatego
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('login/', Login.as_view()),
-    path('signup/', SignUp.as_view()),
+    path('api/login/', Login.as_view()),
+    path('api/signup/', SignUp.as_view()),
     path('', home_view.index, name='index'),
     re_path(r'^(?P<path>.*)/$', home_view.index)
 ]
