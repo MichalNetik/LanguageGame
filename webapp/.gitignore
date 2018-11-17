@@ -1,8 +1,9 @@
 /venv
-/core/static
+/lang_game/core/static
+/lang_game/lang_game/static
 __pycache__/
 *.sqlite3
 *.pyc
-/.idea/
-lang_game/.idea/
-
+*.swp
+/lang_game/.idea
+/.idea
