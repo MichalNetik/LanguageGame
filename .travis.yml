@@ -20,6 +20,10 @@ jobs:
     - stage: deploy
       script:
         - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
-        - ls -lat
+        - ssh root@167.99.132.66 mkdir langgame/
+        - scp ./* root@167.99.132.66:langgame/
+        - ssh root@167.99.132.66:langgame/ "docker-compose up -d"
+        - ssh root@167.99.132.66:langgame/ "docker-compose run web /usr/local/bin/python manage.py migrate"
+
 
 
