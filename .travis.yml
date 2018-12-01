@@ -1,3 +1,6 @@
+addons:
+  ssh_known_hosts:
+    $DEPLOYMENT_PROD_SERVER_IP
 
 jobs:
   include:
@@ -20,10 +23,10 @@ jobs:
     - stage: deploy
       script:
         - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
-        - ssh root@167.99.132.66 mkdir langgame/
-        - scp ./* root@167.99.132.66:langgame/
-        - ssh root@167.99.132.66:langgame/ "docker-compose up -d"
-        - ssh root@167.99.132.66:langgame/ "docker-compose run web /usr/local/bin/python manage.py migrate"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir langgame/
+        - scp ./* root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP:langgame/ "docker-compose up -d"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP:langgame/ "docker-compose run web /usr/local/bin/python manage.py migrate"
 
 
 
