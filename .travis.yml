@@ -19,7 +19,7 @@ jobs:
     - stage: deploy
       before_script:
         - mkdir -p ~/.ssh
-        - echo $PROD_SSH_PRIVATE_KEY | tr -d '\n' > ~/.ssh/id_rsa
+        - echo $PROD_SSH_PRIVATE_KEY > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
         # TODO: REMOVE ME
         - cat ~/.ssh/id_rsa
