@@ -17,9 +17,15 @@ jobs:
 #        - python manage.py test
 
     - stage: deploy
+      before_script:
+        - mkdir -p ~/.ssh
+        - echo "PROD_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+        - eval "$(ssh-agent -s)"
+        - ssh-add ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
       script:
         - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
-        - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
 
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir langgame/
         - scp ./* root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
