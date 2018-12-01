@@ -19,7 +19,7 @@ jobs:
 
     - stage: deploy
       script:
-        - printf "PROD SERVER IP ADDRESS:${DEPLOYMENT_PROD_SERVER_IP}"
+        - printf "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
         - ls -lat
 
 
