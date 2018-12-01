@@ -21,8 +21,6 @@ jobs:
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
-        # TODO: REMOVE ME
-        - cat ~/.ssh/id_rsa
         - eval "$(ssh-agent -s)"
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
@@ -30,7 +28,7 @@ jobs:
         - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
 
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir langgame/
-        - scp ./* root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
+        - scp -r . root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP:langgame/ "docker-compose up -d"
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP:langgame/ "docker-compose run web /usr/local/bin/python manage.py migrate"
 
