@@ -1,14 +1,25 @@
-language: python
 
-python: 
-  - 3.6
+jobs:
+  include:
+#    - stage: python-unitests
+#      language: python
+#
+#      python:
+#        - 3.6
+#
+#      install:
+#        - cd webapp
+#        - pip install -r requirements_dev.txt
+#
+#      script:
+#        - cd lang_game
+#        - python manage.py migrate
+#        - python manage.py loaddata sample_data
+#        - python manage.py test
 
-install:
-  - cd webapp
-  - pip install -r requirements_dev.txt
+    - stage: deploy
+      script:
+        - printf "PROD SERVER IP ADDRESS:${DEPLOYMENT_PROD_SERVER_IP}"
+        - ls -lat
 
-script:
-  - cd lang_game
-  - python manage.py migrate
-  - python manage.py loaddata sample_data
-  - python manage.py test
+
