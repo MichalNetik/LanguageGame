@@ -1,7 +1,3 @@
-addons:
-  ssh_known_hosts:
-    - "$DEPLOYMENT_PROD_SERVER_IP"
-
 jobs:
   include:
 #    - stage: python-unitests
@@ -23,6 +19,8 @@ jobs:
     - stage: deploy
       script:
         - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
+        - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir langgame/
         - scp ./* root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP:langgame/ "docker-compose up -d"
