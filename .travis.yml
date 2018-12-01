@@ -1,6 +1,6 @@
 addons:
   ssh_known_hosts:
-    $DEPLOYMENT_PROD_SERVER_IP
+    - $DEPLOYMENT_PROD_SERVER_IP
 
 jobs:
   include:
