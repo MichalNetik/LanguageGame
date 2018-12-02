@@ -20,7 +20,7 @@ jobs:
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
       script:
-        - source ./create_digital_ocean_droplet.sh
+        - source ./create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
         - echo "test1"
       after_script:
         - echo "test2"
