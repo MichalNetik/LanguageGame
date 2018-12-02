@@ -6,5 +6,5 @@ DROPLET_DETAILS=curl -X POST "https://api.digitalocean.com/v2/droplets" \
     -H "Authorization: Bearer $BEARER_TOKEN" \
     -H "Content-Type: application/json"
 
-echo DROPLET_DETAILS
+echo $DROPLET_DETAILS
 
