@@ -12,7 +12,7 @@ DROPLET_DETAILS=$(curl -X POST "https://api.digitalocean.com/v2/droplets" \
 
 echo "New droplet: $DROPLET_DETAILS"
 
-NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['id']))
+NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['id'])")
 
 echo "DROPLET ID: $NEW_DROPLET_ID"
 
