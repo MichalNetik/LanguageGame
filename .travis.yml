@@ -1,6 +1,8 @@
 jobs:
   include:
     - stage: python-unitests
+      # TODO: REMOVE ME
+      if: branch = master
       language: python
       python:
         - 3.6
@@ -25,8 +27,7 @@ jobs:
         - echo "test2"
 
     - stage: prod-deploy
-      on:
-        branch: master
+      if: branch = master
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
       before_script:
