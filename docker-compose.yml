@@ -1,4 +1,7 @@
 web:
+  environment:
+    - DJANGO_SETTINGS_MODULE
+    - DJANGO_SECRET
   restart: always
   build: ./webapp
   expose:
