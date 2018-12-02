@@ -12,16 +12,16 @@ DROPLET_DETAILS=$(curl -X POST "https://api.digitalocean.com/v2/droplets" \
 
 echo "New droplet: $DROPLET_DETAILS"
 
-# NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['id']))
+NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['id']))
 
-# echo "DROPLET ID: $NEW_DROPLET_ID"
+echo "DROPLET ID: $NEW_DROPLET_ID"
 
-# for i in {1..6}
-# do
-#    DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
-#        -H "Authorization: Bearer $BEARER_TOKEN" \
-#        -H "Content-Type: application/json")
-#    echo "Waiting for ip address: $DROPLET_DETAILS"
-#    sleep 30s
-# done
+for i in {1..8}
+do
+    DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
+       -H "Authorization: Bearer $BEARER_TOKEN" \
+       -H "Content-Type: application/json")
+   echo "Waiting for ip address: $DROPLET_DETAILS"
+   sleep 30s
+done
 
