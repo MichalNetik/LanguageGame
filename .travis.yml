@@ -19,9 +19,8 @@ jobs:
     - stage: dev-deploy
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
-      before_script:
-        - source ./create_digital_ocean_droplet.sh
       script:
+        - source ./create_digital_ocean_droplet.sh
         - echo "test1"
       after_script:
         - echo "test2"
