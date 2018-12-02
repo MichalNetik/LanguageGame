@@ -16,7 +16,7 @@ jobs:
 
     - stage: prod-deploy
       env:
-        - DJANGO_SETTINGS_MODULE=lang_game.settings.local
+        - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
       before_script:
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
@@ -25,6 +25,9 @@ jobs:
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
+        - ssh -t root@$DEPLOYMENT_PROD_SERVER_IP 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE'
+        - ssh -t root@$DEPLOYMENT_PROD_SERVER_IP 'export PROD_DJANGO_SECRET=$PROD_DJANGO_SECRET'
+
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir -p langgame/
         - scp -r . root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f langgame/docker-compose.yml up -d"
