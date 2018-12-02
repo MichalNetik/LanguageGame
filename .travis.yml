@@ -4,7 +4,8 @@ jobs:
       language: python
       python:
         - 3.6
-
+      env:
+        - DJANGO_SETTINGS_MODULE=lang_game.settings.local
       install:
         - pip install -r webapp/requirements_dev.txt
 
@@ -13,7 +14,9 @@ jobs:
         - python webapp/manage.py loaddata sample_data
         - python webapp/manage.py test
 
-    - stage: deploy
+    - stage: prod-deploy
+      env:
+        - DJANGO_SETTINGS_MODULE=lang_game.settings.local
       before_script:
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
@@ -22,8 +25,6 @@ jobs:
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
-        - echo "PROD SERVER IP ADDRESS:$DEPLOYMENT_PROD_SERVER_IP"
-
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir -p langgame/
         - scp -r . root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f langgame/docker-compose.yml up -d"
