@@ -1,6 +1,9 @@
 jobs:
   include:
     - stage: python-unitests
+      on:
+        # TODO: REMOVE when process is ready
+        branch: master
       language: python
       python:
         - 3.6
@@ -14,7 +17,19 @@ jobs:
         - python webapp/manage.py loaddata sample_data
         - python webapp/manage.py test
 
+    - stage: dev-deploy
+      env:
+        - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
+      before_script:
+        - curl -H 'Authorization: token curl -X POST "https://api.digitalocean.com/v2/droplets" -d '{"name":"langgame-dev","region":"fra1","size":"s-1vcpu-1gb","image":"docker-18-04", "ssh_keys":[$PROD_SSH_PUBLIC_FINGERPRINT]}' -H "Authorization: Bearer $DIGITAL_OCEAN_TOKEN" -H "Content-Type: application/json"'
+      script:
+        - echo "test1"
+      after_script:
+        - echo "test2"
+
     - stage: prod-deploy
+      on:
+        branch: master
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
       before_script:
