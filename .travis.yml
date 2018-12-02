@@ -25,10 +25,8 @@ jobs:
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
-        - ssh -t root@$DEPLOYMENT_PROD_SERVER_IP 'export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE'
-        - ssh -t root@$DEPLOYMENT_PROD_SERVER_IP 'export PROD_DJANGO_SECRET=$PROD_DJANGO_SECRET'
-
+        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export PROD_DJANGO_SECRET=$PROD_DJANGO_SECRET"
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir -p langgame/
         - scp -r . root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f langgame/docker-compose.yml up -d"
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py migrate"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml up -d"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py migrate"
