@@ -17,6 +17,9 @@ jobs:
         - python webapp/manage.py test
 
     - stage: dev-deploy
+      language: python
+      python:
+        - 3.6
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
       script:
