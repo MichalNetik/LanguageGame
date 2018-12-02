@@ -10,7 +10,9 @@ NEW_DROPLET_ID=echo $DROPLET_DETAILS | python -c "import sys, json; print(json.l
 
 for i in {1..6}
 do
-    DROPLET_DETAILS=(curl -X POST "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID")
+    DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
+        -H "Authorization: Bearer $BEARER_TOKEN" \
+        -H "Content-Type: application/json")
     echo $DROPLET_DETAILS
     sleep 30s
 done
