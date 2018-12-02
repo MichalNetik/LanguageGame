@@ -1,9 +1,6 @@
 jobs:
   include:
     - stage: python-unitests
-      on:
-        # TODO: REMOVE when process is ready
-        branch: master
       language: python
       python:
         - 3.6
