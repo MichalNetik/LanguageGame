@@ -22,16 +22,16 @@ do
        -H "Authorization: Bearer $BEARER_TOKEN" \
        -H "Content-Type: application/json")
 
-    STATUS=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['status'])")
+    echo "Waiting for ip address: $DROPLET_DETAILS"
+    DROPLET_STATUS=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['status'])")
 
-    echo "Current status: $STATUS"
+    echo "Current status: $DROPLET_STATUS"
 
-    if [ $STATUS == "active" ]
+    if [ $DROPLET_STATUS == "active" ]
         export DEPLOYMENT_DEV_SERVER_IP=(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['networks']['v4'][0]['ip_address'])")
         echo "Deployment dev server ip address: $DEPLOYMENT_DEV_SERVER_IP"
         exit 0
     fi
-    echo "Waiting for ip address: $DROPLET_DETAILS"
     sleep 30s
 done
 
