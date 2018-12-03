@@ -18,7 +18,7 @@ NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c 'import sys, json; print(json
 
 echo "DROPLET ID: $NEW_DROPLET_ID"
 
-while :
+for i in {1..8}
 do
     DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
        -H "Authorization: Bearer $BEARER_TOKEN" \
