@@ -1,3 +1,5 @@
+#!/bin/sh
+
 SSH_KEY_FINGERPRINT=$1
 BEARER_TOKEN=$2
 
@@ -16,7 +18,7 @@ NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c 'import sys, json; print(json
 
 echo "DROPLET ID: $NEW_DROPLET_ID"
 
-while true
+while :
 do
     DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
        -H "Authorization: Bearer $BEARER_TOKEN" \
