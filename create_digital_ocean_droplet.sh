@@ -16,12 +16,20 @@ NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json
 
 echo "DROPLET ID: $NEW_DROPLET_ID"
 
-for i in {1..8}
+while true
 do
     DROPLET_DETAILS=$(curl -X GET "https://api.digitalocean.com/v2/droplets/$NEW_DROPLET_ID" \
        -H "Authorization: Bearer $BEARER_TOKEN" \
        -H "Content-Type: application/json")
-   echo "Waiting for ip address: $DROPLET_DETAILS"
-   sleep 30s
+
+    STATUS=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['status'])")
+
+    if [ $STATUS -eq "active"]
+        export DEPLOYMENT_DEV_SERVER_IP=(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['networks']['v4'][0]['ip_address'])")
+        echo "Deployment dev server ip address: $DEPLOYMENT_DEV_SERVER_IP"
+        exit 0
+    fi
+    echo "Waiting for ip address: $DROPLET_DETAILS"
+    sleep 30s
 done
 
