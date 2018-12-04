@@ -33,7 +33,7 @@ jobs:
         - ssh-keyscan $DEPLOYMENT_DEV_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
         - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$DEV_DJANGO_SECRET'"
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir -p langgame/
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP mkdir -p langgame/
         - scp -r . root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "docker-compose -f langgame/docker-compose.yml down"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml up -d"
