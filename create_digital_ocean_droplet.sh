@@ -13,7 +13,7 @@ DROPLET_DETAILS=$(curl -X POST "https://api.digitalocean.com/v2/droplets" \
     -H "Content-Type: application/json")
 
 NEW_DROPLET_ID=$(echo $DROPLET_DETAILS | python -c 'import sys, json; print(json.load(sys.stdin)["droplet"]["id"])')
-
+export NEW_DROPLET_ID=$NEW_DROPLET_ID
 echo "DROPLET ID: $NEW_DROPLET_ID"
 
 while :
