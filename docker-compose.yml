@@ -1,43 +1,45 @@
-web:
-  environment:
-    - DJANGO_SETTINGS_MODULE
-    - DJANGO_SECRET
-  restart: always
-  build: ./webapp
-  expose:
-    - "8000"
-  links:
-    - postgres:postgres
-  volumes:
-    - /usr/src/app
-    - /usr/src/app/static
-  command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
+version: '3'
+services:
+  web:
+    environment:
+      - DJANGO_SETTINGS_MODULE
+      - DJANGO_SECRET
+    restart: always
+    build: ./webapp
+    expose:
+      - "8000"
+    links:
+      - postgres:postgres
+    volumes:
+      - /usr/src/app
+      - /usr/src/app/static
+    command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
 
-frontend:
-  restart: always
-  build: ./angular/
-  expose:
-    - "8001"
-  volumes:
-    - /usr/src/frontend-app/dist
+  frontend:
+    restart: always
+    build: ./angular/
+    expose:
+      - "8001"
+    volumes:
+      - /usr/src/frontend-app/dist
 
-nginx:
-  restart: always
-  build: ./nginx/
-  ports:
-    - "80:80"
-  volumes:
-    - /www/static
-  volumes_from:
-    - web
-  links:
-    - web:web
-    - frontend:frontend
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - web
+    links:
+      - web:web
+      - frontend:frontend
 
-postgres:
-  restart: always
-  image: postgres:latest
-  ports:
-    - "5432:5432"
-  volumes:
-    - pgdata:/var/lib/postgresql/data/
+  postgres:
+    restart: always
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/

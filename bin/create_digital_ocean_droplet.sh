@@ -33,7 +33,7 @@ do
         echo "Deployment dev server ip address: $DEPLOYMENT_DEV_SERVER_IP"
         export DEPLOYMENT_DEV_SERVER_IP=$DEPLOYMENT_DEV_SERVER_IP
 
-        sleep 10s
+        sleep 30s
         break
     fi
     sleep 30s

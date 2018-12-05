@@ -18,6 +18,7 @@ jobs:
         - python webapp/manage.py test
 
     - stage: dev-deploy
+      if: branch = develop
       language: python
       python:
         - 3.6
@@ -44,7 +45,6 @@ jobs:
         - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
-      if: branch = master
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
       before_script:
