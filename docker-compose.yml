@@ -12,7 +12,6 @@ services:
       - postgres:postgres
     volumes:
       - /usr/src/app
-      - /usr/src/app/static
     command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
 
   frontend:
@@ -20,16 +19,12 @@ services:
     build: ./angular/
     expose:
       - "8001"
-    volumes:
-      - /usr/src/frontend-app/dist
 
   nginx:
     restart: always
     build: ./nginx/
     ports:
       - "80:80"
-    volumes:
-      - /www/static
     links:
       - web:web
       - frontend:frontend
@@ -41,3 +36,6 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:
