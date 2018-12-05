@@ -24,7 +24,7 @@ jobs:
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
       before_script:
-        - source ./create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
+        - source ./bin/create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
@@ -36,13 +36,12 @@ jobs:
         -
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP mkdir -p langgame/
         - scp -r . root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "docker-compose -f langgame/docker-compose.yml down"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml up -d"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py migrate"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data"
       after_script:
         - echo "After script triggered"
-        - source ./delete_digital_ocean_droplet.sh
+        - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
       if: branch = master
