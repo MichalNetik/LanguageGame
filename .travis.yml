@@ -46,7 +46,7 @@ jobs:
 
     - stage: prod-deploy
       env:
-        - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
+        - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
       before_script:
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
