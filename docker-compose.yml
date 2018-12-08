@@ -6,13 +6,11 @@ services:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_SECRET
     restart: always
-    build: ./webapp
+    build: ./webapp/
     expose:
       - "8000"
     links:
       - postgres:postgres
-    volumes:
-      - /usr/src/app
     command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
 
   frontend:
