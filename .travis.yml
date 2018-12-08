@@ -46,11 +46,13 @@ jobs:
         - sudo docker-compose -f docker-compose.yml build --pull
         - sudo docker-compose push
       script:
-        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$DEV_DJANGO_SECRET';export VERSION_TAG=$VERSION_TAG"
-
         # Copy docker-compose.yml to the droplet, start the containers there and populate them with test data
         - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP
+            export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
+            export DJANGO_SECRET='$DEV_DJANGO_SECRET';
+            export VERSION_TAG=$VERSION_TAG;
+
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
             $ENV_VARIABLES;
             docker-compose -f docker-compose pull && docker-compose.yml up -d;
