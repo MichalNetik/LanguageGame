@@ -85,7 +85,7 @@ jobs:
       script:
         # Copy docker-compose.build.yml to the prod droplet and re-start the containers there
         - scp ./docker-compose.run.yml root@$DEPLOYMENT_PROD_SERVER_IP:~/
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$PROD_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
@@ -94,3 +94,4 @@ jobs:
             docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d --remove-orphans;
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
+        "
