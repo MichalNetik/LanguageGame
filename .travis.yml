@@ -32,6 +32,7 @@ jobs:
       before_script:
         # Create digital ocean droplet
         - source ./bin/create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
+
         # Register private SSH key to be able to access the droplet
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
@@ -39,6 +40,7 @@ jobs:
         - eval "$(ssh-agent -s)"
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_DEV_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+
         # Create "beta" images and push them to the docker hub
         - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
         - sudo docker-compose -f docker-compose.yml build --pull
@@ -48,10 +50,12 @@ jobs:
 
         # Copy docker-compose.yml to the droplet, start the containers there and populate them with test data
         - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin"
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose pull && docker-compose.yml up -d"
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate"
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data"
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP
+            echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
+            $ENV_VARIABLES;
+            docker-compose -f docker-compose pull && docker-compose.yml up -d;
+            docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate;
+            docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data;
 
         # TODO: Run integration tests
 
