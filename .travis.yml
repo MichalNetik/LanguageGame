@@ -44,26 +44,27 @@ jobs:
 
         # Create "beta" images and push them to the docker hub
         - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
-        - sudo docker-compose -f docker-compose.yml build --pull
+        - sudo docker-compose -f docker-compose.build.yml build --pull
         - sudo docker-compose push
       script:
-        # Copy docker-compose.yml to the droplet, start the containers there and populate them with test data
-        - scp ./docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
+        # Copy docker-compose.build.yml to the droplet, start the containers there and populate them with test data
+        - scp ./docker-compose.build.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$DEV_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
 
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
-            docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up -d;
-            docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate;
-            docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data;
+            docker-compose -f docker-compose.run.yml pull;
+            docker-compose -f docker-compose.run.yml up -d;
+            docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
+            docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py loaddata sample_data;
 
         # TODO: Run integration tests
 
         # If everything is ok, create production images
         - export VERSION_TAG=PROD
-        - docker-compose -f docker-compose.yml build
+        - docker-compose -f docker-compose.build.yml build
         - docker-compose push
       after_script:
         # Delete digital ocean droplet
@@ -82,14 +83,15 @@ jobs:
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
-        # Copy docker-compose.yml to the prod droplet and re-start the containers there
-        - scp ./docker-compose.yml root@$DEPLOYMENT_PROD_SERVER_IP:~/
+        # Copy docker-compose.build.yml to the prod droplet and re-start the containers there
+        - scp ./docker-compose.build.yml root@$DEPLOYMENT_PROD_SERVER_IP:~/
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$PROD_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
 
-            docker-compose -f docker-compose.yml down;
+            docker-compose -f docker-compose.build.yml down;
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
-            docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up -d;
-            docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate;
+            docker-compose -f docker-compose.run.yml pull;
+            docker-compose -f docker-compose.run.yml up -d;
+            docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
