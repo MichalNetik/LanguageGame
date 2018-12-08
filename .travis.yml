@@ -55,7 +55,7 @@ jobs:
             export VERSION_TAG=$VERSION_TAG;
 
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
-            docker-compose -f docker-compose.yml pull && docker-compose.yml up -d;
+            docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up -d;
             docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate;
             docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data;
 
@@ -91,5 +91,5 @@ jobs:
 
             docker-compose -f docker-compose.yml down;
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
-            docker-compose -f docker-compose.yml pull && docker-compose.yml up -d;
+            docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up -d;
             docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate;
