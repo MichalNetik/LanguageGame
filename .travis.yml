@@ -1,6 +1,11 @@
 dist: xenial
+
+services:
+  - docker
+
 jobs:
   include:
+    # TODO: Create a stage running angular/typescript unittests
     - stage: python-unitests
       # TODO: REMOVE ME
       if: branch = master
@@ -18,36 +23,53 @@ jobs:
         - python webapp/manage.py test
 
     - stage: dev-deploy
-      if: branch = develop
       language: python
       python:
         - 3.6
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
+        - VERSION_TAG=BETA
       before_script:
+        # Create digital ocean droplet
         - source ./bin/create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
+        # Register private SSH key to be able to access the droplet
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
         - eval "$(ssh-agent -s)"
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_DEV_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+        # Create "beta" images and push them to the docker hub
+        - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
+        - sudo docker-compose -f docker-compose.yml build
+        - sudo docker-compose push
       script:
-        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$DEV_DJANGO_SECRET'"
-        -
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP mkdir -p langgame/
-        - scp -r . root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml up -d"
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py migrate"
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data"
+        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$DEV_DJANGO_SECRET';export VERSION_TAG=$VERSION_TAG"
+
+        # Copy docker-compose.yml to the droplet, start the containers there and populate them with test data
+        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin"
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose pull && docker-compose.yml up -d"
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate"
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py loaddata sample_data"
+
+        # TODO: Run integration tests
+
+        # If everything is ok, create production images
+        - export VERSION_TAG=PROD
+        - docker-compose -f docker-compose.yml build
+        - docker-compose push
       after_script:
-        - echo "After script triggered"
+        # Delete digital ocean droplet
         - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
+      if: branch = master
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
+        - VERSION_TAG=PROD
       before_script:
+        # Register private SSH key to be able to access the droplet
         - mkdir -p ~/.ssh
         - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
@@ -55,11 +77,11 @@ jobs:
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
       script:
-        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$PROD_DJANGO_SECRET'"
+        - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$PROD_DJANGO_SECRET';export VERSION_TAG=$VERSION_TAG"
 
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP mkdir -p langgame/
-        - scp -r . root@$DEPLOYMENT_PROD_SERVER_IP:langgame/
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f langgame/docker-compose.yml down"
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml build"
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml up -d"
-        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f langgame/docker-compose.yml run web /usr/local/bin/python manage.py migrate"
+        # Copy docker-compose.yml to the prod droplet and re-start the containers there
+        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f docker-compose.yml down"
+        - ssh root@$DEPLOYMENT_DEV_SERVER_IP "echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose pull && docker-compose.yml up -d"
+        - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate"
