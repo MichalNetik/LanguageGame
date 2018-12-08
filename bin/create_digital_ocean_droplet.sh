@@ -32,8 +32,6 @@ do
         DEPLOYMENT_DEV_SERVER_IP=$(echo $DROPLET_DETAILS | python -c "import sys, json; print(json.load(sys.stdin)['droplet']['networks']['v4'][0]['ip_address'])")
         echo "Deployment dev server ip address: $DEPLOYMENT_DEV_SERVER_IP"
         export DEPLOYMENT_DEV_SERVER_IP=$DEPLOYMENT_DEV_SERVER_IP
-
-        sleep 30s
         break
     fi
     sleep 30s

@@ -41,13 +41,13 @@ jobs:
         - ssh-keyscan $DEPLOYMENT_DEV_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
         # Create "beta" images and push them to the docker hub
         - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
-        - sudo docker-compose -f docker-compose.yml build
+        - sudo docker-compose -f docker-compose.yml build --pull
         - sudo docker-compose push
       script:
         - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$DEV_DJANGO_SECRET';export VERSION_TAG=$VERSION_TAG"
 
         # Copy docker-compose.yml to the droplet, start the containers there and populate them with test data
-        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
+        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose pull && docker-compose.yml up -d"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose.yml run web /usr/local/bin/python manage.py migrate"
@@ -80,7 +80,7 @@ jobs:
         - ENV_VARIABLES="export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;export DJANGO_SECRET='$PROD_DJANGO_SECRET';export VERSION_TAG=$VERSION_TAG"
 
         # Copy docker-compose.yml to the prod droplet and re-start the containers there
-        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP:langgame/
+        - scp -r docker-compose.yml root@$DEPLOYMENT_DEV_SERVER_IP
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP "docker-compose -f docker-compose.yml down"
         - ssh root@$DEPLOYMENT_DEV_SERVER_IP "echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin"
         - ssh root@$DEPLOYMENT_PROD_SERVER_IP "$ENV_VARIABLES;docker-compose -f docker-compose pull && docker-compose.yml up -d"
