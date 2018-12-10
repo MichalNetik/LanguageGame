@@ -44,7 +44,7 @@ jobs:
         # Create "beta" images and push them to the docker hub
         - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
         - sudo docker-compose -f docker-compose.build.yml build --pull
-        - sudo docker-compose push
+        - sudo docker-compose -f docker-compose.build.yml push
       script:
         # Copy docker-compose.build.yml to the droplet, start the containers there and populate them with test data
         - scp ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
