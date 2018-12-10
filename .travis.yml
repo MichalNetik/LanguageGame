@@ -35,12 +35,7 @@ jobs:
         - source ./bin/create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
 
         # Register private SSH key to be able to access the droplet
-        - mkdir -p ~/.ssh
-        - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
-        - chmod 600 ~/.ssh/id_rsa
-        - eval "$(ssh-agent -s)"
-        - ssh-add ~/.ssh/id_rsa
-        - ssh-keyscan $DEPLOYMENT_DEV_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+        - source ./bin/register_private_ssh_key.sh $PROD_SSH_PRIVATE_KEY $DEPLOYMENT_DEV_SERVER_IP
 
         # Create "beta" images and push them to the docker hub
         - sudo echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin
@@ -49,7 +44,8 @@ jobs:
       script:
         # Copy docker-compose.build.yml to the droplet, start the containers there and populate them with test data
         - scp ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
-        - ssh root@$DEPLOYMENT_DEV_SERVER_IP |
+        - |
+          ssh root@$DEPLOYMENT_DEV_SERVER_IP <<-EOF
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$DEV_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
@@ -59,6 +55,7 @@ jobs:
             docker-compose -f docker-compose.run.yml up -d;
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py loaddata sample_data;
+          EOF
 
         # TODO: Run integration tests
 
@@ -76,12 +73,7 @@ jobs:
         - VERSION_TAG=PROD
       before_script:
         # Register private SSH key to be able to access the droplet
-        - mkdir -p ~/.ssh
-        - echo -e $PROD_SSH_PRIVATE_KEY | tr -d '\r' > ~/.ssh/id_rsa
-        - chmod 600 ~/.ssh/id_rsa
-        - eval "$(ssh-agent -s)"
-        - ssh-add ~/.ssh/id_rsa
-        - ssh-keyscan $DEPLOYMENT_PROD_SERVER_IP 2>&1 | tee -a $HOME/.ssh/known_hosts
+        - source ./bin/register_private_ssh_key.sh $PROD_SSH_PRIVATE_KEY $DEPLOYMENT_PROD_SERVER_IP
       script:
         # Copy docker-compose.build.yml to the prod droplet and re-start the containers there
         - scp ./docker-compose.run.yml root@$DEPLOYMENT_PROD_SERVER_IP:~/
