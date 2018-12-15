@@ -46,7 +46,6 @@ jobs:
 
     - stage: dev-deploy
       # TODO: remove me
-      if: branch = master
       language: python
       python:
         - 3.6
@@ -91,6 +90,9 @@ jobs:
         - export VERSION_TAG=PROD
         - docker-compose -f docker-compose.build.yml build
         - docker-compose -f docker-compose.build.yml push
+      after_success:
+        - source ./bin/auto_merge.sh "develop" "master" "$GITHUB_TOKEN"
+
       after_script:
         # Delete digital ocean droplet
         - source ./bin/delete_digital_ocean_droplet.sh
