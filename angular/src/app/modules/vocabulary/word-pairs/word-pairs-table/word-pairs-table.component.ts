@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable ,  Subscription } from 'rxjs';
 
 import { LangTableColumns } from '../../../../shared/components/table-form-combo/lang-table/lang-table.type';
 import * as fromWordPairs from '../store/word-pairs.reducers';
@@ -10,7 +10,6 @@ import * as fromWordPairCategories from '../../word-pair-categories/store/word-p
 import * as WordPairCategoriesActions from '../../word-pair-categories/store/word-pair-categories.actions';
 
 import { PaginationUrlParamsModel } from '../../../../shared/models/pagination-url-params.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-word-pairs-table',

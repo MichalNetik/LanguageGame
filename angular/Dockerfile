@@ -1,4 +1,4 @@
-FROM node:8.10.0 as node
+FROM node:10.14.2 as node
 
 RUN mkdir -p /usr/src/frontend-app
 WORKDIR /usr/src/frontend-app
