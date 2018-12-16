@@ -13,6 +13,7 @@ git clone "https://github.com/$GITHUB_REPO" "$REPO_TEMP"
 pushd $REPO_TEMP
 
 git checkout "$TO_BRANCH"
+git fetch
 git merge "$FROM_BRANCH"
 
 
