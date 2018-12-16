@@ -3,8 +3,6 @@ dist: xenial
 jobs:
   include:
     - stage: python-unit-tests
-      # TODO: REMOVE ME
-      if: branch = master
       language: python
       python:
         - 3.6
@@ -19,8 +17,6 @@ jobs:
         - python webapp/manage.py test
 
     - stage: angular-unit-tests
-      # TODO: REMOVE ME
-      if: branch = master
       language: node_js
       node_js:
         - "10"
@@ -43,19 +39,13 @@ jobs:
         - popd
 
     - stage: dev-deploy
-      # TODO: remove me
+      if: branch = develop
       language: python
       python:
         - 3.6
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
-      addons:
-        apt:
-          sources:
-            - google-chrome
-          packages:
-            - google-chrome-stable
       services:
         - docker
       before_script:
@@ -104,7 +94,6 @@ jobs:
         - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
-      # TODO: remove me
       if: branch = master
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
