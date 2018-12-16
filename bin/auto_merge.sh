@@ -13,7 +13,7 @@ git clone "https://github.com/$GITHUB_REPO" "$REPO_TEMP"
 pushd $REPO_TEMP
 
 git checkout "$TO_BRANCH"
-git merge --ff-only "$FROM_BRANCH"
+git merge "$FROM_BRANCH"
 
 
 PUSH_URI="https://$GITHUB_TOKEN@github.com/$GITHUB_REPO"
