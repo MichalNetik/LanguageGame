@@ -1,20 +1,10 @@
 dist: xenial
 
-services:
-  - docker
-
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-
 jobs:
   include:
-    # TODO: Create a stage running angular/typescript unittests
     - stage: python-unit-tests
       # TODO: REMOVE ME
+      if: branch = master
       language: python
       python:
         - 3.6
@@ -29,9 +19,17 @@ jobs:
         - python webapp/manage.py test
 
     - stage: angular-unit-tests
+      # TODO: REMOVE ME
+      if: branch = master
       language: node_js
       node_js:
         - "10"
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
       cache:
         directories:
           - ./angular/node_modules
@@ -52,6 +50,14 @@ jobs:
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
+      services:
+        - docker
       before_script:
         # Create digital ocean droplet
         - source ./bin/create_digital_ocean_droplet.sh $PROD_SSH_PUBLIC_FINGERPRINT $DIGITAL_OCEAN_TOKEN
@@ -103,6 +109,8 @@ jobs:
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.prod
         - VERSION_TAG=PROD
+      services:
+        - docker
       before_script:
         # Register private SSH key to be able to access the droplet
         - mkdir -p ~/.ssh
