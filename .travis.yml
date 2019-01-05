@@ -46,9 +46,6 @@ jobs:
       language: node_js
         node_js:
           - "10"
-      cache:
-        directories:
-          - ./angular/node_modules
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
