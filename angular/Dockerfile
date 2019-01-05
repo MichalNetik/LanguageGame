@@ -5,7 +5,6 @@ WORKDIR /usr/src/frontend-app
 COPY package.json /usr/src/frontend-app
 
 RUN npm install -g @angular/cli@latest
-RUN npm install -g
 RUN npm install
 COPY . /usr/src/frontend-app
 RUN npm run build --prod

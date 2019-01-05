@@ -19,8 +19,6 @@ jobs:
         - python webapp/manage.py test
 
     - stage: angular-unit-tests
-      # TODO: remove me
-      if: branch = master
       language: node_js
       node_js:
         - "10"
@@ -45,9 +43,12 @@ jobs:
     - stage: dev-deploy
       # TODO: put me back
       # if: branch = develop
-      language: python
-      python:
-        - 3.6
+      language: node_js
+        node_js:
+          - "10"
+      cache:
+        directories:
+          - ./angular/node_modules
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
@@ -83,10 +84,10 @@ jobs:
             docker-compose -f docker-compose.run.yml up -d;
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py loaddata sample_data;
-
-            apt install chromium-browser;
-            docker-compose -f docker-compose.run.yml run frontend ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
           EOF
+
+        # Run integration tests
+        - ng e2e -- --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP --devServerTarget= --protractor-config=e2e/protractor-ci.conf.js
 
         # If everything is ok, create production images
         - export VERSION_TAG=PROD
