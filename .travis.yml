@@ -43,9 +43,6 @@ jobs:
     - stage: dev-deploy
       # TODO: put me back
       # if: branch = develop
-      language: node_js
-        node_js:
-          - "10"
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
