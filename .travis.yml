@@ -68,9 +68,9 @@ jobs:
         - sudo docker-compose -f docker-compose.build.yml push
       script:
         # Copy docker-compose.build.yml to the droplet, start the containers there and populate them with test data
-        - scp ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
+        - scp -o "StrictHostKeyChecking no" ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
         - |
-          ssh root@$DEPLOYMENT_DEV_SERVER_IP <<-EOF
+          ssh -o "StrictHostKeyChecking no" root@$DEPLOYMENT_DEV_SERVER_IP <<-EOF
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$DEV_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
