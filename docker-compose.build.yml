@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: "michalnetik/langgame_backend:${VERSION_TAG}"
+    image: "michalnetik/langggame_backend:${VERSION_TAG}"
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_SECRET
@@ -14,7 +14,7 @@ services:
     command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
 
   frontend:
-    image: "michalnetik/langgame_frwebontend:${VERSION_TAG}"
+    image: "michalnetik/langgame_frontend:${VERSION_TAG}"
     restart: always
     build: ./angular/
     expose:
