@@ -19,6 +19,8 @@ jobs:
         - python webapp/manage.py test
 
     - stage: angular-unit-tests
+      # TODO: remove me
+      if: branch = master
       language: node_js
       node_js:
         - "10"
@@ -81,7 +83,7 @@ jobs:
           EOF
 
         # Run integration tests
-        - ng e2e -- --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP --devServerTarget= --protractor-config=e2e/protractor-ci.conf.js
+        - docker-compose -f docker-compose.build.yml run e2e protractor --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP --devServerTarget= protractor-ci.conf.js
 
         # If everything is ok, create production images
         - export VERSION_TAG=PROD

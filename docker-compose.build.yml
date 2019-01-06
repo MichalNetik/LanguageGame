@@ -38,5 +38,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data/
 
+  e2e:
+    image: "michalnetik/langame_e2e"
+    build: ./angular/e2e
+
 volumes:
   pgdata:
