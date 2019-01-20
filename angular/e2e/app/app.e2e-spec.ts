@@ -1,4 +1,4 @@
-import { LangGamePage } from './app.po';
+import { LangGamePage } from '../app.po';
 
 describe('lang-game App', () => {
   let page: LangGamePage;
@@ -7,8 +7,8 @@ describe('lang-game App', () => {
     page = new LangGamePage();
   });
 
-  it('should display welcome message', () => {
+  it('should display page title', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getTitleText()).toEqual('Language Game');
   });
 });

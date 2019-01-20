@@ -40,9 +40,6 @@ jobs:
 
     - stage: dev-deploy
       if: branch = develop
-      language: python
-      python:
-        - 3.6
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
@@ -66,9 +63,9 @@ jobs:
         - sudo docker-compose -f docker-compose.build.yml push
       script:
         # Copy docker-compose.build.yml to the droplet, start the containers there and populate them with test data
-        - scp ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
+        - scp -o "StrictHostKeyChecking no" ./docker-compose.run.yml root@$DEPLOYMENT_DEV_SERVER_IP:~/
         - |
-          ssh root@$DEPLOYMENT_DEV_SERVER_IP <<-EOF
+          ssh -o "StrictHostKeyChecking no" root@$DEPLOYMENT_DEV_SERVER_IP <<-EOF
             export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE;
             export DJANGO_SECRET='$DEV_DJANGO_SECRET';
             export VERSION_TAG=$VERSION_TAG;
@@ -80,7 +77,8 @@ jobs:
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py loaddata sample_data;
           EOF
 
-        # TODO: Run integration tests
+        # Run integration tests
+        - docker-compose -f docker-compose.build.yml run e2e protractor --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP --devServerTarget= protractor-ci.conf.js
 
         # If everything is ok, create production images
         - export VERSION_TAG=PROD
