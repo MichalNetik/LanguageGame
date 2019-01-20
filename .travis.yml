@@ -3,8 +3,6 @@ dist: xenial
 jobs:
   include:
     - stage: python-unit-tests
-      # TODO: remove me
-      if: branch = master
       language: python
       python:
         - 3.6
@@ -19,8 +17,6 @@ jobs:
         - python webapp/manage.py test
 
     - stage: angular-unit-tests
-      # TODO: remove me
-      if: branch = master
       language: node_js
       node_js:
         - "10"
@@ -43,8 +39,7 @@ jobs:
         - popd
 
     - stage: dev-deploy
-      # TODO: put me back
-      # if: branch = develop
+      if: branch = develop
       env:
         - DJANGO_SETTINGS_MODULE=lang_game.settings.dev
         - VERSION_TAG=BETA
