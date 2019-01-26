@@ -78,10 +78,6 @@ jobs:
           EOF
 
         # Run integration tests
-        - sudo docker-compose -f docker-compose.build.yml run e2e ls -lat
-        - echo $DEPLOYMENT_DEV_SERVER_IP
-        - sudo docker-compose -f docker-compose.build.yml ls
-        - sudo docker-compose -f docker-compose.build.yml up e2e
         - sudo docker-compose -f docker-compose.build.yml run e2e protractor --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP protractor-ci.conf.js
       after_success:
         - export VERSION_TAG=PROD
