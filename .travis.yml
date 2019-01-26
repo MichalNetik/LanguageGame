@@ -78,13 +78,11 @@ jobs:
           EOF
 
         # Run integration tests
-        - docker-compose -f docker-compose.build.yml run e2e protractor --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP protractor-ci.conf.js
-
-        # If everything is ok, create production images
+        - sudo docker-compose -f docker-compose.build.yml run e2e protractor --baseUrl=http://$DEPLOYMENT_DEV_SERVER_IP protractor-ci.conf.js
+      after_success:
         - export VERSION_TAG=PROD
         - docker-compose -f docker-compose.build.yml build
         - docker-compose -f docker-compose.build.yml push
-      after_success:
         - source ./bin/auto_merge.sh "develop" "master" "$GITHUB_TOKEN"
 
       after_script:
