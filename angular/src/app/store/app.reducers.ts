@@ -13,5 +13,5 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
   'word-pairs': fromWordPairs.wordPairsReducer,
   'word-pair-categories': fromWordPairCategories.wordPairCategoriesReducer,
-  auth: fromAuth.authReducer
+  'auth': fromAuth.authReducer
 };
