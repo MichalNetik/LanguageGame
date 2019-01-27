@@ -24,7 +24,7 @@ const initialState: State = {
 export function wordPairCategoriesReducer(state = initialState, action: WordPairCategoriesActions.WordPairCategoriesActions) {
   return proccessReducer(
     action,
-    WordPairCategoriesActions  ,
+    WordPairCategoriesActions,
     state
   )
 }

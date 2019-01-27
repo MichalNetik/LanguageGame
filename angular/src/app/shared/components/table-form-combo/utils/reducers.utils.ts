@@ -57,6 +57,7 @@ export function proccessReducer(
       urlParamsResetPagination.resetPagination();
       return {
         ...state,
+        urlParams: urlParamsResetPagination
       }
     case (typeActions.SET_PAGE_SIZE):
       const urlParamsSetRecordsPerPage = new PaginationUrlParamsModel({...state.urlParams});

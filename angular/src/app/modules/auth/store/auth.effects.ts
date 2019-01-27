@@ -20,7 +20,6 @@ export class AuthEffects {
         return this.authHttpService.signUp(authData.username, authData.password);
       }),
       map((authData: {username: string, password: string}) => {
-        console.log('aaa', authData);
         return {
             type: AuthActions.TRY_LOGIN,
             payload: authData
