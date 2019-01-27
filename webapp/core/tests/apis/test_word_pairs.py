@@ -3,16 +3,14 @@ import jwt
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import force_authenticate
 
 
 class TestWordPairs(APITestCase):
   fixtures=['sample_data']
 
   def setUp(self):
-      user = User.objects.create_user(
+      user = User.objects.get(
           username='test_user',
-          password='TestTest99'
       )
       self.token = jwt.encode(
           { 'id': user.id, 'username': user.username }, "SECRET_KEY"
