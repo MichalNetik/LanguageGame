@@ -8,8 +8,12 @@ class VocabularyCategoryViewSet(BaseViewSet):
     queryset = VocabularyCategory.objects.all()
     serializer_class = VocabularyCategorySerializer
 
+    def filter_user(self, query):
+        return query.filter(user=self.request.user)
+
     def get_queryset(self):
         query = VocabularyCategory.objects.all()
+        query = self.filter_user(query)
         return self.get_queryset_for_pagination(query)
 
     def list(self, request):

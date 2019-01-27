@@ -14,13 +14,13 @@ class SignUp(views.APIView):
         username = request.data['username']
         password = request.data['password']
 
-        new_user = User.objects.create_user(
+        User.objects.create_user(
             username=username,
             password=password
         )
 
         return JsonResponse(
-            { 'username': username, 'password': password },
+            {'username': username, 'password': password},
             status=200,
             content_type="application/json"
         )

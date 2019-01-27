@@ -31,7 +31,6 @@ export class TopMenuComponent implements OnInit {
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
     if (token && userName) {
-      console.log('having user name and token');
       this.authStore.dispatch(new AuthActions.SetToken(token));
       this.authStore.dispatch(new AuthActions.SetUserName(userName));
       this.authStore.dispatch(new AuthActions.Login());
