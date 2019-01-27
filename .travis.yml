@@ -35,7 +35,13 @@ jobs:
         - popd
       script:
         - pushd ./angular
+
+        # check typescript syntax
+        - ng lint
+
+        # run unit tests
         - ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
         - popd
 
     - stage: dev-deploy
