@@ -39,7 +39,7 @@ services:
       - pgdata:/var/lib/postgresql/data/
 
   e2e:
-    image: "michalnetik/langame_e2e:${VERSION_TAG}"
+    image: "michalnetik/langgame_e2e:${VERSION_TAG}"
     restart: always
     build: ./angular/e2e
 
