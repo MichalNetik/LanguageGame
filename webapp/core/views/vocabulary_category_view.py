@@ -4,6 +4,7 @@ from core.models import VocabularyCategory
 from core.views.base_view import BaseViewSet
 from core.serializers.vocabulary_category_serializer import VocabularyCategorySerializer
 
+
 class VocabularyCategoryViewSet(BaseViewSet):
     queryset = VocabularyCategory.objects.all()
     serializer_class = VocabularyCategorySerializer
@@ -18,7 +19,7 @@ class VocabularyCategoryViewSet(BaseViewSet):
 
     def list(self, request):
         queryset = self.get_queryset()
-        total_records = len(queryset) 
+        total_records = len(queryset)
         queryset = self.paginate(queryset)
 
         serializer = VocabularyCategorySerializer(queryset, many=True)

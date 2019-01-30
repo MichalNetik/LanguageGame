@@ -11,6 +11,7 @@ class WordPair(models.Model):
     def __str__(self):
         return '{0} -> {1} in {2}'.format(self.base, self.translated, self.category)
 
+
 class VocabularyCategory(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200, null=True, blank=True)
@@ -18,4 +19,3 @@ class VocabularyCategory(models.Model):
 
     def __str__(self):
         return self.name
-
