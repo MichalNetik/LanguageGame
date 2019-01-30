@@ -5,6 +5,7 @@ from core.models import WordPair, VocabularyCategory
 
 class WordPairSerializer(serializers.ModelSerializer):
     category = VocabularyCategorySerializer()
+
     class Meta:
         model = WordPair
         fields = '__all__'
