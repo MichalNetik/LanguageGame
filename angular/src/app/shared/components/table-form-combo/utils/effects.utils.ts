@@ -57,7 +57,7 @@ export function getPaginationEffect(
       store
     ),
     map(
-      ([action, state]) => {
+      ([action, state]: any) => {
         return {
           type: typeActions.FETCH_DATA,
           payload: state.urlParams
@@ -83,7 +83,7 @@ export function getEditEffect<ItemModel>(
         store
       ),
       map(
-        ([action, state]) => {
+        ([action, state]: any) => {
           let item: ItemModel;
           switch (state.selectedRow) {
             case (null):
@@ -163,7 +163,7 @@ export function getDeleteFormEffect(
       store
     ),
     mergeMap(
-      ([action, state]) => {
+      ([action, state]: any) => {
         return [
           {
             type: typeActions.SET_SELECTED_ROW,
