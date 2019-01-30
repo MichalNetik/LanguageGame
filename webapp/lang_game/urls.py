@@ -18,4 +18,3 @@ urlpatterns = [
     path('', home_view.index, name='index'),
     re_path(r'^(?P<path>.*)/$', home_view.index)
 ]
-

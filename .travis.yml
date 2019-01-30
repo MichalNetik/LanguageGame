@@ -12,6 +12,10 @@ jobs:
         - pip install -r webapp/requirements_dev.txt
 
       script:
+        # check python syntax
+        - flake8
+
+        # run unit tests
         - python webapp/manage.py migrate
         - python webapp/manage.py loaddata sample_data
         - python webapp/manage.py test

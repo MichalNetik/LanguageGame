@@ -1,13 +1,11 @@
-from rest_framework import status, exceptions
+from rest_framework import exceptions
 from django.http import HttpResponse
-from rest_framework.authentication import get_authorization_header, BaseAuthentication
+from rest_framework.authentication import BaseAuthentication
 from django.contrib.auth.models import User
 import jwt
-import json
 
 
 class TokenAuthentication(BaseAuthentication):
-
     model = None
 
     def get_model(self):
@@ -19,7 +17,7 @@ class TokenAuthentication(BaseAuthentication):
             msg = 'Token does not exist!'
             raise exceptions.AuthenticationFailed(msg)
         try:
-            if token=="null":
+            if token == "null":
                 msg = 'Null token not allowed'
                 raise exceptions.AuthenticationFailed(msg)
         except UnicodeError:
@@ -40,7 +38,7 @@ class TokenAuthentication(BaseAuthentication):
                 id=userid,
                 is_active=True
             )
-               
+
         except jwt.ExpiredSignature or jwt.DecodeError or jwt.InvalidTokenError:
             return HttpResponse({'Error': "Token is invalid"}, status="403")
         except User.DoesNotExist:

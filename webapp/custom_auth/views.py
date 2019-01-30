@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
+
 @authentication_classes([])
 @permission_classes([])
 class SignUp(views.APIView):
@@ -25,13 +26,14 @@ class SignUp(views.APIView):
             content_type="application/json"
         )
 
+
 @authentication_classes([])
 @permission_classes([])
 class Login(views.APIView):
     def post(self, request, *args, **kwargs):
         if not request.data:
             return Response({'Error': "Please provide username/password"}, status="400")
-        
+
         username = request.data['username']
         password = request.data['password']
 
@@ -54,7 +56,7 @@ class Login(views.APIView):
             )
         else:
             return Response(
-              json.dumps({'Error': "Invalid credentials"}),
-              status=400,
-              content_type="application/json"
+                json.dumps({'Error': "Invalid credentials"}),
+                status=400,
+                content_type="application/json"
             )
