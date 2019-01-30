@@ -13,7 +13,7 @@ jobs:
 
       script:
         # check python syntax
-        - flake8
+        - flake8 webapp/
 
         # run unit tests
         - python webapp/manage.py migrate
