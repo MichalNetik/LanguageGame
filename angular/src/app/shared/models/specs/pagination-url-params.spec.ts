@@ -28,4 +28,22 @@ describe('Pagination Url Params', () => {
   it('#getSortIcon should return "sort" for a non-sort column', () => {
     expect(model.getSortIcon('anotherTestColumn')).toBe('sort');
   });
+
+  it('#nextPage should return full page if there are enough records for the next page', () => {
+    model.totalRecords = 100;
+
+    model.nextPage();
+
+    expect(model.endOffset).toBe(20);
+    expect(model.startOffset).toBe(10);
+  })
+
+  it('#nextPage should return total records if reached last page', () => {
+    model.totalRecords = 14;
+
+    model.nextPage();
+
+    expect(model.endOffset).toBe(14);
+    expect(model.startOffset).toBe(10);
+  })
 });
