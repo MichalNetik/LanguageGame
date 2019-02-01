@@ -36,7 +36,7 @@ describe('Pagination Url Params', () => {
 
     expect(model.endOffset).toBe(20);
     expect(model.startOffset).toBe(10);
-  })
+  });
 
   it('#nextPage should return total records if reached last page', () => {
     model.totalRecords = 14;
@@ -45,5 +45,29 @@ describe('Pagination Url Params', () => {
 
     expect(model.endOffset).toBe(14);
     expect(model.startOffset).toBe(10);
+  });
+
+  it(
+    '#previousPage should display full previous page if there is enough records for the previous page',
+    () => {
+      model.totalRecords = 100;
+      model.endOffset = 30;
+      model.startOffset = 20;
+
+      model.previousPage();
+
+      expect(model.startOffset).toBe(10);
+      expect(model.endOffset).toBe(20);
+    }
+  );
+
+  it('#previousPage should go to the first page if there are not enough records for the previous page', () => {
+    model.endOffset = 15;
+    model.startOffset = 5;
+
+    model.previousPage();
+
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(10);
   })
 });
