@@ -150,4 +150,32 @@ describe('Pagination Url Params', () => {
     expect(model.totalRecords).toBe(5);
     expect(model.endOffset).toBe(5);
   });
+
+  it('#setPageSize should properly set endOffset for the last page', () => {
+    model.pageSize = 10;
+    model.startOffset = 0;
+    model.endOffset = 10;
+    model.totalRecords = 12;
+
+    model.setPageSize(15);
+
+    expect(model.pageSize).toBe(15);
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(12);
+    expect(model.totalRecords).toBe(12);
+  });
+
+  it('#setPageSize should properly set endOffset for any other page than the last one', () => {
+    model.pageSize = 10;
+    model.startOffset = 10;
+    model.endOffset = 20;
+    model.totalRecords = 43;
+
+    model.setPageSize(15);
+
+    expect(model.pageSize).toBe(15);
+    expect(model.startOffset).toBe(10);
+    expect(model.endOffset).toBe(25);
+    expect(model.totalRecords).toBe(43);
+  });
 });
