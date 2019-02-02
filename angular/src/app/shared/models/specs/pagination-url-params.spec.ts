@@ -201,4 +201,24 @@ describe('Pagination Url Params', () => {
     expect(model.sortColumn).toBe('testColumn');
     expect(model.sortDirection).toBe('desc');
   });
+
+  it('#setFilter should remove filter attributes for filterValue == "all"', () => {
+    model.filterValue = '123';
+    model.filterColumn = 'testColumn2';
+
+    model.setFilter({filterValue: 'all', filterColumn: 'testColumn'});
+
+    expect(model.filterValue).toBeUndefined();
+    expect(model.filterColumn).toBeUndefined();
+  });
+
+  it('#setFilter should propertly set filterValue and filterColumn', () => {
+    model.filterValue = '123';
+    model.filterColumn = 'testColumn';
+
+    model.setFilter({filterValue: '456', filterColumn: 'testColumn2'});
+
+    expect(model.filterValue).toBe('456');
+    expect(model.filterColumn).toBe('testColumn2');
+  });
 });
