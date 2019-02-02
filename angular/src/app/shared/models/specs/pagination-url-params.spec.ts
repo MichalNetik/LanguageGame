@@ -94,4 +94,28 @@ describe('Pagination Url Params', () => {
     expect(model.startOffset).toBe(0);
     expect(model.endOffset).toBe(10);
   });
+
+  it('#lastPage should set proper start offest for one page table', () => {
+    model.endOffset = 10;
+    model.startOffset = 2;
+    model.pageSize = 10;
+    model.totalRecords = 8;
+
+    model.lastPage();
+
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(8);
+  });
+
+  it('#lastPage should set proper start offest for multiple page table', () => {
+    model.endOffset = 15;
+    model.startOffset = 5;
+    model.pageSize = 10;
+    model.totalRecords = 17;
+
+    model.lastPage();
+
+    expect(model.startOffset).toBe(10);
+    expect(model.endOffset).toBe(17);
+  });
 });
