@@ -71,7 +71,7 @@ describe('Pagination Url Params', () => {
     expect(model.endOffset).toBe(10);
   });
 
-  it('#firstPage should set proper end offset for total records lesser than page size', () => {
+  it('#firstPage should set proper endOffset for totalRecords lesser than pageSize', () => {
     model.endOffset = 25;
     model.startOffset = 15;
     model.pageSize = 10;
@@ -83,7 +83,7 @@ describe('Pagination Url Params', () => {
     expect(model.endOffset).toBe(8);
   });
 
-  it('#firstPage should set proper end offset for total records greater than page size', () => {
+  it('#firstPage should set proper endOffset for totalRecords greater than pageSize', () => {
     model.endOffset = 25;
     model.startOffset = 15;
     model.pageSize = 10;
@@ -95,7 +95,7 @@ describe('Pagination Url Params', () => {
     expect(model.endOffset).toBe(10);
   });
 
-  it('#lastPage should set proper start offest for one page table', () => {
+  it('#lastPage should set proper startOffset for one page table', () => {
     model.endOffset = 10;
     model.startOffset = 2;
     model.pageSize = 10;
@@ -107,7 +107,7 @@ describe('Pagination Url Params', () => {
     expect(model.endOffset).toBe(8);
   });
 
-  it('#lastPage should set proper start offest for multiple page table', () => {
+  it('#lastPage should set proper startOffset for multiple page table', () => {
     model.endOffset = 15;
     model.startOffset = 5;
     model.pageSize = 10;
@@ -117,5 +117,37 @@ describe('Pagination Url Params', () => {
 
     expect(model.startOffset).toBe(10);
     expect(model.endOffset).toBe(17);
+  });
+
+  it('#resetPagination should reset start and endOffset', () => {
+    model.startOffset = 20;
+    model.endOffset = 35;
+    model.pageSize = 15;
+    model.totalRecords = 50;
+
+    model.resetPagination();
+
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(15);
+    expect(model.pageSize).toBe(15);
+    expect(model.totalRecords).toBe(0);
+  });
+
+  it('#setTotalRecords should only set totalRecords for endOffset lesser than totalRecords', () => {
+    model.endOffset = 10;
+
+    model.setTotalRecords(55);
+
+    expect(model.totalRecords).toBe(55);
+    expect(model.endOffset).toBe(10);
+  });
+
+  it('#setTotalRecords should set totalRecords and endOffset for endOffset greater than totalRecords', () => {
+    model.endOffset = 10;
+
+    model.setTotalRecords(5);
+
+    expect(model.totalRecords).toBe(5);
+    expect(model.endOffset).toBe(5);
   });
 });
