@@ -69,5 +69,29 @@ describe('Pagination Url Params', () => {
 
     expect(model.startOffset).toBe(0);
     expect(model.endOffset).toBe(10);
-  })
+  });
+
+  it('#firstPage should set proper end offset for total records lesser than page size', () => {
+    model.endOffset = 25;
+    model.startOffset = 15;
+    model.pageSize = 10;
+    model.totalRecords = 8;
+
+    model.firstPage();
+
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(8);
+  });
+
+  it('#firstPage should set proper end offset for total records greater than page size', () => {
+    model.endOffset = 25;
+    model.startOffset = 15;
+    model.pageSize = 10;
+    model.totalRecords = 12;
+
+    model.firstPage();
+
+    expect(model.startOffset).toBe(0);
+    expect(model.endOffset).toBe(10);
+  });
 });
