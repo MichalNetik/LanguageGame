@@ -178,4 +178,27 @@ describe('Pagination Url Params', () => {
     expect(model.endOffset).toBe(25);
     expect(model.totalRecords).toBe(43);
   });
+
+  it('#setSort should propertly set sort direction for a new sort column', () => {
+    model.setSort('testColumn2');
+
+    expect(model.sortColumn).toBe('testColumn2');
+    expect(model.sortDirection).toBe('asc');
+  });
+
+  it('#setSort should propertly set "asc" sort direction for the existing desc sort column', () => {
+    model.sortDirection = 'desc';
+
+    model.setSort('testColumn');
+
+    expect(model.sortColumn).toBe('testColumn');
+    expect(model.sortDirection).toBe('asc');
+  });
+
+  it('#setSort should propertly set "desc" sort direction for the existing asc sort column', () => {
+    model.setSort('testColumn');
+
+    expect(model.sortColumn).toBe('testColumn');
+    expect(model.sortDirection).toBe('desc');
+  });
 });
