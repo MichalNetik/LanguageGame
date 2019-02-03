@@ -5,7 +5,6 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_SECRET
-    restart: always
     expose:
       - "8000"
     links:
@@ -16,13 +15,11 @@ services:
 
   frontend:
     image: "michalnetik/langgame_frontend:${VERSION_TAG}"
-    restart: always
     expose:
       - "8001"
 
   nginx:
     image: "michalnetik/langgame_nginx:${VERSION_TAG}"
-    restart: always
     ports:
       - "80:80"
     links:
