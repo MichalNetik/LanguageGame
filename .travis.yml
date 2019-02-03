@@ -83,9 +83,9 @@ jobs:
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
             docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d;
-            docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py migrate;
-            docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py collectstatic --noinput;
-            docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py loaddata sample_data;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py migrate;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py collectstatic --noinput;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py loaddata sample_data;
           EOF
 
         # Run integration tests
@@ -129,6 +129,6 @@ jobs:
             docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d;
 
-            docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py migrate;
-            docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py collectstatic --noinput;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py migrate;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py collectstatic --noinput;
           EOF
