@@ -12,12 +12,6 @@ services:
     volumes:
       - static:/static
     command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
 
   frontend:
     image: "michalnetik/langgame_frontend:${VERSION_TAG}"
@@ -33,12 +27,6 @@ services:
       - frontend:frontend
     volumes:
       - static:/static
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
 
   postgres:
     restart: always
@@ -47,12 +35,6 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
 
 volumes:
   pgdata:
