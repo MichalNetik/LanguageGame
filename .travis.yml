@@ -98,8 +98,7 @@ jobs:
 
       after_script:
         # Delete digital ocean droplet
-        # TODO: put me back
-        # - source ./bin/delete_digital_ocean_droplet.sh
+        - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
       if: branch = master
@@ -129,6 +128,6 @@ jobs:
             docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d;
 
-            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py migrate;
             docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py collectstatic --noinput;
+            docker-compose -f docker-compose.run.yml exec -T web /usr/local/bin/python manage.py migrate;
           EOF
