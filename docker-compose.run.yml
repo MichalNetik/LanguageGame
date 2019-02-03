@@ -10,6 +10,8 @@ services:
       - "8000"
     links:
       - postgres:postgres
+    volumes:
+      - static:/static
     command: /usr/local/bin/gunicorn lang_game.wsgi:application -w 2 -b :8000
 
   frontend:
@@ -26,6 +28,8 @@ services:
     links:
       - web:web
       - frontend:frontend
+    volumes:
+      - static:/static
 
   postgres:
     restart: always
@@ -37,3 +41,4 @@ services:
 
 volumes:
   pgdata:
+  static:
