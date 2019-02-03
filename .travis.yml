@@ -83,7 +83,6 @@ jobs:
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
             docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d;
-
             docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py migrate;
             docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py collectstatic --noinput;
             docker-compose -f docker-compose.run.yml exec web /usr/local/bin/python manage.py loaddata sample_data;
@@ -99,7 +98,8 @@ jobs:
 
       after_script:
         # Delete digital ocean droplet
-        - source ./bin/delete_digital_ocean_droplet.sh
+        # TODO: put me back
+        # - source ./bin/delete_digital_ocean_droplet.sh
 
     - stage: prod-deploy
       if: branch = master
