@@ -125,8 +125,8 @@ jobs:
             export VERSION_TAG=$VERSION_TAG;
 
             echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USER_NAME --password-stdin;
-            docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml down;
+            docker-compose -f docker-compose.run.yml pull;
             docker-compose -f docker-compose.run.yml up -d;
 
             docker-compose -f docker-compose.run.yml run web /usr/local/bin/python manage.py migrate;
