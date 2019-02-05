@@ -17,4 +17,5 @@ services:
 
   e2e:
     image: "michalnetik/langgame_e2e:${VERSION_TAG}"
+    restart: always
     build: ./angular/e2e
