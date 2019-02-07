@@ -10,6 +10,4 @@ COPY . /usr/src/e2e
 
 RUN npm install -g protractor
 RUN npm install
-
 RUN webdriver-manager update
-
