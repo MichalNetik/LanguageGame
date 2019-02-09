@@ -16,6 +16,7 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
 import { TopMenuModule } from './modules/top-menu/top-menu.module';
 import { AuthModule } from './modules/auth/auth.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
