@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Actions, Effect} from '@ngrx/effects';
+import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Router} from '@angular/router';
-import {map, tap, switchMap, mergeMap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import {map, switchMap, mergeMap, tap } from 'rxjs/operators';
 
 import * as AuthActions from './auth.actions';
 import { AuthHttpService } from '../../../shared/services/auth-http.service';
@@ -11,8 +10,8 @@ import { AuthHttpService } from '../../../shared/services/auth-http.service';
 export class AuthEffects {
   @Effect()
   authSignup = this.actions$
-    .ofType(AuthActions.TRY_SIGNUP)
     .pipe(
+      ofType(AuthActions.TRY_SIGNUP),
       map((action: AuthActions.TrySignup) => {
         return action.payload;
       }),
@@ -28,8 +27,8 @@ export class AuthEffects {
 
   @Effect()
   authLogin = this.actions$
-    .ofType(AuthActions.TRY_LOGIN)
     .pipe(
+      ofType(AuthActions.TRY_LOGIN),
       switchMap(
         (action: AuthActions.TryLogin) => {
           return this.authHttpService.login(
@@ -62,8 +61,8 @@ export class AuthEffects {
 
   @Effect({dispatch: false})
   authLogout = this.actions$
-    .ofType(AuthActions.LOGOUT)
     .pipe(
+      ofType(AuthActions.LOGOUT),
       tap(() => {
         this.router.navigate(['/']);
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect, Actions, ofType } from '@ngrx/effects';
 import * as LearningActions from './learning.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { WordPairCategoriesHttpService } from 'app/shared/services/word-pair-categories-http.service';
@@ -11,8 +11,8 @@ import { WordPairCategoryInterface, WordPairCategoryPaginationInterface } from '
 export class LearningEffects {
   @Effect()
   wordPairCategoriesFetch = this.actions$
-    .ofType(LearningActions.FETCH_CATEGORIES)
     .pipe(
+      ofType(LearningActions.FETCH_CATEGORIES),
       switchMap(
         (action: LearningActions.FetchCategories) => {
           return this.categoriesHttpService.getItems();
