@@ -20,6 +20,7 @@ export class LearningEffects {
       ),
       map(
         (data: WordPairCategoryPaginationInterface) => {
+          console.log('my data', data);
           return {
             type: LearningActions.SET_CATEGORIES,
             payload: data.data

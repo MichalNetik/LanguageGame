@@ -6,7 +6,10 @@
     <select
       class="btn-select-primary select-field"
     >
-      <option value="test">test</option>
+      <option
+        *ngFor="let category of (learningState | async).wordPairCategories"
+        [value]="category.id"
+      >{{ category.name }}</option>
     </select>
   </div>
 </div>

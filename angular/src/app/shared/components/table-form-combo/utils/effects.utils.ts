@@ -151,10 +151,10 @@ export function getDeleteFormEffect(
 ) {
   return $actions
   .pipe(
+    ofType(
+      typeActions.DELETE_FORM
+    ),
     switchMap(
-      ofType(
-        typeActions.DELETE_FORM
-      ),
       (action: any) => {
         return service.deleteItem(action.payload);
       }
