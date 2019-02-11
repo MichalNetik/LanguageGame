@@ -1,6 +1,6 @@
 <div class="start-container">
   <div class="start-container__category-select-group">
-    <div>
+    <div class="input-label">
       Select Category
     </div>
     <select
@@ -11,5 +11,21 @@
         [value]="category.id"
       >{{ category.name }}</option>
     </select>
+  </div>
+
+  <div class="start-container__radio-groups">
+    <div class="start-container__radio-group">
+      <input type="radio" name="start-radio" checked>
+      <div class="input-label">
+        Original &#8658; Translation
+      </div>
+    </div>
+   
+    <div class="start-container__radio-group">
+      <input type="radio" name="start-radio">
+      <div class="input-label">
+        Translation &#8658; Original
+      </div>
+    </div>
   </div>
 </div>
