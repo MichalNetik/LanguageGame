@@ -9,7 +9,7 @@ const learningRoutes: Routes = [
   { path: '', component: LearningComponent, children: [
       { path: '', redirectTo: 'start', pathMatch: 'full' },
       { path: 'start',  component: StartComponent},
-      { path: 'progress/:categoryId',  component: ProgressComponent}
+      { path: 'progress/:categoryId/:learningDir',  component: ProgressComponent}
     ]
   }
 ];

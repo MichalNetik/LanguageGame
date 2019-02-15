@@ -5,6 +5,7 @@
     </div>
     <select
       class="btn-select-primary select-field"
+      [(ngModel)]="selectedCategory"
     >
       <option
         *ngFor="let category of (learningState | async).wordPairCategories"
@@ -15,14 +16,26 @@
 
   <div class="start-container__radio-groups">
     <div class="start-container__radio-group">
-      <input id="original-translation" type="radio" name="start-radio" checked>
+      <input 
+        id="original-translation" 
+          type="radio" 
+          name="start-radio" 
+          value="org-tra"
+          [(ngModel)]="selectedLearningDir"
+        >
       <label class="input-label" for="original-translation">
         Original &#8658; Translation
       </label>
     </div>
    
     <div class="start-container__radio-group">
-      <input id="translation-original" type="radio" name="start-radio">
+      <input 
+        id="translation-original" 
+        type="radio" 
+        name="start-radio"
+        value="tra-org"
+        [(ngModel)]="selectedLearningDir"
+      >
       <label class="input-label" for="translation-original">
         Translation &#8658; Original
       </label>
@@ -30,6 +43,11 @@
   </div>
 
   <div class="start-container__nav-panel">
-    <button class="btn-primary">Start Learning</button>
+    <button 
+      class="btn-primary"
+      (click)="onStartLearningClick()"
+      [disabled]="!selectedCategory || !selectedLearningDir"
+      routerLink="/learning/progress/{{ selectedCategory }}/{{ selectedLearningDir }}"
+    >Start Learning</button>
   </div>
 </div>

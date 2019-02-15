@@ -13,7 +13,8 @@ import * as LearningActions from '../store/learning.actions';
 })
 export class StartComponent implements OnInit {
   learningState: Observable<fromLearning.State>;
-
+  selectedCategory: string;
+  selectedLearningDir = 'tra-org';
 
   constructor(
     private learningStore: Store<fromLearning.State>
@@ -27,4 +28,7 @@ export class StartComponent implements OnInit {
     this.learningState = this.learningStore.select('learning')
   }
 
+  onStartLearningClick() {
+    console.log(this.selectedCategory, this.selectedLearningDir);
+  }
 }

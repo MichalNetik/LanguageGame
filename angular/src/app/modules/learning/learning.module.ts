@@ -9,11 +9,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { LearningEffects } from './store/learning.effects';
 import { learningReducer } from './store/learning.reducers';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LearningComponent, StartComponent, ProgressComponent],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
     LearningRoutingModule,
     StoreModule.forFeature('learning', learningReducer),
