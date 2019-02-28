@@ -1,4 +1,14 @@
 <div class="progress-container">
+  <div class="progress-container__nav-panel">
+    <div class="progress-container__nav-panel--correct">
+      Correct: <span class="progress-container__correct-text">{{ counter.correct }}</span>
+    </div>
+    <div class="progress-container__nav-panel--incorrect">
+      Incorrect: <span class="progress-container__incorrect-text">{{ counter.incorrect }}</span>
+    </div>
+    <div class="progress-container__nav-panel--total">Total: {{ currentWordPairIndex + 1 }}/{{ counter.total }}</div>
+  </div>
+
   <div class="progress-container__group">
     <div class="progress-container__label">{{ getDisplayValue('fromDisplayValue') }}</div>
     <input 

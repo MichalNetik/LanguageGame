@@ -8,6 +8,23 @@
   box-shadow: 2px 0 8px;
   box-sizing: border-box;
 
+  &__nav-panel {
+    display: flex;
+    justify-content: flex-end;
+
+    &--correct {
+      padding: 0.5em;
+    }
+
+    &--incorrect {
+      padding: 0.5em;
+    }
+
+    &--total {
+      padding: 0.5em;
+    }
+  }
+
   &__group {
     padding: 1em;
   }

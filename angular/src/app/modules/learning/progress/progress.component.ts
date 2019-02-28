@@ -20,6 +20,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   learningDirection: string;
   valueToSubmit: string;
   comparisonResultText: string;
+  counter: { correct: number, incorrect: number, total: number };
 
   learningConfig = {
     'org-tra': {
@@ -42,6 +43,12 @@ export class ProgressComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.counter = {
+      correct: 0,
+      incorrect: 0,
+      total: 0
+    };
+
     this.paramsChangedSubscription = this.route.params.subscribe((params: Params) => {
       this.learningStore.dispatch(
         new LearningActions.FetchWordPairs({filterColumn: 'category', filterValue: params.categoryId})
@@ -54,6 +61,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
       (data: fromLearning.State) => {
         this.wordPairs = data.wordPairs;
         this.currentWordPairIndex = 0
+        this.counter.total = this.wordPairs.length;
       }
     );
   }
@@ -79,8 +87,10 @@ export class ProgressComponent implements OnInit, OnDestroy {
     const correctValue = this.getValue('toValue');
     if (correctValue === this.valueToSubmit) {
       this.comparisonResultText = 'Correct!';
+      ++this.counter.correct;
     } else {
       this.comparisonResultText = `Incorrect! Correct value: "${correctValue}".`;
+      ++this.counter.incorrect;
     }
   }
 
