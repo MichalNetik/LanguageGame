@@ -1,3 +1,5 @@
+@import '../../../shared/styles/variables.scss';
+
 .progress-container {
   height: 100%;
   margin-left: 1.5rem;
@@ -13,5 +15,13 @@
   &__btn-group {
     display:flex;
     justify-content: center;
+  }
+
+  &__correct-text {
+    color: $green;
+  }
+
+  &__incorrect-text {
+    color: $light-red;
   }
 }

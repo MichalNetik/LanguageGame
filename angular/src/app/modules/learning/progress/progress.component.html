@@ -17,31 +17,35 @@
 
   <div 
     class="progress-container__group"
-    *ngIf="comparisonResult"
+    *ngIf="comparisonResultText"
   >
     <div class="progress-container__label">Result</div>
     <input 
       class="input-primary progress-container__input"
       disabled
-      [(ngModel)]="comparisonResult"
+      [(ngModel)]="comparisonResultText"
+      [ngClass]="{ 
+        'progress-container__correct-text': comparisonResultText.startsWith('Correct!'), 
+        'progress-container__incorrect-text': comparisonResultText.startsWith('Incorrect!') 
+      }"
     >
   </div>
 
   <div class="progress-container__btn-group">
     <button 
-      class="btn-primary" 
+      class="btn-primary"
       type="button"
       (click)="onSubmitButtonClick()"
-      *ngIf="!comparisonResult"
+      *ngIf="!comparisonResultText"
     >
       Submit
     </button>
 
     <button 
-      class="btn-primary" 
+      class="btn-primary"
       type="button"
       (click)="onNextButtonClick()"
-      *ngIf="comparisonResult"
+      *ngIf="comparisonResultText"
     >
       Next
     </button>

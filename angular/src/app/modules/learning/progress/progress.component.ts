@@ -19,7 +19,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   currentWordPairIndex: number;
   learningDirection: string;
   valueToSubmit: string;
-  comparisonResult: string;
+  comparisonResultText: string;
 
   learningConfig = {
     'org-tra': {
@@ -78,15 +78,15 @@ export class ProgressComponent implements OnInit, OnDestroy {
   onSubmitButtonClick() {
     const correctValue = this.getValue('toValue');
     if (correctValue === this.valueToSubmit) {
-      this.comparisonResult = 'Correct!';
+      this.comparisonResultText = 'Correct!';
     } else {
-      this.comparisonResult = 'Incorrect!';
+      this.comparisonResultText = `Incorrect! Correct value: "${correctValue}".`;
     }
   }
 
   onNextButtonClick() {
     ++this.currentWordPairIndex;
-    this.comparisonResult = '';
+    this.comparisonResultText = '';
     this.valueToSubmit = '';
   }
 }
