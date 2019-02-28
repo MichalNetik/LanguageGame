@@ -27,8 +27,4 @@ export class StartComponent implements OnInit {
 
     this.learningState = this.learningStore.select('learning')
   }
-
-  onStartLearningClick() {
-    console.log(this.selectedCategory, this.selectedLearningDir);
-  }
 }

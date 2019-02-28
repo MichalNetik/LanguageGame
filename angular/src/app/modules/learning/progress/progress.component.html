@@ -1,3 +1,49 @@
-<p>
-  progress works!
-</p>
+<div class="progress-container">
+  <div class="progress-container__group">
+    <div class="progress-container__label">{{ getDisplayValue('fromDisplayValue') }}</div>
+    <input 
+      class="input-primary progress-container__input"
+      disabled
+      [value]="getValue('fromValue')"
+    >
+  </div>
+  <div class="progress-container__group">
+    <div class="progress-container__label">{{ getDisplayValue('toDisplayValue') }}</div>
+    <input 
+      class="input-primary progress-container__input"
+      [(ngModel)]="valueToSubmit"
+    >
+  </div>
+
+  <div 
+    class="progress-container__group"
+    *ngIf="comparisonResult"
+  >
+    <div class="progress-container__label">Result</div>
+    <input 
+      class="input-primary progress-container__input"
+      disabled
+      [(ngModel)]="comparisonResult"
+    >
+  </div>
+
+  <div class="progress-container__btn-group">
+    <button 
+      class="btn-primary" 
+      type="button"
+      (click)="onSubmitButtonClick()"
+      *ngIf="!comparisonResult"
+    >
+      Submit
+    </button>
+
+    <button 
+      class="btn-primary" 
+      type="button"
+      (click)="onNextButtonClick()"
+      *ngIf="comparisonResult"
+    >
+      Next
+    </button>
+  </div>
+</div>

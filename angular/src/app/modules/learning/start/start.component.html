@@ -45,7 +45,6 @@
   <div class="start-container__nav-panel">
     <button 
       class="btn-primary"
-      (click)="onStartLearningClick()"
       [disabled]="!selectedCategory || !selectedLearningDir"
       routerLink="/learning/progress/{{ selectedCategory }}/{{ selectedLearningDir }}"
     >Start Learning</button>

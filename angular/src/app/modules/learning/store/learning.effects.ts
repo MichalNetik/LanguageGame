@@ -4,7 +4,8 @@ import * as LearningActions from './learning.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { WordPairCategoriesHttpService } from 'app/shared/services/word-pair-categories-http.service';
 import { WordPairsHttpService } from 'app/shared/services/word-pairs-http.service';
-import { WordPairCategoryInterface, WordPairCategoryPaginationInterface } from 'app/shared/models/word-pair-category.model';
+import { WordPairCategoryPaginationInterface } from 'app/shared/models/word-pair-category.model';
+import { WordPairPaginationInterface } from 'app/shared/models/word-pair.model';
 
 
 @Injectable()
@@ -20,9 +21,27 @@ export class LearningEffects {
       ),
       map(
         (data: WordPairCategoryPaginationInterface) => {
-          console.log('my data', data);
           return {
             type: LearningActions.SET_CATEGORIES,
+            payload: data.data
+          }
+        }
+      )
+    )
+
+  @Effect()
+  wordPairsFetch = this.actions$
+    .pipe(
+      ofType(LearningActions.FETCH_WORD_PAIRS),
+      switchMap(
+        (action: LearningActions.FetchWordPairs) => {
+          return this.wordPairsHttpService.getAllFilteredItems(action.payload);
+        }
+      ),
+      map(
+        (data: WordPairPaginationInterface) => {
+          return {
+            type: LearningActions.SET_WORD_PAIRS,
             payload: data.data
           }
         }

@@ -6,7 +6,7 @@ import { StatisticsComponent } from './modules/statistics/statistics.component';
 import { AuthComponent } from './modules/auth/auth.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/learning', pathMatch: 'full' },
+  { path: '', redirectTo: '/learning/start', pathMatch: 'full' },
   { path: 'vocabulary', loadChildren: './modules/vocabulary/vocabulary.module#VocabularyModule' },
   { path: 'learning', loadChildren: './modules/learning/learning.module#LearningModule' },
   { path: 'statistics', component: StatisticsComponent },
