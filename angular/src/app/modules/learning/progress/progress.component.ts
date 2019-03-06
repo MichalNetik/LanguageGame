@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { WordPairModel } from 'app/shared/models/word-pair.model';
 import { Store } from '@ngrx/store';
@@ -21,6 +21,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   valueToSubmit: string;
   comparisonResultText: string;
   counter: { correct: number, incorrect: number, total: number };
+  finished: boolean;
 
   learningConfig = {
     'org-tra': {
@@ -39,7 +40,8 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private learningStore: Store<fromLearning.State>
+    private learningStore: Store<fromLearning.State>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
       incorrect: 0,
       total: 0
     };
+    this.finished = false;
 
     this.paramsChangedSubscription = this.route.params.subscribe((params: Params) => {
       this.learningStore.dispatch(
@@ -83,6 +86,12 @@ export class ProgressComponent implements OnInit, OnDestroy {
     }
   }
 
+  onLastItemSubmit() {
+    if (this.currentWordPairIndex === (this.wordPairs.length - 1)) {
+      this.finished = true;
+    };
+  }
+
   onSubmitButtonClick() {
     const correctValue = this.getValue('toValue');
     if (correctValue === this.valueToSubmit) {
@@ -92,11 +101,17 @@ export class ProgressComponent implements OnInit, OnDestroy {
       this.comparisonResultText = `Incorrect! Correct value: "${correctValue}".`;
       ++this.counter.incorrect;
     }
+
+    this.onLastItemSubmit();
   }
 
   onNextButtonClick() {
     ++this.currentWordPairIndex;
     this.comparisonResultText = '';
     this.valueToSubmit = '';
+  }
+
+  onFinishButtonClick() {
+    this.router.navigate(['/', 'learning']);
   }
 }

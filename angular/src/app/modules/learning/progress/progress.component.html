@@ -46,7 +46,7 @@
       class="btn-primary"
       type="button"
       (click)="onSubmitButtonClick()"
-      *ngIf="!comparisonResultText"
+      *ngIf="!comparisonResultText && !finished"
     >
       Submit
     </button>
@@ -55,9 +55,18 @@
       class="btn-primary"
       type="button"
       (click)="onNextButtonClick()"
-      *ngIf="comparisonResultText"
+      *ngIf="comparisonResultText && !finished"
     >
       Next
+    </button>
+
+    <button 
+      class="btn-primary"
+      type="button"
+      (click)="onFinishButtonClick()"
+      *ngIf="finished"
+    >
+      Finish
     </button>
   </div>
 </div>
