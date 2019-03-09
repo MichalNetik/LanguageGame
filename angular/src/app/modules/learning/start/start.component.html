@@ -8,9 +8,11 @@
       [(ngModel)]="selectedCategory"
     >
       <option
-        *ngFor="let category of (learningState | async).wordPairCategories"
+        *ngFor="let category of wordPairCategories"
         [value]="category.id"
-      >{{ category.name }}</option>
+      >
+        {{ category.name }}
+      </option>
     </select>
   </div>
 
@@ -47,6 +49,8 @@
       class="btn-primary"
       [disabled]="!selectedCategory || !selectedLearningDir"
       routerLink="/learning/progress/{{ selectedCategory }}/{{ selectedLearningDir }}"
-    >Start Learning</button>
+    >
+      Start Learning
+    </button>
   </div>
 </div>

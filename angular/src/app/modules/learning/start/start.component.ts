@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import * as fromLearning from '../store/learning.reducers';
 import * as LearningActions from '../store/learning.actions';
+import { WordPairCategoryModel } from 'app/shared/models/word-pair-category.model';
 
 
 @Component({
@@ -11,10 +12,11 @@ import * as LearningActions from '../store/learning.actions';
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss']
 })
-export class StartComponent implements OnInit {
-  learningState: Observable<fromLearning.State>;
-  selectedCategory: string;
+export class StartComponent implements OnInit, OnDestroy {
+  wordPairCategories: WordPairCategoryModel[] = [];
+  selectedCategory: number;
   selectedLearningDir = 'tra-org';
+  learningStateSubscription: Subscription;
 
   constructor(
     private learningStore: Store<fromLearning.State>
@@ -25,6 +27,15 @@ export class StartComponent implements OnInit {
       new LearningActions.FetchCategories()
     );
 
-    this.learningState = this.learningStore.select('learning')
+    this.learningStateSubscription = this.learningStore.select('learning').subscribe(
+      (data: fromLearning.State) => {
+        this.wordPairCategories = data.wordPairCategories;
+        this.selectedCategory = data.wordPairCategories.length > 0 ? this.wordPairCategories[0].id :  null;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.learningStateSubscription.unsubscribe();
   }
 }
