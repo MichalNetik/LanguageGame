@@ -5,7 +5,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { LearningComponent } from './learning.component';
 
 
-const learningRoutes: Routes = [
+export const learningRoutes: Routes = [
   { path: '', component: LearningComponent, children: [
       { path: '', redirectTo: 'start', pathMatch: 'full' },
       { path: 'start',  component: StartComponent},
