@@ -21,7 +21,7 @@ class BaseViewSet(viewsets.ModelViewSet):
             sort_column = self.request.query_params['sortColumn']
             return query.order_by(f'{sort_direction}{sort_column}')
         else:
-            return query
+            return self.filter_query(query)
 
     def paginate(self, queryset):
         start_offset = self.request.query_params.get('startOffset')

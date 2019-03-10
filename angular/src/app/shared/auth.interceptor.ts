@@ -14,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.store.select('auth')
-      .pipe(take(1),
+      .pipe(
+        take(1),
         switchMap((authState: fromAuth.State) => {
           const copiedReq = authState.token ? req.clone({setHeaders: {'X-Token': authState.token}}) : req;
           return next.handle(copiedReq);

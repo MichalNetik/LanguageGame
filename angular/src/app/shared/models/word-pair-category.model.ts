@@ -2,7 +2,6 @@ export interface WordPairCategoryInterface {
   id: number;
   name: string;
   description: string;
-
 }
 
 export class WordPairCategoryModel implements WordPairCategoryInterface {

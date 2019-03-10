@@ -1,0 +1,32 @@
+.start-container {
+  margin: 1.6em;
+
+  .select-field {
+    width: 80%;
+  }
+
+  &__category-select-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__radio-groups {
+    margin-top: 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__radio-group {
+    display: flex;
+    flex-direction: row;
+    margin: 0.3em 0;
+  }
+
+  &__nav-panel {
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+  }
+}

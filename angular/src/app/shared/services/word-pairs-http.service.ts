@@ -19,6 +19,15 @@ export class WordPairsHttpService {
     )
   }
 
+  getAllFilteredItems(params: {filterColumn: string, filterValue: number}) {
+    const httpParams = toHttpParams(params);
+    return this.http.get<WordPairPaginationInterface>(`${this.API_URL}/`,
+      {
+        params: httpParams
+      }
+    )
+  }
+
   saveItem(wordPair: WordPairModel) {
     return this.http.post<WordPairInterface>(`${this.API_URL}/`, wordPair);
   }
