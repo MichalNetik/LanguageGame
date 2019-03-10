@@ -5,10 +5,10 @@ import { LearningComponent } from './modules/learning/learning.component';
 import { StatisticsComponent } from './modules/statistics/statistics.component';
 import { AuthComponent } from './modules/auth/auth.component';
 
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/learning', pathMatch: 'full' },
+export const appRoutes: Routes = [
+  { path: '', redirectTo: '/learning/start', pathMatch: 'full' },
   { path: 'vocabulary', loadChildren: './modules/vocabulary/vocabulary.module#VocabularyModule' },
-  { path: 'learning', component: LearningComponent },
+  { path: 'learning', loadChildren: './modules/learning/learning.module#LearningModule' },
   { path: 'statistics', component: StatisticsComponent },
   { path: 'auth', component: AuthComponent, loadChildren: './modules/auth/auth.module#AuthModule' }
 ];

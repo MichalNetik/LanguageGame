@@ -1,0 +1,72 @@
+<div class="progress-container">
+  <div class="progress-container__nav-panel">
+    <div class="progress-container__nav-panel--correct">
+      Correct: <span class="progress-container__correct-text">{{ counter.correct }}</span>
+    </div>
+    <div class="progress-container__nav-panel--incorrect">
+      Incorrect: <span class="progress-container__incorrect-text">{{ counter.incorrect }}</span>
+    </div>
+    <div class="progress-container__nav-panel--total">Total: {{ currentWordPairIndex + 1 }}/{{ counter.total }}</div>
+  </div>
+
+  <div class="progress-container__group">
+    <div class="progress-container__label">{{ getDisplayValue('fromDisplayValue') }}</div>
+    <input 
+      class="input-primary progress-container__input"
+      disabled
+      [value]="getValue('fromValue')"
+    >
+  </div>
+  <div class="progress-container__group">
+    <div class="progress-container__label">{{ getDisplayValue('toDisplayValue') }}</div>
+    <input 
+      class="input-primary progress-container__input"
+      [(ngModel)]="valueToSubmit"
+    >
+  </div>
+
+  <div 
+    class="progress-container__group"
+    *ngIf="comparisonResultText"
+  >
+    <div class="progress-container__label">Result</div>
+    <input 
+      class="input-primary progress-container__input"
+      disabled
+      [(ngModel)]="comparisonResultText"
+      [ngClass]="{ 
+        'progress-container__correct-text': comparisonResultText.startsWith('Correct!'), 
+        'progress-container__incorrect-text': comparisonResultText.startsWith('Incorrect!') 
+      }"
+    >
+  </div>
+
+  <div class="progress-container__btn-group">
+    <button 
+      class="btn-primary"
+      type="button"
+      (click)="onSubmitButtonClick()"
+      *ngIf="!comparisonResultText && !finished"
+    >
+      Submit
+    </button>
+
+    <button 
+      class="btn-primary"
+      type="button"
+      (click)="onNextButtonClick()"
+      *ngIf="comparisonResultText && !finished"
+    >
+      Next
+    </button>
+
+    <button 
+      class="btn-primary"
+      type="button"
+      (click)="onFinishButtonClick()"
+      *ngIf="finished"
+    >
+      Finish
+    </button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Actions } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
@@ -10,8 +10,8 @@ export function getTableDataFetchEffect<PaginationInterface extends any, ItemMod
   service: any
 ) {
   return $actions
-    .ofType(typeActions.FETCH_DATA)
     .pipe(
+      ofType(typeActions.FETCH_DATA),
       switchMap(
         (action: any) => {
           return service.getItems(action.payload);
@@ -43,29 +43,29 @@ export function getPaginationEffect(
   store: any
 ) {
   return $actions
-  .ofType(
-    typeActions.NEXT_PAGE,
-    typeActions.PREVIOUS_PAGE,
-    typeActions.FIRST_PAGE,
-    typeActions.LAST_PAGE,
-    typeActions.RESET_PAGINATION,
-    typeActions.SET_PAGE_SIZE,
-    typeActions.SET_SORT
-  )
-  .pipe(
-    withLatestFrom(
-      store
-    ),
-    map(
-      ([action, state]: any) => {
-        return {
-          type: typeActions.FETCH_DATA,
-          payload: state.urlParams
+    .pipe(
+      ofType(
+        typeActions.NEXT_PAGE,
+        typeActions.PREVIOUS_PAGE,
+        typeActions.FIRST_PAGE,
+        typeActions.LAST_PAGE,
+        typeActions.RESET_PAGINATION,
+        typeActions.SET_PAGE_SIZE,
+        typeActions.SET_SORT
+      ),
+      withLatestFrom(
+        store
+      ),
+      map(
+        ([action, state]: any) => {
+          return {
+            type: typeActions.FETCH_DATA,
+            payload: state.urlParams
+          }
         }
-      }
 
+      )
     )
-  )
 }
 
 export function getEditEffect<ItemModel>(
@@ -75,10 +75,10 @@ export function getEditEffect<ItemModel>(
   store: any
 ) {
   return $actions
-    .ofType(
-      typeActions.SET_SELECTED_ROW
-    )
     .pipe(
+      ofType(
+        typeActions.SET_SELECTED_ROW
+      ),
       withLatestFrom(
         store
       ),
@@ -111,36 +111,36 @@ export function getSaveFormEffect(
   store: any
 ) {
   return $actions
-  .ofType(
-    typeActions.SAVE_FORM
-  )
-  .pipe(
-    switchMap(
-      (action: any) => {
-        if (action.payload.id) {
-          return service.updateItem(action.payload);
-        } else {
-          return service.saveItem(action.payload);
-        }
-      }
-    ),
-    withLatestFrom(
-      store
-    ),
-    mergeMap(
-      ([action, state]) => {
-        return [
-          {
-            type: typeActions.RESET_PAGINATION
-          },
-          {
-            type: typeActions.SET_FORM_ITEM,
-            payload: null
+    .pipe(
+      ofType(
+        typeActions.SAVE_FORM
+      ),
+      switchMap(
+        (action: any) => {
+          if (action.payload.id) {
+            return service.updateItem(action.payload);
+          } else {
+            return service.saveItem(action.payload);
           }
-        ]
-      }
+        }
+      ),
+      withLatestFrom(
+        store
+      ),
+      mergeMap(
+        ([action, state]) => {
+          return [
+            {
+              type: typeActions.RESET_PAGINATION
+            },
+            {
+              type: typeActions.SET_FORM_ITEM,
+              payload: null
+            }
+          ]
+        }
+      )
     )
-  )
 }
 
 export function getDeleteFormEffect(
@@ -150,10 +150,10 @@ export function getDeleteFormEffect(
   store: any
 ) {
   return $actions
-  .ofType(
-    typeActions.DELETE_FORM
-  )
   .pipe(
+    ofType(
+      typeActions.DELETE_FORM
+    ),
     switchMap(
       (action: any) => {
         return service.deleteItem(action.payload);
