@@ -10,11 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { LearningModule } from './modules/learning/learning.module';
-import { LeftMenuModule } from './modules/left-menu/left-menu.module';
-import { StatisticsModule } from './modules/statistics/statistics.module';
-import { TopMenuModule } from './modules/top-menu/top-menu.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { CoreModule } from './modules/core/core.module';
 
 
 @NgModule({
@@ -27,11 +23,7 @@ import { AuthModule } from './modules/auth/auth.module';
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    LeftMenuModule,
-    LearningModule,
-    StatisticsModule,
-    TopMenuModule,
-    AuthModule,
+    CoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
   ],

@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromAuth from '../auth/store/auth.reducers';
-import * as AuthActions from '../auth/store/auth.actions';
+import * as fromAuth from '../../auth/store/auth.reducers';
+import * as AuthActions from '../../auth/store/auth.actions';
 
 import { Component, OnInit } from '@angular/core';
 
