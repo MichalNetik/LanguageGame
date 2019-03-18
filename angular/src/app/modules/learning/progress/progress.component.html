@@ -1,4 +1,6 @@
-<div class="progress-container">
+<div class="progress-container"
+  *ngIf="learningDirection && wordPairs"
+>
   <div class="progress-container__nav-panel">
     <div class="progress-container__nav-panel--correct">
       Correct: <span class="progress-container__correct-text">{{ counter.correct }}</span>

@@ -25,7 +25,7 @@ import { CoreModule } from './modules/core/core.module';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([])
   ],
   bootstrap: [AppComponent]
 })
