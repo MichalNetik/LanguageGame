@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { LearningComponent } from './modules/learning/learning.component';
 import { StatisticsComponent } from './modules/statistics/statistics.component';
 import { AuthComponent } from './modules/auth/auth.component';
 
@@ -9,8 +8,8 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: '/learning/start', pathMatch: 'full' },
   { path: 'vocabulary', loadChildren: './modules/vocabulary/vocabulary.module#VocabularyModule' },
   { path: 'learning', loadChildren: './modules/learning/learning.module#LearningModule' },
-  { path: 'statistics', component: StatisticsComponent },
-  { path: 'auth', component: AuthComponent, loadChildren: './modules/auth/auth.module#AuthModule' }
+  { path: 'statistics', loadChildren: './modules/statistics/statistics.module#StatisticsModule' },
+  { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule' }
 ];
 
 @NgModule({

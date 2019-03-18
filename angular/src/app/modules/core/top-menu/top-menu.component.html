@@ -1,6 +1,15 @@
 <div class="header-container">
+  <div 
+    class="header-container__expand-icon"
+    (click)="onExpandIconClick()"
+  >
+    <fa 
+      name="align-justify"
+    >
+    </fa>
+  </div>
   <div class="header-container__title">
-      Language Game
+      {{ appName }}
   </div>
   <div class="header-container__auth-navbar">
     <div class="auth-container">
