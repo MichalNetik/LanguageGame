@@ -1,12 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="app-container">
-  <div class="app-container__left-menu">
-    <app-left-menu></app-left-menu>
+  <div 
+    class="app-container__left-menu"
+    [ngClass]="{'app-container__left-menu--displayed': leftPanelDisplayed, 'app-container__left-menu--hidden': !leftPanelDisplayed}"
+  >
+    <app-left-menu [appName]="appName"></app-left-menu>
   </div>
   <div class="app-container__top-menu">
-    <app-top-menu></app-top-menu>
+    <app-top-menu [appName]="appName"></app-top-menu>
   </div>
   <div class="app-container__router-outlet">
     <router-outlet></router-outlet>
+  </div>
+
+  <div 
+    class="app-container__disabled-background"
+    [ngClass]="{'app-container__disabled-background--displayed': leftPanelDisplayed, 'app-container__disabled-background--hidden': !leftPanelDisplayed}"
+    (click)="onDisabledBackgroundClick()"
+  >
+
   </div>
 </div>

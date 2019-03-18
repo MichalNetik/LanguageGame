@@ -35,7 +35,8 @@ import { AuthHttpService } from './services/auth-http.service';
   ],
   exports: [
     LangTableComponent,
-    FormGeneratorComponent
+    FormGeneratorComponent,
+    AngularFontAwesomeModule
   ],
   providers: [
     WordPairsHttpService,

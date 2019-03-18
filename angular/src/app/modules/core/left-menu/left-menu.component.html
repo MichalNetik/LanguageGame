@@ -1,15 +1,32 @@
 <div
-  class="left-menu-container">
+  class="left-menu-container"
+>
+  <div class="left-menu-container__title">
+    {{ appName }}
+  </div>
+
   <div
     class="left-menu-container__item"
     routerLink="/learning"
-    routerLinkActive="active">Learning</div>
+    routerLinkActive="active"
+    (click)="onTabClick()"
+  >
+    Learning
+  </div>
   <div
     class="left-menu-container__item"
     routerLink="/vocabulary"
-    routerLinkActive="active">Vocabulary</div>
+    routerLinkActive="active"
+    (click)="onTabClick()"
+  >
+    Vocabulary
+  </div>
   <div
     class="left-menu-container__item"
     routerLink="/statistics"
-    routerLinkActive="active">Statistics</div>
+    routerLinkActive="active"
+    (click)="onTabClick()"
+  >
+    Statistics
+  </div>
 </div>

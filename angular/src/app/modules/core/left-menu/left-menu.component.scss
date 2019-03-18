@@ -1,10 +1,23 @@
 @import '~app/shared/styles/variables';
 
 .left-menu-container {
-  display: flex;
   flex-direction: column;
   box-shadow: 2px 0 4px;
   height: 100%;
+  padding: 0.1em;
+
+  &__title {
+    display: None;
+
+    @media #{$information-phone} {
+      display: block;
+      font-weight: bold;
+      font-size: 150%;
+      text-align: center;
+      margin-top: 8px;
+      margin-bottom: 16px; 
+    }
+  }
 
   &__item {
     padding-top: 1rem;

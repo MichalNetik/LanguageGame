@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { AppRoutingModule } from 'app/app-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
+import { CoreService } from './core.service';
 
 
 @NgModule({
@@ -14,9 +16,11 @@ import { AppRoutingModule } from 'app/app-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     AppRoutingModule
   ],
-  exports: [LeftMenuComponent, TopMenuComponent]
+  exports: [LeftMenuComponent, TopMenuComponent],
+  providers: [CoreService]
 })
 export class CoreModule { }
 

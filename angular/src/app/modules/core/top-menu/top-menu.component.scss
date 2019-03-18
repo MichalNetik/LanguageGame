@@ -5,13 +5,30 @@
   display: flex;
   justify-content: space-between;
 
+  &__expand-icon {
+    display: None;
+    
+    @media #{$information-phone} {
+      display: flex;
+      align-items: center;
+      margin: 0 16px;
+      font-size: 1.2em;
+    }
+  }
+
   &__title {
     height: 100%;
     font-weight: bold;
     font-size: 150%;
     display: flex;
+    flex-grow: 1;
+    justify-content: center;
     align-items: center;
     margin-left: 10px;
+
+    @media #{$information-phone} {
+      display: None;
+    }
   }
 
   &__auth-navbar{

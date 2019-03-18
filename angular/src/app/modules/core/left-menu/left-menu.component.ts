@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CoreService } from '../core.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -6,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./left-menu.component.scss']
 })
 export class LeftMenuComponent implements OnInit {
+  @Input() appName: string;
 
-  constructor() { }
+  constructor(private coreService: CoreService) { }
 
   ngOnInit() {
+  }
 
+  onTabClick() {
+    this.coreService.toggleLeftPanel();
   }
 
 }
