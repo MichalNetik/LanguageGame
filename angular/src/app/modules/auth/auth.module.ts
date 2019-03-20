@@ -5,6 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
+import { authReducer } from './store/auth.reducers';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,9 @@ import { AuthRoutingModule } from './auth-routing.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('auth', authReducer),
+    EffectsModule.forFeature([AuthEffects])
   ],
 })
 export class AuthModule {}
