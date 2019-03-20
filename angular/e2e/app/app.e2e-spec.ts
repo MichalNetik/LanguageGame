@@ -9,6 +9,6 @@ describe('lang-game App', () => {
 
   it('should display page title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Language Game');
+    expect(page.getTitleText()).toEqual('Lang Game');
   });
 });
